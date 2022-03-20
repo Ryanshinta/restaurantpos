@@ -1,13 +1,36 @@
 
 # Start The Project
-Change the **.env.example** to  **.env** file and fill in your database password
 
-Open the Terminal and run following command.
+
+### Install dependencies
+
+    cd restaurantpos
+    composer install
+
+### Config file
+Rename the **.env.example** to  **.env** file and fill in your database password 
+
+
+### DataBase
+
+    php artisan migrate
+    php artisan db:seed
+
+### Install Node Dependencies
+
 1. `npm install`
 2. `npm run dev` (sometime need run twice)
-3. `composer install`
-4. `php artisan key:generate`
-5. `php artisan migrate`
+
+### Create Admin Account
+
+1. `php artisan tinker` and than paste
+    ```php
+    App\Models\User::create([
+        'name'=>'Admin',
+        'email'=>'admin@gmail.com',
+        'password' => bcrypt('admin')
+    ]);
+    ```
 
 Run Project
 
