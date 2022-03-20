@@ -7,12 +7,13 @@
     cd restaurantpos
     composer install
 
+
 ### Config file
 Rename the **.env.example** to  **.env** file and fill in your database password 
 
 
 ### DataBase
-
+    php artisan key:generate
     php artisan migrate
     php artisan db:seed
 
