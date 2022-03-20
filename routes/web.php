@@ -51,3 +51,7 @@ Route::resource('/restauranttable', RestaurantTableController::class);
 Route::resource('/reservation', ReservationController::class);
 
 Route::resource('/reservationdetail', ReservationDetailController::class);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
