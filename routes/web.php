@@ -19,9 +19,9 @@ use App\Models\RestaurantTable;
   |
  */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
 
 Route::post('/reservation/addTable', 'App\Http\Controllers\ReservationController@addTable');
 
@@ -54,4 +54,4 @@ Route::resource('/reservationdetail', ReservationDetailController::class);
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
