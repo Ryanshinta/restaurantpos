@@ -1,6 +1,6 @@
 
 # Start The Project
-Change the **.env** file to your database 
+Change the **.env.example** to  **.env** file and fill in your database password
 
 Open the Terminal and run following command.
 1. npm install
