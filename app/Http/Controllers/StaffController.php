@@ -1,20 +1,20 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Staff;
 use Illuminate\Http\Request;
 
-class StaffController extends Controller
-{
+class StaffController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $staffs = Staff::all();
-        return view ('staffs.index')->with('staffs', $staffs);
+        return view('staffs.index')->with('staffs', $staffs);
     }
 
     /**
@@ -22,8 +22,7 @@ class StaffController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         return view('staffs.create');
     }
 
@@ -33,9 +32,8 @@ class StaffController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //$input = $request->all();    
+    public function store(Request $request) {
+        //$input = $request->all();
         $request->validate([
             'icNumber' => 'unique:staffs|regex:/^\d{6}-\d{2}-\d{4}$/',
             'name' => "regex:/^[a-zA-Z-'\s]+$/",
@@ -43,7 +41,7 @@ class StaffController extends Controller
             'mobile' => "regex:/^\d{3}-\d{7}$/",
             'email' => "email"
         ]);
-        
+
         Staff::create([
             'icNumber' => $request->input('icNumber'),
             'name' => $request->input('name'),
@@ -55,7 +53,43 @@ class StaffController extends Controller
             'birthday' => $request->input('birthday'),
             'address' => $request->input('address')
         ]);
+
+//        $ic = $request->input('icNumber');
+        $this->newXml();
         return redirect('staff')->with('flash_message', 'Staff Added!');
+    }
+
+    public function newXml() {
+        $results = Staff::all();
+
+        $xml = new \DOMDocument('1.0'); $xml->formatOutput = true;
+
+        $staffs = $xml->createElement('staffs');
+        $xml->appendChild($staffs);
+
+        foreach ($results as $row) {
+            $staff = $xml->createElement("staff");
+            $staffs->appendChild($staff);
+
+            $ic=$xml->createElement("ic", $row['icNumber']); $staff->appendChild($ic);
+
+            $name=$xml->createElement("name", $row['name']); $staff->appendChild($name);
+
+            $position=$xml->createElement("position", $row['position']); $staff->appendChild($position);
+
+            $gender=$xml->createElement("gender", $row['gender']); $staff->appendChild($gender);
+
+            $mobile=$xml->createElement("mobile", $row['mobile']); $staff->appendChild($mobile);
+
+            $email=$xml->createElement("email", $row['email']); $staff->appendChild($email);
+
+            $birthday=$xml->createElement("birthday", $row['birthday']); $staff->appendChild($birthday);
+
+            $address=$xml->createElement("address", $row['address']); $staff->appendChild($address);
+        }
+
+        echo "<xmp>" . $xml->saveXML() . "</xmp>";
+        $xml->save("staff_info.xml") or die("Unable to create xml");
     }
 
     /**
@@ -64,8 +98,7 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         $staff = Staff::find($id);
         return view('staffs.show')->with('staffs', $staff);
     }
@@ -76,9 +109,8 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-        $staff  = Staff::find($id);
+    public function edit($id) {
+        $staff = Staff::find($id);
         return view('staffs.edit')->with('staffs', $staff);
     }
 
@@ -89,8 +121,7 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         $staff = Staff::find($id);
         $input = $request->all();
         $staff->update($input);
@@ -103,10 +134,9 @@ class StaffController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         Staff::destroy($id);
         return redirect('staff')->with('flash_message', 'Staff deleted!');
     }
-   
+
 }

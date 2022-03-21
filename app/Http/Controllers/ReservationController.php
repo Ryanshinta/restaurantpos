@@ -48,23 +48,28 @@ class ReservationController extends Controller {
         $n = $request->input('noTableReserve');
         $r = $request->input('reserveId');
 
+        $restauranttables = $this->showTable($d, $s);
+        return view('reservations.addTable')->with('restauranttables', $restauranttables)->with('n', $n)->with('r', $r);
+    }
+
+    public function showTable($d, $s) {
         $restauranttables = DB::table('restauranttables')
-                ->select('tableNo', 'maxSeats')->whereNotIn('tableNo', function ($unavailable) use ($d, $s) {
-                    $unavailable->select('restauranttables.tableNo')->from('restauranttables')
+            ->select('tableNo', 'maxSeats')->whereNotIn('tableNo', function ($unavailable) use ($d, $s) {
+                $unavailable->select('restauranttables.tableNo')->from('restauranttables')
                     ->join('reservation_restaurant_tables', 'restauranttables.tableNo', '=', 'reservation_restaurant_tables.tableNo')
                     ->join('reservations', 'reservation_restaurant_tables.reserveId', '=', 'reservations.reserveId')
                     ->where('reservations.reserveDate', '=', $d)
                     ->where('reservations.reserveSlot', '=', $s);
-                })
-                ->get();
-        return view('reservations.addTable')->with('restauranttables', $restauranttables)->with('n', $n)->with('r', $r);
+            })
+            ->get();
+        return $restauranttables;
     }
 
     public function addTable(Request $request) {
         $id = $request->input('reserveId');
         $reservation = Reservation::find($id);
         $reservation->restauranttables()->attach($request->tableNo);
-        
+        Reservation::where('reserveId', $id)->update(array('reserveStatus' => 'Confirmed'));
         return redirect('reservation')->with('flash_message', 'Table Selected!');
     }
 
@@ -101,6 +106,14 @@ class ReservationController extends Controller {
      */
     public function update(Request $request, $reserveId) {
         $reservation = Reservation::find($reserveId);
+
+        if ($request->input('noTableReserve') != $reservation->getOriginal('noTableReserve')) {
+            $reservation->restauranttables()->detach($request->tableNo);
+            $n = $request->input('noTableReserve'); $r = $reserveId;
+            $d = $request->input('reserveDate'); $s = $request->input('reserveSlot');
+            $restauranttables = $this->showTable($d, $s);
+            return view('reservations.addTable')->with('restauranttables', $restauranttables)->with('n', $n)->with('r', $r);
+        }
         $input = $request->all();
         $reservation->update($input);
         return redirect('reservation')->with('flash_message', 'Reservation Updated!');
