@@ -33,7 +33,7 @@ Rename the **.env.example** to  **.env** file and fill in your database password
     ]);
     ```
 
-Run Project
+###Run Project
 
 1. `php artisan serve`
 
