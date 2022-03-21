@@ -100,7 +100,7 @@
                 line-height: 60px;
             }
         }
-        
+
             .error{color: red;}
 
     .upper-section{
@@ -169,8 +169,12 @@
                 <div class="item"><a href="#">Voucher</a></div>
                 <div class="item"><a href="/restauranttable">Table</a></div>
                 <div class="item"><a href="/reservation">Reservation</a></div>
-                <div class="item"><a href="#">Logout</a></div>
+                <div class="item"><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a></div>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
+
         </div>
         <div>
             @yield('content')
