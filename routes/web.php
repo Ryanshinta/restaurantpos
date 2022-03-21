@@ -25,32 +25,14 @@ use App\Models\RestaurantTable;
 
 Route::post('/reservation/addTable', 'App\Http\Controllers\ReservationController@addTable');
 
-//Route::get('/', function(){
-//$reservation = Reservation::find('R01');
-//$reservation->restauranttables()->attach([2,3]);
-//});
-
-//Route::get('/reservation/addTable', function() {
-//    $restauranttables = DB::table('restauranttables')
-//            ->select('tableNo', 'maxSeats')
-//            ->whereNotIn('tableNo', function ($unavailable){
-//    $unavailable->select('restauranttables.tableNo')->from('restauranttables')
-//    ->join('reservation_restaurant_tables', 'restauranttables.tableNo', '=', 'reservation_restaurant_tables.tableNo')
-//    ->join('reservations', 'reservation_restaurant_tables.reserveId', '=', 'reservations.reserveId')
-//    ->where('reservations.reserveDate', '=', '2022-03-25')
-//    ->where('reservations.reserveSlot', '=', 'Evening Slot');
-//            })
-//    ->get();
-//    return view('reservations.addTable')->with('restauranttables', $restauranttables);
-//});
 
 Route::resource('/staff', StaffController::class);
 
-Route::resource('/restauranttable', RestaurantTableController::class);
+Route::resource('/restaurantTable', RestaurantTableController::class);
 
 Route::resource('/reservation', ReservationController::class);
 
-Route::resource('/reservationdetail', ReservationDetailController::class);
+Route::resource('/reservationDetail', ReservationDetailController::class);
 
 Auth::routes();
 
