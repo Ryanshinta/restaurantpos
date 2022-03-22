@@ -1,5 +1,5 @@
 
-# Start The Project
+# Restaurant POS System
 
 
 ### Install dependencies

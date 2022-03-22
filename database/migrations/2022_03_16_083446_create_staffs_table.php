@@ -22,7 +22,7 @@ class CreateStaffsTable extends Migration
             $table->string('password');
             $table->string('gender');
             $table->string('mobile');
-            $table->string('email')->nullable()->change();
+            $table->string('email')->nullable();
             $table->string('birthday')->nullable()->change();
             $table->string('address')->nullable()->change();
         });

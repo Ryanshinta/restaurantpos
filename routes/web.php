@@ -37,3 +37,5 @@ Route::resource('/reservationDetail', ReservationDetailController::class);
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::resource('products',\App\Http\Controllers\ProductController::class);

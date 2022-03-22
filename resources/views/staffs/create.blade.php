@@ -21,6 +21,8 @@
             <label>Enter Password  : </label><input type="password" name="password" value="" required="true"/><br><br>
             <!--<span class="error"><?php // echo "* " . $passwordError;      ?></span><br><br>-->
 
+
+
             <label>Confirm Password  : </label><input type="password" name="c_password" value="" required="true"/><br><br>
             <!--<span class="error"><?php // echo "* " . $c_passwordError;      ?></span><br><br>-->
 
