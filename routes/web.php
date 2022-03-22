@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Staff;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ReservationController;
@@ -25,8 +26,13 @@ use App\Models\RestaurantTable;
 
 Route::post('/reservation/addTable', 'App\Http\Controllers\ReservationController@addTable');
 
-
 Route::resource('/staff', StaffController::class);
+
+//Route::view('staffDisplay', '/staffs/display');
+
+Route::view('/test','staffs.search');
+
+Route::get('/staffDisplay', [StaffController::class, 'display']);
 
 Route::resource('/restaurantTable', RestaurantTableController::class);
 

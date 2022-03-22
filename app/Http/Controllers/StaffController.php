@@ -5,14 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\Staff;
 use Illuminate\Http\Request;
 
-class StaffController extends Controller {
+class StaffController extends Controller
+{
 
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $staffs = Staff::all();
         return view('staffs.index')->with('staffs', $staffs);
     }
@@ -22,23 +24,25 @@ class StaffController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
+    public function create()
+    {
         return view('staffs.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         //$input = $request->all();
         $request->validate([
             'icNumber' => 'unique:staffs|regex:/^\d{6}-\d{2}-\d{4}$/',
             'name' => "regex:/^[a-zA-Z-'\s]+$/",
             'password' => "regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/",
-            'mobile' => "regex:/^\d{3}-\d{7}$/",
+            'mobile' => "regex:/^\d{3}-\d{9}$/",
             'email' => "email"
         ]);
 
@@ -59,46 +63,83 @@ class StaffController extends Controller {
         return redirect('staff')->with('flash_message', 'Staff Added!');
     }
 
-    public function newXml() {
-        $results = Staff::all();
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function display()
+    {
+        $xml = file_get_contents('D:\Program Files\Xampp\htdocs\restaurantpos\public\xml\staff_info.xml');
+        $data = simplexml_load_string($xml);
 
-        $xml = new \DOMDocument('1.0'); $xml->formatOutput = true;
+        $json = json_encode($data);
+        $array = json_decode($json, true);
+        $array = $array['staff'];
 
-        $staffs = $xml->createElement('staffs');
-        $xml->appendChild($staffs);
+        return view('staffs.display')->with('data', $data)->with('array', $array)/*->with('ic', $ic)->with('name', $name)->with('position', $position)*/;
+    }
 
-        foreach ($results as $row) {
-            $staff = $xml->createElement("staff");
-            $staffs->appendChild($staff);
+    public function search(){
 
-            $ic=$xml->createElement("ic", $row['icNumber']); $staff->appendChild($ic);
+    }
 
-            $name=$xml->createElement("name", $row['name']); $staff->appendChild($name);
+    public function newXml()
+    {
+        $path = 'public/xml/staff_info.xml';
+        if(file_exists($path)){
+            unlink($path);
+        }else {
+            $results = Staff::all();
 
-            $position=$xml->createElement("position", $row['position']); $staff->appendChild($position);
+            $xml = new \DOMDocument('1.0');
+            $xml->formatOutput = true;
 
-            $gender=$xml->createElement("gender", $row['gender']); $staff->appendChild($gender);
+            $staffs = $xml->createElement('staffs');
+            $xml->appendChild($staffs);
 
-            $mobile=$xml->createElement("mobile", $row['mobile']); $staff->appendChild($mobile);
+            foreach ($results as $row) {
+                $staff = $xml->createElement("staff");
+                $staffs->appendChild($staff);
 
-            $email=$xml->createElement("email", $row['email']); $staff->appendChild($email);
+                $ic = $xml->createElement("ic", $row['icNumber']);
+                $staff->appendChild($ic);
 
-            $birthday=$xml->createElement("birthday", $row['birthday']); $staff->appendChild($birthday);
+                $name = $xml->createElement("name", $row['name']);
+                $staff->appendChild($name);
 
-            $address=$xml->createElement("address", $row['address']); $staff->appendChild($address);
+                $position = $xml->createElement("position", $row['position']);
+                $staff->appendChild($position);
+
+                $gender = $xml->createElement("gender", $row['gender']);
+                $staff->appendChild($gender);
+
+                $mobile = $xml->createElement("mobile", $row['mobile']);
+                $staff->appendChild($mobile);
+
+                $email = $xml->createElement("email", $row['email']);
+                $staff->appendChild($email);
+
+                $birthday = $xml->createElement("birthday", $row['birthday']);
+                $staff->appendChild($birthday);
+
+                $address = $xml->createElement("address", $row['address']);
+                $staff->appendChild($address);
+            }
+
+            echo "<xmp>" . $xml->saveXML() . "</xmp>";
+            $xml->save("xml/staff_info.xml") or die("Unable to create xml");
         }
-
-        echo "<xmp>" . $xml->saveXML() . "</xmp>";
-        $xml->save("staff_info.xml") or die("Unable to create xml");
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id) {
+    public function show($id)
+    {
         $staff = Staff::find($id);
         return view('staffs.show')->with('staffs', $staff);
     }
@@ -106,10 +147,11 @@ class StaffController extends Controller {
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id) {
+    public function edit($id)
+    {
         $staff = Staff::find($id);
         return view('staffs.edit')->with('staffs', $staff);
     }
@@ -117,25 +159,29 @@ class StaffController extends Controller {
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id) {
+    public function update(Request $request, $id)
+    {
         $staff = Staff::find($id);
         $input = $request->all();
         $staff->update($input);
+        $this->newXml();
         return redirect('staff')->with('flash_message', 'Staff Updated!');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
+    public function destroy($id)
+    {
         Staff::destroy($id);
+        $this->newXml();
         return redirect('staff')->with('flash_message', 'Staff deleted!');
     }
 
