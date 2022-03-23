@@ -77,12 +77,14 @@ class StaffController extends Controller
         $array = json_decode($json, true);
         $array = $array['staff'];
 
-        return view('staffs.display')->with('data', $data)->with('array', $array)/*->with('ic', $ic)->with('name', $name)->with('position', $position)*/;
+        return view('staffs.display')->with('data', $data)->with('array', $array)/*->with('ic', $ic)->with('name', $name)->with('position', $position)*/ ;
     }
 
-    public function search(){
+    public function search()
+    {
+        libxml_disable_entity_loader(false);
         $xml = new \DOMDocument();
-        $xml->load('public/xml/staff_info.xml');
+        $xml->load('public/xml/staff_info.xml', LIBXML_NOWARNING);
 
         $xsl = new \DOMDocument();
         $xsl->load('public/xml/staff_info.xslt');
@@ -91,14 +93,15 @@ class StaffController extends Controller
         $proc->importStylesheet($xsl);
 
         echo $proc->transformToXml($xml);
+//        return view('staffs.test')->with('proc', $proc);
     }
 
     public function newXml()
     {
         $path = 'public/xml/staff_info.xml';
-        if(file_exists($path)){
+        if (file_exists($path)) {
             unlink($path);
-        }else {
+        } else {
             $results = Staff::all();
 
             $xml = new \DOMDocument('1.0');
