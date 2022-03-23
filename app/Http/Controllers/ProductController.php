@@ -73,7 +73,6 @@ class ProductController extends Controller
         $product->name = $request->name;
         $product->description = $request->description;
         $product->price = $request->price;
-        $product->quantity = $request->quantity;
         $product->status = $request->status;
 
         if ($request->hasFile('image')) {
@@ -88,7 +87,7 @@ class ProductController extends Controller
         if (!$product->save()) {
             return redirect()->back()->with('error', 'Sorry, there\'re a problem while updating product.');
         }
-        return redirect()->route('products.index')->with('success', 'Success, your product have been updated.');
+        return redirect()->route('product.index')->with('success', 'Success, your product have been updated.');
 
     }
 
@@ -100,6 +99,6 @@ class ProductController extends Controller
         }
         $product->delete();
 
-        return redirect('products')->with('success', "Success, your product have been delete.");
+        return redirect('product')->with('success', "Success, your product have been delete.");
     }
 }

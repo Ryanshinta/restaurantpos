@@ -6,7 +6,9 @@
         <title>Restaurant System</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
         <link rel="stylesheet" href="{{asset('css/sideBar.css')}}">
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     </head>
 {{--    <style>--}}
@@ -150,12 +152,7 @@
                 <div class="item"><a href="#">Access Control (RBAC)</a></div>
                 <div class="item"><a href="/staff">Staff</a></div>
                 <div class="item">
-                    <a class="sub-btn">Product<i class="fas fa-angle-right dropdown"></i></a>
-                    <div class="sub-menu">
-                        <a href="/product" class="sub-item">Add New Product</a>
-                        <a href="#" class="sub-item">Edit Product Info</a>
-                        <a href="#" class="sub-item">Remove Product</a>
-                    </div>
+                    <a class="sub-btn" href="/product">Product</a>
                 </div>
                 <div class="item">
                     <a class="sub-btn">Order<i class="fas fa-angle-right dropdown"></i></a>
@@ -188,5 +185,37 @@
                 $(this).find('.dropdown').toggleClass('rotate');
             });
         });
+
+        $(document).ready(function () {
+            $(document).on('click', '.btn-delete', function () {
+                $this = $(this);
+                const swalWithBootstrapButtons = Swal.mixin({
+                    customClass: {
+                        confirmButton: 'btn btn-success',
+                        cancelButton: 'btn btn-danger'
+                    },
+                    buttonsStyling: false
+                })
+
+                swalWithBootstrapButtons.fire({
+                    title: 'Are you sure?',
+                    text: "Do you really want to delete this product?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Yes, delete it!',
+                    cancelButtonText: 'No',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.value) {
+                        $.post($this.data('url'), {_method: 'DELETE', _token: '{{csrf_token()}}'}, function (res) {
+                            $this.closest('tr').fadeOut(500, function () {
+                                $(this).remove();
+                            })
+                        })
+                    }
+                })
+            })
+        })
+
     </script>
 </html>
