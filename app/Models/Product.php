@@ -11,7 +11,6 @@ class Product extends Model
     protected $table = 'products';
     protected $primaryKey = 'id';
     protected $fillable = ['price','name','image','description','status'];
-    /**
-     * @var mixed
-     */
+
+
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductStoreRequest;
 use App\Http\Requests\ProductUpdateRequest;
+use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -20,14 +21,21 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::all();
+        $products = new Product();
+        if ($request->search) {
+            $products = $products->where('name', 'LIKE', "%{$request->search}%");
+        }
+        $products = $products->latest()->paginate(10);
+        if (request()->wantsJson()) {
+            return ProductResource::collection($products);
+        }
 
         return view('product.index')->with('products', $products);
     }
 
     public function create()
     {
-        return view('products.create');
+        return view('product.create');
     }
 
     public function store(ProductStoreRequest $request)
@@ -49,14 +57,14 @@ class ProductController extends Controller
         if (!$product) {
             return redirect()->back()->with('error', 'Sorry, there a problem while creating product');
         }
-        return redirect()->route('products.index')->with('success', 'Success, you product have been created.');
+        return redirect()->route('product.index')->with('success', 'Success, you product have been created.');
 
 
     }
 
     public function edit(Product $product)
     {
-        return view('products.edit')->with('product', $product);
+        return view('product.edit')->with('product', $product);
     }
 
 

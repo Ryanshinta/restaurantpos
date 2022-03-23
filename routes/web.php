@@ -6,6 +6,8 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReservationDetailController;
 use App\Http\Controllers\RestaurantTableController;
+use App\Http\Controllers\ProductController;
+use App\Http\Resources\ProductResource;
 use App\Models\Reservation;
 use App\Models\RestaurantTable;
 
@@ -44,4 +46,5 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('products',\App\Http\Controllers\ProductController::class);
+Route::resource('/product',ProductController::class);
+

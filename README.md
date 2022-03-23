@@ -32,6 +32,10 @@ Rename the **.env.example** to  **.env** file and fill in your database password
         'password' => bcrypt('admin')
     ]);
     ```
+### Link to local storage
+
+    php artisan storage:link
+
 
 ### Run Project
 

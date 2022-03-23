@@ -152,7 +152,7 @@
                 <div class="item">
                     <a class="sub-btn">Product<i class="fas fa-angle-right dropdown"></i></a>
                     <div class="sub-menu">
-                        <a href="#" class="sub-item">Add New Product</a>
+                        <a href="/product" class="sub-item">Add New Product</a>
                         <a href="#" class="sub-item">Edit Product Info</a>
                         <a href="#" class="sub-item">Remove Product</a>
                     </div>
