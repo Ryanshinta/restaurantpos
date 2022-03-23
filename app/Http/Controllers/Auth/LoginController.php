@@ -41,5 +41,6 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->middleware('throttle:3,1')->only('login'); // 3(maxAttempts).  // 1(decayMinutes)
     }
 }
