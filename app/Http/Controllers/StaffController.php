@@ -81,7 +81,16 @@ class StaffController extends Controller
     }
 
     public function search(){
+        $xml = new \DOMDocument();
+        $xml->load('public/xml/staff_info.xml');
 
+        $xsl = new \DOMDocument();
+        $xsl->load('public/xml/staff_info.xslt');
+
+        $proc = new \XSLTProcessor();
+        $proc->importStylesheet($xsl);
+
+        echo $proc->transformToXml($xml);
     }
 
     public function newXml()

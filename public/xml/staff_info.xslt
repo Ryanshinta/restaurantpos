@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
-    <xsl:template match="/staffs">
+    <xsl:template match="/">
         <div class="container">
             <div class="upper-section">
                 <h2>Staff Information</h2>
@@ -48,7 +47,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <xsl:for-each select="staff">
+                        <xsl:for-each select="staffs/staff">
                             <tr>
                                 <td><xsl:value-of select="ic"/></td>
                                 <td><xsl:value-of select="name"/></td>
