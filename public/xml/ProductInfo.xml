@@ -1,15 +1,21 @@
-<?xml version="1"?>
+<?xml version="1.0"?>
 <Products>
   <Product Status="1">
+    <ID>3</ID>
     <name>GoodFood</name>
     <description>Good good food</description>
     <price>12.20</price>
-    <imagePath>products/DqzQywmQfXZFtrJnpD4SX4OqTbAOoxMVebrDOk05.jpg</imagePath>
+    <createdAt>2022-03-24 03:02:30</createdAt>
+    <updatedAt>2022-03-24 03:02:30</updatedAt>
+    <imagePath>/storage/products/DqzQywmQfXZFtrJnpD4SX4OqTbAOoxMVebrDOk05.jpg</imagePath>
   </Product>
   <Product Status="0">
+    <ID>5</ID>
     <name>Ayam</name>
     <description>2 good good ayam</description>
-    <price>7.00</price>
-    <imagePath>products/Gxv0qOGE2kCK0KgPLekNNxmzf74KvwssEkA4BNna.jpg</imagePath>
+    <price>7.10</price>
+    <createdAt>2022-03-24 03:05:57</createdAt>
+    <updatedAt>2022-03-24 13:13:06</updatedAt>
+    <imagePath>/storage/products/Gxv0qOGE2kCK0KgPLekNNxmzf74KvwssEkA4BNna.jpg</imagePath>
   </Product>
 </Products>

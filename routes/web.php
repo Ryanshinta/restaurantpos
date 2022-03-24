@@ -51,3 +51,4 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 Route::resource('/product',ProductController::class);
 
 Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->name("product.update");
+Route::view('/testProduct','product.search');

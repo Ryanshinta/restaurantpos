@@ -25,10 +25,7 @@ class ProductController extends Controller
         if ($request->search) {
             $products = $products->where('name', 'LIKE', "%{$request->search}%");
         }
-        $products = $products->latest()->paginate(10);
-        if (request()->wantsJson()) {
-            return ProductResource::collection($products);
-        }
+        $products = Product::all();
 
         return view('product.index')->with('products', $products);
     }
@@ -71,13 +68,16 @@ class ProductController extends Controller
             unlink($XMLpath);
         }else{
             $results = Product::all();
-            $xml = new \DOMDocument(1.0);
+            $xml = new \DOMDocument('1.0');
             $xml->formatOutput = true;
             $products = $xml->createElement('Products');
             $xml->appendChild($products);
             foreach ($results as $row){
                 $product = $xml->createElement('Product');
                 $products->appendChild($product);
+
+                $ID = $xml->createElement('ID',$row['id']);
+                $product->appendChild($ID);
 
                 $Status = $xml->createAttribute('Status');
                 $product->setAttribute('Status',$row['status']);
@@ -91,7 +91,13 @@ class ProductController extends Controller
                 $price = $xml->createElement('price',$row['price']);
                 $product->appendChild($price);
 
-                $imagePath = $xml->createElement('imagePath',$row['image']);
+                $createdAt = $xml->createElement('createdAt',$row['created_at']);
+                $product->appendChild($createdAt);
+
+                $updatedAt = $xml->createElement('updatedAt',$row['updated_at']);
+                $product->appendChild($updatedAt);
+
+                $imagePath = $xml->createElement('imagePath',"/storage/".$row['image']);
                 $product->appendChild($imagePath);
             }
             echo "<xmp>" . $xml->saveXML() . "</xmp>";

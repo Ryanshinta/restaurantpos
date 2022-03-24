@@ -3,12 +3,24 @@
     <div class="container">
         <div class="upper-section">
             <h2>Product</h2>
+            <form>
+                <div >
+                    <input type="search" placeholder="Search" aria-label="Search">
+                    <button type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </form>
+            <br>
+
+
             <a href="{{ url('/product/create') }}" title="Add New Product">
                 <button class="btn btn-primary btn-sm"
                         style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i
                         aria-hidden="true"></i> Add New
                 </button>
             </a>
+
             <table class="table">
                 <tr>
                     <th>ID</th>
