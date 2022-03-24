@@ -1,0 +1,15 @@
+<?xml version="1"?>
+<Products>
+  <Product Status="1">
+    <name>GoodFood</name>
+    <description>Good good food</description>
+    <price>12.20</price>
+    <imagePath>products/DqzQywmQfXZFtrJnpD4SX4OqTbAOoxMVebrDOk05.jpg</imagePath>
+  </Product>
+  <Product Status="0">
+    <name>Ayam</name>
+    <description>2 good good ayam</description>
+    <price>7.00</price>
+    <imagePath>products/Gxv0qOGE2kCK0KgPLekNNxmzf74KvwssEkA4BNna.jpg</imagePath>
+  </Product>
+</Products>

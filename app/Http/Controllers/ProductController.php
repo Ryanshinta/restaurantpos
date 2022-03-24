@@ -54,12 +54,49 @@ class ProductController extends Controller
             'status' => $request->status
         ]);
 
+
         if (!$product) {
             return redirect()->back()->with('error', 'Sorry, there a problem while creating product');
         }
+
+        $this->generateXML();
         return redirect()->route('product.index')->with('success', 'Success, you product have been created.');
 
 
+    }
+
+    public function generateXML(){
+        $XMLpath = 'public/xml/ProductInfo.xml';
+        if (file_exists($XMLpath)){
+            unlink($XMLpath);
+        }else{
+            $results = Product::all();
+            $xml = new \DOMDocument(1.0);
+            $xml->formatOutput = true;
+            $products = $xml->createElement('Products');
+            $xml->appendChild($products);
+            foreach ($results as $row){
+                $product = $xml->createElement('Product');
+                $products->appendChild($product);
+
+                $Status = $xml->createAttribute('Status');
+                $product->setAttribute('Status',$row['status']);
+
+                $name = $xml->createElement('name',$row['name']);
+                $product->appendChild($name);
+
+                $description = $xml->createElement('description',$row['description']);
+                $product->appendChild($description);
+
+                $price = $xml->createElement('price',$row['price']);
+                $product->appendChild($price);
+
+                $imagePath = $xml->createElement('imagePath',$row['image']);
+                $product->appendChild($imagePath);
+            }
+            echo "<xmp>" . $xml->saveXML() . "</xmp>";
+            $xml->save("xml/ProductInfo.xml") or die("Unable to create xml");
+        }
     }
 
     public function edit(Product $product)
@@ -87,6 +124,7 @@ class ProductController extends Controller
         if (!$product->save()) {
             return redirect()->back()->with('error', 'Sorry, there\'re a problem while updating product.');
         }
+        $this->generateXML();
         return redirect()->route('product.index')->with('success', 'Success, your product have been updated.');
 
     }
@@ -98,7 +136,7 @@ class ProductController extends Controller
             Storage::delete($product->image);
         }
         $product->delete();
-
+        $this->generateXML();
         return redirect('product')->with('success', "Success, your product have been delete.");
     }
 }
