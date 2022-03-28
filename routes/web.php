@@ -2,6 +2,8 @@
 
 use App\Models\Staff;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReservationDetailController;
@@ -10,6 +12,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Resources\ProductResource;
 use App\Models\Reservation;
 use App\Models\RestaurantTable;
+use Illuminate\Support\Facades\App;
 
 /*
   |--------------------------------------------------------------------------
@@ -28,9 +31,12 @@ use App\Models\RestaurantTable;
 
 Route::post('/reservation/addTable', 'App\Http\Controllers\ReservationController@addTable');
 
+
 Route::resource('/staff', StaffController::class);
 
 //Route::view('staffDisplay', '/staffs/display');
+
+Route::get('orders/add', 'App\Http\Controllers\OrderController@add');
 
 Route::view('/test','staffs.search');
 
@@ -42,9 +48,20 @@ Route::resource('/reservation', ReservationController::class);
 
 Route::resource('/reservationDetail', ReservationDetailController::class);
 
+Route::resource('/order', OrderController::class);
+
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('/product',ProductController::class);
 
+Route::get('/', [CartController::class, 'index']);
+
+Route::get('cart', [CartController::class, 'cart'])->name('cart');
+
+Route::post('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add.to.cart');
+
+Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
+
+Route::delete('remove-from-cart', [CartController::class, 'destroy'])->name('remove.from.cart');

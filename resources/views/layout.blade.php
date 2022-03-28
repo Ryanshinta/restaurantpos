@@ -7,6 +7,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
         <link rel="stylesheet" href="{{asset('css/sideBar.css')}}">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     </head>
 {{--    <style>--}}
@@ -160,8 +161,8 @@
                 <div class="item">
                     <a class="sub-btn">Order<i class="fas fa-angle-right dropdown"></i></a>
                     <div class="sub-menu">
-                        <a href="#" class="sub-item">Add New Order</a>
-                        <a href="#" class="sub-item">Edit Order Details</a>
+                        <a href="/orders/add" class="sub-item">Add New Order</a>
+                        <a href="/order" class="sub-item">Edit Order Details</a>
                         <a href="#" class="sub-item">Cancel Order</a>
                     </div>
                 </div>
