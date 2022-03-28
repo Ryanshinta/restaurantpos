@@ -5,7 +5,7 @@
         <h2>Add Reservation</h2>
         <form id="reservation-form" method="POST" action="{{ url('reservation/') }}">
             {!! csrf_field() !!}
-            <label>Reservation ID : </label><input type="text" name="reserveId" value="{{$reserveId}}" required="true"/><br><br>
+            <label>Reservation ID : </label><input type="text" name="reserveId" value="{{$reserveId}}" required="true" readonly/><br><br>
 
             <label>Date : </label><input type="date" name="reserveDate" value="" required="true"/><br><br>
             <!--<span class="error"><?php // echo "* " . $reserveDateErr;       ?></span><br><br>-->
