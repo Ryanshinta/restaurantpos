@@ -34,7 +34,7 @@ Route::resource('/staff', StaffController::class);
 
 Route::view('/test','staffs.search');
 
-//Route::get('/test',[StaffController::class, 'search']);
+//Route::view('/test','staffs.test');
 
 Route::get('/staffDisplay', [StaffController::class, 'display']);
 

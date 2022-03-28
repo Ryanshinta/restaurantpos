@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Staff;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class StaffController extends Controller
 {
@@ -42,15 +43,17 @@ class StaffController extends Controller
             'icNumber' => 'unique:staffs|regex:/^\d{6}-\d{2}-\d{4}$/',
             'name' => "regex:/^[a-zA-Z-'\s]+$/",
             'password' => "regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/",
-            'mobile' => "regex:/^\d{3}-\d{9}$/",
+            'mobile' => "regex:/^\d{3}-\d{7,9}$/",
             'email' => "email"
         ]);
+
+        $password = Hash::make($request->input('password'));
 
         Staff::create([
             'icNumber' => $request->input('icNumber'),
             'name' => $request->input('name'),
             'position' => $request->input('position'),
-            'password' => $request->input('password'),
+            'password' => $password,
             'gender' => $request->input('gender'),
             'mobile' => $request->input('mobile'),
             'email' => $request->input('email'),
@@ -93,7 +96,7 @@ class StaffController extends Controller
         $proc->importStylesheet($xsl);
 
         echo $proc->transformToXml($xml);
-//        return view('staffs.test')->with('proc', $proc);
+        return view('staffs.test')->with('proc', $proc);
     }
 
     public function newXml()

@@ -1,2 +1,2 @@
 <h2>haha</h2>
-<div>{{ $proc }}</div>
+{{ print_r($proc) }}

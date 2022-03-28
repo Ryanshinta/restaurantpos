@@ -40,4 +40,14 @@
     <birthday>2022-03-10</birthday>
     <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
   </staff>
+  <staff>
+    <ic>011201-14-0495</ic>
+    <name>Chiew Wai Hong</name>
+    <position>Chef</position>
+    <gender>Male</gender>
+    <mobile>013-2865802</mobile>
+    <email>jiahaochai0112@gmail.com</email>
+    <birthday>2022-03-01</birthday>
+    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+  </staff>
 </staffs>
