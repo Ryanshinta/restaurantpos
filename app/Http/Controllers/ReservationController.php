@@ -26,7 +26,23 @@ class ReservationController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('reservations.create');
+        $reserveId = DB::table('reservations')
+            ->latest()
+            ->first();
+        if (!empty($reserveId)) {
+            $currentId = $reserveId->reserveId;
+            if (substr($currentId, 1, 6) == date("ymd")) {
+                $newId = (int) substr($currentId, 8, 2);
+                $test = $newId + 1;
+                $new = sprintf("%02d", $test);
+                $reserveId = "R" . date("ymd") . "/" . $new;
+            } else {
+                $reserveId = "R" . date("ymd") . "/" . '01';
+            }
+        } else {
+            $reserveId = "R" . date("ymd") . "/" . '01';
+        }
+        return view('reservations.create')->with('reserveId', $reserveId);
     }
 
     /**

@@ -40,6 +40,8 @@ Route::get('orders/add', 'App\Http\Controllers\OrderController@add');
 
 Route::view('/test','staffs.search');
 
+//Route::view('/test','staffs.test');
+
 Route::get('/staffDisplay', [StaffController::class, 'display']);
 
 Route::resource('/restaurantTable', RestaurantTableController::class);
@@ -56,6 +58,7 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('ho
 
 Route::resource('/product',ProductController::class);
 
+<<<<<<< HEAD
 Route::get('/', [CartController::class, 'index']);
 
 Route::get('cart', [CartController::class, 'cart'])->name('cart');
@@ -65,3 +68,7 @@ Route::post('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add
 Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
 
 Route::delete('remove-from-cart', [CartController::class, 'destroy'])->name('remove.from.cart');
+=======
+Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->name("product.update");
+Route::view('/testProduct','product.search');
+>>>>>>> f53d23c85d987963fd5aea0682df7bc26f27d48c

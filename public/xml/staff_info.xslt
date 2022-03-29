@@ -1,13 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
-
-    <xsl:template match="/staffs">
+<?xml version="1.0" encoding="UTF-8" ?>
+<xsl:transform version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+    <xsl:template match="/">
         <div class="container">
             <div class="upper-section">
                 <h2>Staff Information</h2>
                 <h4>Insert search condition</h4><br></br>
                 <form id="register-form" method="POST" action="{{ url('staff/display') }}">
-                    {!! csrf_field() !!}
                     <label>IC Number : </label><input type="text" name="icNumber" id="icNumber" value="" placeholder="xxxxxx-xx-xxxx"/><br></br><br></br>
 
                     <label>Full Name : </label><input type="text" name="name" value=""/><br></br><br></br>
@@ -48,7 +46,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <xsl:for-each select="staff">
+                        <xsl:for-each select="staffs/staff">
                             <tr>
                                 <td><xsl:value-of select="ic"/></td>
                                 <td><xsl:value-of select="name"/></td>
@@ -62,4 +60,4 @@
             </div>
         </div>
     </xsl:template>
-</xsl:stylesheet>
+</xsl:transform>

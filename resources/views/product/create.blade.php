@@ -21,8 +21,8 @@
                 <br>
                 <label for="status">Status</label>
                 <select name="status" class="form-control @error('productStatus') is-invalid @enderror" id="status">
-                    <option value="1" {{old('productStatus') === 1 ? 'selected': ''}}>Active</option>
-                    <option value="0" {{old('productStatus') === 0 ? 'selected': ''}}>Inactive</option>
+                    <option value="1" {{old('status') === 1 ? 'selected': ''}}>Active</option>
+                    <option value="0" {{old('status') === 0 ? 'selected': ''}}>Inactive</option>
                 </select>
                 @if ($errors->any())
                     <div>
