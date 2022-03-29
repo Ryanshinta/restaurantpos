@@ -53,6 +53,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+//            'role' => ['required|in:Admin,Manager,Chef,Waiter'],
         ]);
     }
 
@@ -64,10 +65,18 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        User::create([
+            'icNumber' => $data['icNumber'],
             'name' => $data['name'],
-            'email' => $data['email'],
+            'role' => $data['role'],
             'password' => Hash::make($data['password']),
+            'gender' => $data['gender'],
+            'mobile' => $data['mobile'],
+            'email' => $data['email'],
+            'birthday' => $data['birthday'],
+            'address' => $data['address'],
         ]);
+
+        return redirect('login')->with('flash_message', 'Staff Added!');
     }
 }

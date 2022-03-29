@@ -10,21 +10,11 @@ use Illuminate\Http\Request;
 
 class ReservationController extends Controller {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index() {
         $reservations = Reservation::all();
         return view('reservations.index')->with('reservations', $reservations);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create() {
         $reserveId = DB::table('reservations')
             ->latest()
@@ -35,22 +25,16 @@ class ReservationController extends Controller {
                 $newId = (int) substr($currentId, 8, 2);
                 $test = $newId + 1;
                 $new = sprintf("%02d", $test);
-                $reserveId = "R" . date("ymd") . "/" . $new;
+                $reserveId = "R" . date("ymd") . "_" . $new;
             } else {
-                $reserveId = "R" . date("ymd") . "/" . '01';
+                $reserveId = "R" . date("ymd") . "_" . '01';
             }
         } else {
-            $reserveId = "R" . date("ymd") . "/" . '01';
+            $reserveId = "R" . date("ymd") . "_" . '01';
         }
         return view('reservations.create')->with('reserveId', $reserveId);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request) {
         Reservation::create([
             'reserveId' => $request->input('reserveId'), 'reserveDate' => $request->input('reserveDate'),
@@ -89,37 +73,18 @@ class ReservationController extends Controller {
         return redirect('reservation')->with('flash_message', 'Table Selected!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($reserveId) {
         $reservation = Reservation::find($reserveId);
 
         return view('reservations.show')->with('reservations', $reservation);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($reserveId) {
         $reservation = Reservation::find($reserveId);
 
         return view('reservations.edit')->with('reservations', $reservation);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $reserveId) {
         $reservation = Reservation::find($reserveId);
 
@@ -135,12 +100,6 @@ class ReservationController extends Controller {
         return redirect('reservation')->with('flash_message', 'Reservation Updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($reserveId) {
         Reservation::destroy($reserveId);
         return redirect('reservation')->with('flash_message', 'Reservation deleted!');

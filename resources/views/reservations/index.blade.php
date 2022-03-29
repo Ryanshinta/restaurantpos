@@ -31,11 +31,14 @@
                     <td>
                         <a href="{{ url('/reservation/' . $item->reserveId) }}" title="View Reservation"><button style="height: 28px; width: 85px;" class="btn btn-info btn-sm"><i aria-hidden="true"></i> View</button></a>
                         <a href="{{ url('/reservation/' . $item->reserveId . '/edit') }}" title="Edit Reservation"><button style="height: 28px; width: 85px;" class="btn btn-primary btn-sm"><i aria-hidden="true"></i> Edit</button></a>
-                        <form method="POST" action="{{ url('/reservation' . '/' . $item->reserveId) }}" accept-charset="UTF-8" style="display:inline">
-                            {{ method_field('DELETE') }}
-                            {{ csrf_field() }}
-                            <button type="submit" style="height: 28px; width: 85px;" class="btn btn-danger btn-sm" title="Delete Reservation" onclick="return confirm( & quot; Confirm delete? & quot; )"><i aria-hidden="true"></i> Delete</button>
-                        </form>
+{{--                        <form method="POST" action="{{ url('/reservation' . '/' . $item->reserveId) }}" accept-charset="UTF-8" style="display:inline">--}}
+{{--                            {{ method_field('DELETE') }}--}}
+{{--                            {{ csrf_field() }}--}}
+{{--                            <button type="submit" style="height: 28px; width: 85px;" class="btn btn-danger btn-sm" title="Delete Reservation" onclick="return confirm( & quot; Confirm delete? & quot; )"><i aria-hidden="true"></i> Delete</button>--}}
+{{--                        </form>--}}
+                        <button class="btn btn-danger btn-delete"
+                                data-url="{{route('reservation.destroy', $item)}}"><i
+                                class="fas fa-trash"></i></button>
                     </td>
                 </tr>
                 @endforeach

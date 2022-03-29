@@ -7,7 +7,7 @@
     <gender>Male</gender>
     <mobile>013-2865802</mobile>
     <email>jiahaochai0112@gmail.com</email>
-    <birthday>2022-03-17</birthday>
+    <birthday>2022-03-01</birthday>
     <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
   </staff>
   <staff>
@@ -17,7 +17,7 @@
     <gender>Male</gender>
     <mobile>013-2865802</mobile>
     <email>jiahaochai0112@gmail.com</email>
-    <birthday>2022-03-04</birthday>
+    <birthday>2022-03-03</birthday>
     <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
   </staff>
   <staff>
@@ -27,27 +27,7 @@
     <gender>Male</gender>
     <mobile>013-2865802</mobile>
     <email>jiahaochai0112@gmail.com</email>
-    <birthday>2022-03-10</birthday>
-    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
-  </staff>
-  <staff>
-    <ic>011201-14-0494</ic>
-    <name>Ouyang Yunru</name>
-    <position>Admin</position>
-    <gender>Male</gender>
-    <mobile>013-2865802</mobile>
-    <email>jiahaochai0112@gmail.com</email>
-    <birthday>2022-03-10</birthday>
-    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
-  </staff>
-  <staff>
-    <ic>011201-14-0495</ic>
-    <name>Chiew Wai Hong</name>
-    <position>Chef</position>
-    <gender>Male</gender>
-    <mobile>013-2865802</mobile>
-    <email>jiahaochai0112@gmail.com</email>
-    <birthday>2022-03-01</birthday>
+    <birthday>2022-03-16</birthday>
     <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
   </staff>
 </staffs>

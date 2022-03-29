@@ -16,11 +16,11 @@ class CreateReservationRestaurantTablesTable extends Migration
         Schema::create('reservation_restaurant_tables', function (Blueprint $table) {
             $table->id();
             $table->string('reserveId');
-            $table->string('tableNo');
-            
+            $table->integer('tableNo');
+
             $table->foreign('reserveId')->references('reserveId')->on('reservations')->onDelete('cascade');
             $table->foreign('tableNo')->references('tableNo')->on('restauranttables')->onDelete('cascade');
-            
+
         });
     }
 

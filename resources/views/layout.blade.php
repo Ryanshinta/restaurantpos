@@ -8,11 +8,8 @@
         <link rel="stylesheet" href="{{asset('css/sideBar.css')}}">
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" charset="utf-8"></script>
-<<<<<<< HEAD
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-=======
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
->>>>>>> f53d23c85d987963fd5aea0682df7bc26f27d48c
 
     </head>
     <body>
