@@ -145,4 +145,8 @@ class ProductController extends Controller
         $this->generateXML();
         return redirect('product')->with('success', "Success, your product have been delete.");
     }
+
+    public function search(){
+
+    }
 }

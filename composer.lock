@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b55f4c5f4437cc72dfd25aebebe34c1e",
+    "content-hash": "7c30a1602f87799c022c598914ea58a8",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -8280,6 +8280,63 @@
                 }
             ],
             "time": "2020-09-28T06:39:44+00:00"
+        },
+        {
+            "name": "sunaoka/laravel-facade-generator",
+            "version": "v1.3.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sunaoka/laravel-facade-generator.git",
+                "reference": "6eb39e033dce0d0bc3f01a66784f332bc7d1b0b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sunaoka/laravel-facade-generator/zipball/6eb39e033dce0d0bc3f01a66784f332bc7d1b0b9",
+                "reference": "6eb39e033dce0d0bc3f01a66784f332bc7d1b0b9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1.3 || ^8.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^3.8 || ^4.0 || ^5.0 || ^6.0 || ^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Sunaoka\\LaravelFacadeGenerator\\FacadeGeneratorServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Sunaoka\\LaravelFacadeGenerator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "sunaoka",
+                    "email": "sunaoka@pocari.org"
+                }
+            ],
+            "description": "Provide command line generation of facade layer files.",
+            "keywords": [
+                "artisan",
+                "facade",
+                "generator",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/sunaoka/laravel-facade-generator/issues",
+                "source": "https://github.com/sunaoka/laravel-facade-generator/tree/v1.3.4"
+            },
+            "time": "2022-02-09T01:29:45+00:00"
         },
         {
             "name": "theseer/tokenizer",
