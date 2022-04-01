@@ -59,7 +59,7 @@ Route::get('orders/add', 'App\Http\Controllers\OrderController@add');
 
 Route::resource('/order', OrderController::class);
 
-Route::get('/', [CartController::class, 'index']);
+Route::get('/product', [CartController::class, 'index']);
 
 Route::get('cart', [CartController::class, 'cart'])->name('cart');
 
@@ -68,3 +68,4 @@ Route::post('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add
 Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
 
 Route::delete('remove-from-cart', [CartController::class, 'destroy'])->name('remove.from.cart');
+
