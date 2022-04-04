@@ -38,7 +38,7 @@ Route::view('/test','staffs.search');
 
 //Route::get('/test',[StaffController::class, 'search']);
 
-Route::get('/staffDisplay', [StaffController::class, 'display']);
+Route::get('/staffDisplay', [StaffController::class, 'sort']);
 
 Route::resource('/restaurantTable', RestaurantTableController::class);
 
@@ -68,4 +68,3 @@ Route::post('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add
 Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
 
 Route::delete('remove-from-cart', [CartController::class, 'destroy'])->name('remove.from.cart');
-

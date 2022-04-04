@@ -16,7 +16,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <xsl:for-each select="staffs//staff">
+                        <xsl:for-each select="staffs/staff">
+                            <xsl:sort select="mobile"/>
                             <tr>
                                 <td><xsl:value-of select="ic"/></td>
                                 <td><xsl:value-of select="name"/></td>

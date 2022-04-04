@@ -83,21 +83,27 @@ class StaffController extends Controller
         return view('staffs.display')->with('data', $data)->with('array', $array)/*->with('ic', $ic)->with('name', $name)->with('position', $position)*/ ;
     }
 
-    public function search()
+    public function sort()
     {
-        libxml_disable_entity_loader(false);
         $xml = new \DOMDocument();
-        $xml->load('public/xml/staff_info.xml', LIBXML_NOWARNING);
+        $xml->load('xml/staff_info.xml');
 
         $xsl = new \DOMDocument();
-        $xsl->load('public/xml/staff_info.xslt');
+        $xsl->load('xml/staff_sort_position.xslt');
 
         $proc = new \XSLTProcessor();
         $proc->importStylesheet($xsl);
-
-        echo $proc->transformToXml($xml);
-        return view('staffs.test')->with('proc', $proc);
+        $x = $proc->transformToXml($xml);
+        return view('staffs.search')->with('x', $x);
     }
+//        $doc = new \DOMDocument();
+//        $doc->preserveWhiteSpace = false;
+//        $doc->load('xml/staff_info.xml');
+//        $xpath = new \DOMXPath($doc);
+//        $query = '//staffs/staff/position[.="Manager"]';
+//        $entries = $xpath->query($query);
+//            ->with('entries',$entries);
+//        ->with('proc', $proc);
 
     public function newXml()
     {
@@ -140,6 +146,9 @@ class StaffController extends Controller
 
                 $address = $xml->createElement("address", $row['address']);
                 $staff->appendChild($address);
+
+                $dateRegistered = $xml->createElement("dateRegistered", substr($row['created_at'], 0, 10));
+                $staff->appendChild($dateRegistered);
             }
 
             echo "<xmp>" . $xml->saveXML() . "</xmp>";
