@@ -14,7 +14,12 @@ class CreateVouchersTable extends Migration
     public function up()
     {
         Schema::create('vouchers', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
+            $table->string('code')->unique();
+            $table->string('type'); // Two type Fixed discount and percentage
+            $table->integer('value')->nullable();
+            $table->boolean('isActive')->default(false);
+            $table->timestamp('expireDate');
             $table->timestamps();
         });
     }
