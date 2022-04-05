@@ -15,6 +15,11 @@ class RestaurantTableController extends Controller {
         $restauranttables = RestaurantTable::all();
         return view ('restauranttables.index')->with('restauranttables', $restauranttables);
     }
+    
+    public function display() {
+        $restauranttables = RestaurantTable::all();
+        return view ('restauranttables.display')->with('restauranttables', $restauranttables);
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -22,7 +27,10 @@ class RestaurantTableController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function create() {
-        return view('restauranttables.create');
+        $tableNum = RestaurantTable::all()->count();
+        $tableNum = $tableNum + 1;
+        
+        return view('restauranttables.create')->with('tableNum', $tableNum);
     }
 
     /**
@@ -32,12 +40,15 @@ class RestaurantTableController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
+        $tableNum = RestaurantTable::all()->count();
+        $tableNum = $tableNum + 1;
         //$input = $request->all();    
         RestaurantTable::create([
-            'tableNo' => $request->input('tableNo'),
+            'tableNo' => $tableNum,
+            'tableType' => $request->input('tableType'),
             'maxSeats' => $request->input('maxSeats')
         ]);
-        return redirect('restauranttable')->with('flash_message', 'Table Added!');
+        return redirect('restaurantTable')->with('flash_message', 'Table Added!');
     }
 
     /**
@@ -73,7 +84,7 @@ class RestaurantTableController extends Controller {
         $restauranttable = RestaurantTable::find($id);
         $input = $request->all();
         $restauranttable->update($input);
-        return redirect('restauranttable')->with('flash_message', 'Table Updated!');
+        return redirect('restaurantTable')->with('flash_message', 'Table Updated!');
     }
 
     /**
@@ -84,7 +95,7 @@ class RestaurantTableController extends Controller {
      */
     public function destroy($id) {
         RestaurantTable::destroy($id);
-        return redirect('restauranttable')->with('flash_message', 'Table deleted!');
+        return redirect('restaurantTable')->with('flash_message', 'Table deleted!');
     }
 
 }

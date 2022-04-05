@@ -8,6 +8,7 @@ use App\Http\Controllers\ReservationDetailController;
 use App\Http\Controllers\RestaurantTableController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\OrderController;
 use App\Http\Resources\ProductResource;
 use App\Models\Reservation;
@@ -65,6 +66,9 @@ Route::post('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add
 Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
 
 Route::delete('remove-from-cart', [CartController::class, 'destroy'])->name('remove.from.cart');
+
+
+Route::resource('/payment', PaymentController::class);
 
 //Product
 Route::resource('/product',ProductController::class);

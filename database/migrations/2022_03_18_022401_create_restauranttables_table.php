@@ -16,6 +16,7 @@ class CreateRestauranttablesTable extends Migration
         Schema::create('restauranttables', function (Blueprint $table) {
             $table->integer('tableNo')->primary();
             $table->string('tableStatus')->default('Available');
+            $table->string('tableType');
             $table->integer('maxSeats');
             $table->timestamps();
         });
