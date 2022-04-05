@@ -6,16 +6,19 @@
             <form id="register-form" method="get" action="">
                 <h3>Filters to search</h3><br>
                 <label>IC Number : </label><input type="text" name="icNumber" id="icNumber" value=""/><br><br>
-                <label>Full Name : </label><input type="text" name="name" value=""/><br><br>
+                <label>Name : </label><input type="text" name="name" value=""/><br><br>
                 <label>Position : </label><select name="position" value="">
-                    <option value="-">--Choose one--</option>
+                    <option value="">--Choose one--</option>
                     <option value="Waiter">Waiter</option>
                     <option value="Chef">Chef</option>
                     <option value="Manager">Manager</option>
                     <option value="Admin">Admin</option>
                 </select><br><br>
-                <label>Gender : </label><input type="radio" name="gender" value="Female"/>Female
-                <input type="radio" name="gender" value="Male"/>Male<br><br>
+                <label>Gender : </label><select name="gender" value="">
+                    <option value="">--Choose one--</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select><br><br>
                 <label>Phone no. : </label><input type="tel" name="mobile" value=""/><br><br>
                 <input style="width:100px; height: 28px;" type="submit" name="submit" value="Search"/><br><br>
                 <?php if (isset($_GET['submit'])){
@@ -23,9 +26,16 @@
                 $doc->preserveWhiteSpace = false;
                 $doc->load('xml/staff_info.xml');
                 $xpath = new \DOMXPath($doc);
+                $x_ic = $_GET['icNumber'];
                 $x_name = $_GET['name'];
                 $x_position = $_GET['position'];
-                $query = "//staffs/staff/name[contains(text(),'$x_name')]";
+                $x_gender = $_GET['gender'];
+                $x_mobile = $_GET['mobile'];
+                $query = "//staffs/staff[ic[(contains(text(),'$x_ic'))] and name[(contains(text(),'$x_name'))]
+                and position[(contains(text(),'$x_position'))]
+                and gender[(contains(text(),'$x_gender'))]
+                and mobile[(contains(text(),'$x_mobile'))]]/ic";
+//                $query = "//staffs/staff/name[contains(text(),'$x_name')]";
                 //                $query = "//staffs/staff/name[contains(text(),'$x_name')]/(.following-sibling::*|self::*)";
                 //                 staffs/staff/position[contains(text(),'$x_position')]
                 $entries = $xpath->query($query);
@@ -42,12 +52,12 @@
                     <tbody>
                     @foreach($entries as $entry)
                         <tr>
-                            <td>{{ $entry->previousSibling->nodeValue }}</td>
                             <td>{{ $entry->nodeValue }}</td>
                             <td>{{ $entry->nextSibling->nodeValue }}</td>
                             <td>{{ $entry->nextSibling->nextSibling->nodeValue }}</td>
                             <td>{{ $entry->nextSibling->nextSibling->nextSibling->nodeValue }}</td>
-                            <td>{{ $entry->nextSibling->nextSibling->nextSibling->nextSibling->nextSibling->nodeValue }}</td>
+                            <td>{{ $entry->nextSibling->nextSibling->nextSibling->nextSibling->nodeValue }}</td>
+                            <td>{{ $entry->nextSibling->nextSibling->nextSibling->nextSibling->nextSibling->nextSibling->nextSibling->nextSibling->nodeValue }}</td>
                         </tr>
                     @endforeach
                     </tbody>
