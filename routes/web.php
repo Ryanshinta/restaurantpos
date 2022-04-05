@@ -74,3 +74,10 @@ Route::delete('remove-from-cart', [CartController::class, 'destroy'])->name('rem
 //Voucher
 Route::get('voucher','App\Http\Controllers\VoucherController@getAllVoucher');
 Route::get('voucher/{code}','App\Http\Controllers\VoucherController@getVoucherByCode');
+Route::post('addVoucher','App\Http\Controllers\VoucherController@addVoucher');
+Route::post('updateVoucher/{code}','App\Http\Controllers\VoucherController@updateVoucher');
+Route::post('deleteVoucher/{code}','App\Http\Controllers\VoucherController@deleteVoucher');
+
+Route::get('/token', function () {
+    return csrf_token();
+});
