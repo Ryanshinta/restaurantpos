@@ -68,3 +68,9 @@ Route::post('add-to-cart/{id}', [CartController::class, 'addToCart'])->name('add
 Route::patch('update-cart', [CartController::class, 'update'])->name('update.cart');
 
 Route::delete('remove-from-cart', [CartController::class, 'destroy'])->name('remove.from.cart');
+
+
+
+//Voucher
+Route::get('voucher','App\Http\Controllers\VoucherController@getAllVoucher');
+Route::get('voucher/{code}','App\Http\Controllers\VoucherController@getVoucherByCode');
