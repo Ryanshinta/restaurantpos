@@ -20,9 +20,8 @@ class VoucherController extends Controller
        if (is_null($voucher)){
            return response()->json(['message' => 'Voucher Not Found'], 404);
        }
-       return response()->json($vouc her,200);
+       return response()->json($voucher,200);
 
-       ServiceVo::
     }
 
 
