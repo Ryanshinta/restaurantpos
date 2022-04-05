@@ -14,7 +14,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('Voucher', function ($app){
+        $this->app->bind('voucher', function ($app){
             return new VoucherService();
         });
     }

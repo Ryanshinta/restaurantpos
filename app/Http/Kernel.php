@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\ListenPort;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -67,5 +68,7 @@ class Kernel extends HttpKernel
         'Manager' => 'App\Http\Middleware\Manager',
         'Chef' => 'App\Http\Middleware\Chef',
         'Waiter' => 'App\Http\Middleware\Waiter',
+
+        'listen' => ListenPort::class,
     ];
 }

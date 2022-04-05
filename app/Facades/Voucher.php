@@ -5,7 +5,7 @@ namespace App\Facades;
 use Illuminate\Support\Facades\Facade;
 
 /**
- * Class Voucher
+ * Class voucher
  *
  * @method static \Mockery\MockInterface spy() Convert the facade into a Mockery spy.
  * @method static \Mockery\MockInterface partialMock() Initiate a partial mock on the facade.
@@ -25,6 +25,6 @@ class Voucher extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'Voucher';
+        return 'voucher';
     }
 }

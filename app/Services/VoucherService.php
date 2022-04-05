@@ -11,10 +11,10 @@ class VoucherService
 {
     public function checkAvailable(Voucher $voucher, Order $order){
         if ($voucher->isActive){
-            return toJSON('The Voucher is not active');
+            return toJSON('The voucher is not active');
         }
         if ($voucher->expireDate->lt(Carbon::now()) ){
-            return toJSON('The Voucher is expired');
+            return toJSON('The voucher is expired');
         }
     }
 }

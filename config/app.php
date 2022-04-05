@@ -232,7 +232,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Cart'=> \Gloudemans\Shoppingcart\Facades\Cart::class,
-        'Voucher'=>App\Facades\Voucher::class,
+        'voucher'=>App\Facades\Voucher::class,
     ],
 
 ];

@@ -60,4 +60,16 @@ class RouteServiceProvider extends ServiceProvider
             return Limit::perMinute(60)->by(optional($request->user())->id ?: $request->ip());
         });
     }
+
+
+    public function map()
+    {
+        if (request()->getPort() === 8000) {
+            $this->mapApiRoutes();
+        }
+
+        if (request()->getPort() === 80) {
+            $this->mapWebRoutes();
+        }
+    }
 }
