@@ -38,6 +38,7 @@ class CartController extends Controller
             $cart[$id]['quantity']++;
         } else {
             $cart[$id] = [
+                "pid" => $product->id,
                 "name" => $product->name,
                 "quantity" => 1,
                 "price" => $product->price,
@@ -77,8 +78,13 @@ class CartController extends Controller
                 unset($cart[$request->id]);
                 session()->put('cart', $cart);
             }
-            session()->flash('success', 'Product removed successfully');
+            // session()->flash('success', 'Product removed successfully');
+
+            return redirect()->back()->with('success', 'Product removed from cart successfully!');
+        }else{
+        	return redirect()->back()->with('error', 'Error');
         }
+
     }
 
     

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+
 use App\Models\Order;
 use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 
 class OrderController extends Controller
@@ -29,7 +32,34 @@ class OrderController extends Controller
      */
     public function create(Request $request)
     {
-        //
+        $user_id = Auth::id();
+
+        $order = new Order();
+        $order->user_id = $user_id;
+        $order->save();
+
+        $orderId = $order->id;
+
+        $totalPrice = 0;
+        $carts = session()->get('cart');
+        foreach($carts as $id=>$cart){
+            DB::table('orders_list')->insert([
+                'order_id' => $orderId,
+                'product_id' => $cart["pid"],
+                'quantity' => $cart["quantity"],
+                'subtotal' => $cart["price"] * $cart["quantity"],
+            ]);
+
+            $totalPrice = $totalPrice + ($cart["price"] * $cart["quantity"]);
+        }
+
+        $order->total_price = $totalPrice;
+        $order->save();
+
+        $request->session()->forget('cart');
+
+        return redirect('/order');
+
     }
 
     /**
