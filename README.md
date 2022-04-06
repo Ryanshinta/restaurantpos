@@ -24,14 +24,8 @@ Rename the **.env.example** to  **.env** file and fill in your database password
 
 ### Create Admin Account
 
-1. `php artisan tinker` and than paste
-    ```php
-    App\Models\User::create([
-        'name'=>'Admin',
-        'email'=>'admin@gmail.com',
-        'password' => bcrypt('admin')
-    ]);
-    ```
+1. php artisan db:seed --class=CreateAdminUserSeeder
+
 ### Link to local storage
 
     php artisan storage:link
