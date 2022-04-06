@@ -25,6 +25,8 @@ Rename the **.env.example** to  **.env** file and fill in your database password
 ### Create Admin Account
 
 1. `php artisan db:seed --class=CreateAdminUserSeeder`
+2. login with email: 'admin@gmail.com'
+           password: 'admin123456'
 
 ### Link to local storage
 
