@@ -59,6 +59,7 @@ Route::get('orders/add', 'App\Http\Controllers\OrderController@add');
 
 Route::get('orders/create', 'App\Http\Controllers\OrderController@create');
 
+
 Route::resource('/order', OrderController::class);
 
 Route::get('/cart', [CartController::class, 'index']);
