@@ -31,9 +31,9 @@
                         <a href="#" class="sub-item">Cancel Order</a>
                     </div>
                 </div>
-                <div class="item"><a href="/payment">Payment</a></div>
+                <div class="item"><a href="#">Payment</a></div>
                 <div class="item"><a href="#">Voucher</a></div>
-                <div class="item"><a href="/restaurantTable">Table</a></div>
+                <div class="item"><a href="/restauranttable">Table</a></div>
                 <div class="item"><a href="/reservation">Reservation</a></div>
                 <div class="item"><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a></div>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -45,7 +45,7 @@
         <div>
             @yield('content')
         </div>
-    </body>
+    
     <script type="text/javascript">
         $(document).ready(function () {
             //jquery for toggle sub menus
@@ -87,4 +87,7 @@
         })
 
     </script>
+    @yield('scripts')
+
+    </body>
 </html>
