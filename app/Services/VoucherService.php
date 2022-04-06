@@ -16,5 +16,7 @@ class VoucherService
         if ($voucher->expireDate->lt(Carbon::now()) ){
             return toJSON('The voucher is expired');
         }
+        return toJSON(false);
     }
+
 }

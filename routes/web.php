@@ -9,6 +9,8 @@ use App\Http\Controllers\RestaurantTableController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\VoucherController;
 use App\Http\Resources\ProductResource;
 use App\Models\Reservation;
 use App\Models\RestaurantTable;
@@ -50,11 +52,6 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('/product',ProductController::class);
-
-Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->name("product.update");
-Route::view('/testProduct','product.search');
-
 Route::get('orders/add', 'App\Http\Controllers\OrderController@add');
 
 Route::get('orders/create', 'App\Http\Controllers\OrderController@create');
@@ -74,15 +71,17 @@ Route::post('remove-from-cart', [CartController::class, 'destroy'])->name('remov
 
 Route::resource('/payment', PaymentController::class);
 
+
 //Product
 Route::resource('/product',ProductController::class);
 Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->name("product.update");
 Route::view('/testProduct','product.search');
 
 //page
-Route::resource('/voucher',\App\Http\Controllers\VoucherController::class);
+Route::resource('/voucher',VoucherController::class);
 //Route::post('/voucher/create',\App\Http\Controllers\VoucherController::class);
-Route::post('voucher/create', 'VoucherController@store');
+//Route::post('voucher/create', 'VoucherController@store');
+Route::post('/voucher/{code}','VoucherController@update');
 
 //voucher
 //Route::get('/api/voucher','App\Http\Controllers\VoucherAPIController@getAllVoucher');
@@ -92,13 +91,6 @@ Route::post('voucher/create', 'VoucherController@store');
 //Route::post('/api/deleteVoucher/{code}','App\Http\Controllers\VoucherAPIController@deleteVoucher');
 
 
-
-//Voucher
-Route::get('voucher','App\Http\Controllers\VoucherController@getAllVoucher');
-Route::get('voucher/{code}','App\Http\Controllers\VoucherController@getVoucherByCode');
-Route::post('addVoucher','App\Http\Controllers\VoucherController@addVoucher');
-Route::post('updateVoucher/{code}','App\Http\Controllers\VoucherController@updateVoucher');
-Route::post('deleteVoucher/{code}','App\Http\Controllers\VoucherController@deleteVoucher');
 
 Route::get('/token', function () {
     return csrf_token();

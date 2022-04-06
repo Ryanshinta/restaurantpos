@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="item"><a href="#">Payment</a></div>
-                <div class="item"><a href="#">Voucher</a></div>
+                <div class="item"><a href="/voucher">Voucher</a></div>
                 <div class="item"><a href="/restauranttable">Table</a></div>
                 <div class="item"><a href="/reservation">Reservation</a></div>
                 <div class="item"><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a></div>
@@ -45,7 +45,7 @@
         <div>
             @yield('content')
         </div>
-    
+
     <script type="text/javascript">
         $(document).ready(function () {
             //jquery for toggle sub menus
