@@ -41,11 +41,11 @@
                                             <input type="number" value="{{ $item['quantity'] }}" class="form-control quantity update-cart" />
                                         </td>
                                         <td data-th="Subtotal" class="text-center">RM{{ $item['price'] * $item['quantity'] }}</td>
-                                        <td class="actions" >
+                                        <td class="actions">
                                             <form method="POST" action="{{ url('remove-from-cart') }}" accept-charset="UTF-8" style="display:inline">
                                                 @csrf
                                                 <input type="hidden" name="id" value="{{$id}}">
-                                                <button type="submit" style="height: 28px; width: 85px;" class="btn btn-danger btn-sm" title="Delete Product" ><i aria-hidden="true"></i> Delete</button>
+                                                <button type="submit" style="height: 28px; width: 85px;" class="btn btn-danger btn-sm" title="Delete Product"><i aria-hidden="true"></i> Delete</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -57,22 +57,18 @@
                                 <div className="col">Total:RM{{ $total }}</div>
                                 <div className="col text-right"></div>
                             </div>
-                            <div className="row">
-                                <div className="col">
-                                    <button class="btn btn-primary btn-sm" style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i aria-hidden="true"></i> Cancel</button>
-                                </div>
-                                <div className="col">
-
-                                    <a href="{{ url('orders/create') }}" style="background-color: grey;color: white;padding: 5px 10px;text-align: center;text-decoration: none;">Submit</a>
-
-                                </div>
+                            <div className="col">
+                                <a href="{{ url('orders/create') }}">
+                                    <button class="btn btn-primary btn-sm" style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i aria-hidden="true">Submit</a>
+                                <button class="btn btn-primary btn-sm" style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i aria-hidden="true"></i> Cancel</button>
                             </div>
                         </div>
                     </div>
                 </div>
-            </tbody>
-        </table>
     </div>
+    </tbody>
+    </table>
+</div>
 </div>
 @endsection
 
@@ -96,26 +92,5 @@
             }
         });
     });
-
-    // $(".remove-from-cart").click(function (e) {
-    //     e.preventDefault();
-  
-    //     var ele = $(this);
-  
-    //     if(confirm("Are you sure want to remove?")) {
-    //         $.ajax({
-    //             url: "{{ route('remove.from.cart') }}",
-    //             method: "DELETE",
-    //             data: {
-    //                 _token: '{{ csrf_token() }}', 
-    //                 id: ele.parents("tr").attr("data-id")
-    //             },
-    //             success: function (response) {
-    //                 window.location.reload();
-    //             }
-    //         });
-    //     }
-    // });
-
 </script>
 @endsection

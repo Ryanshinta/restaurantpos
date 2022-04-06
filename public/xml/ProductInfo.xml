@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <Products>
   <Product Status="1">
-    <ID>1</ID>
-    <name>Nasi Lemak</name>
-    <description>hahaha</description>
-    <price>12.00</price>
-    <createdAt>2022-04-05 04:57:59</createdAt>
-    <updatedAt>2022-04-05 04:57:59</updatedAt>
-    <imagePath>/storage/products/vGQFjOSRCfLa48gxb00qzTGs6sJHRQMXt2XR2QNY.jpg</imagePath>
+    <ID>2</ID>
+    <name>coffee</name>
+    <description>just coffee</description>
+    <price>10.00</price>
+    <createdAt>2022-04-06 10:46:19</createdAt>
+    <updatedAt>2022-04-06 10:46:19</updatedAt>
+    <imagePath>/storage/products/Uc9kRtt8KSwdrBTd993bQih2lxp45cMj2JhS8HRz.jpg</imagePath>
   </Product>
 </Products>
