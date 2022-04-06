@@ -38,7 +38,7 @@
     <name>Ouyang Yunru</name>
     <role>Manager</role>
     <gender>Male</gender>
-    <mobile>012-3644875</mobile>
+    <mobile>012-3644877</mobile>
     <email>ryanshinta@gmail.com</email>
     <birthday>2022-04-01</birthday>
     <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
@@ -64,6 +64,17 @@
     <email>nicole111@gmail.com</email>
     <birthday>2022-04-01</birthday>
     <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+    <dateRegistered>2022-04-06</dateRegistered>
+  </user>
+  <user>
+    <ic>010101-01-0101</ic>
+    <name>My Admin</name>
+    <role>Admin</role>
+    <gender>Male</gender>
+    <mobile>012-3456789</mobile>
+    <email>admin@gmail.com</email>
+    <birthday/>
+    <address/>
     <dateRegistered>2022-04-06</dateRegistered>
   </user>
 </users>

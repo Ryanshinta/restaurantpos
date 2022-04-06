@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class ReservationController extends Controller {
 
+    function __construct(){
+        $this->middleware('permission:reservation-list|reservation-create|reservation-edit|reservation-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:reservation-create', ['only' => ['create','store']]);
+        $this->middleware('permission:reservation-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:reservation-delete', ['only' => ['destroy']]);
+    }
+
     public function index() {
         $reservations = Reservation::all();
         return view('reservations.index')->with('reservations', $reservations);

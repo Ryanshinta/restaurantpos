@@ -1,9 +1,9 @@
-@extends('layout')
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="upper-section">
         <h2>Update Account</h2>
-        <form method="POST" action="{{ url('user/' .$users->id) }}">
+        <form method="POST" action="{{ url('users/' .$users->id) }}">
             {!! csrf_field() !!}
             @method("PATCH")
             <label>IC Number : </label><label style="color: blue">{{$users->icNumber}}</label><br><br>
@@ -33,7 +33,12 @@
             <label>Address   : </label><input type="text" name="address" value="{{$users->address}}"/><br><br>
 
             <input style="width: 100px; height: 28px;" type="submit" name="update" value="Update"/>
-            <button style="width: 100px; height: 28px;" onclick="history.back()">Back</button><br><br>
+            <a href="{{ url('/users') }}" title="Back">
+                <button class="btn btn-primary btn-sm"
+                        style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i
+                        aria-hidden="true"></i> Back
+                </button>
+            </a>
                 <!--<span class="error"><?php // echo $error   ?></span>-->
         </form>
     </div>

@@ -1,12 +1,33 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
+
+class User extends Authenticatable
 {
+    use HasFactory, Notifiable, HasRoles;
+
     protected $table = 'users';
+
     protected $primaryKey = 'id';
-    protected $fillable = ['icNumber', 'name', 'role', 'password', 'gender', 'mobile', 'email', 'birthday', 'address'];
+
+    protected $fillable = [
+        'icNumber', 'name', 'role',
+        'password', 'gender', 'mobile',
+        'email', 'birthday', 'address'
+    ];
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
 }

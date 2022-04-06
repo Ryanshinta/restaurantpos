@@ -9,6 +9,8 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\VoucherController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RoleController;
 use App\Http\Resources\ProductResource;
 use App\Models\Reservation;
 use App\Models\RestaurantTable;
@@ -26,28 +28,6 @@ use Illuminate\Support\Facades\Auth;
   |
  */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
-Route::post('/reservation/addTable', 'App\Http\Controllers\ReservationController@addTable');
-
-Route::resource('/user', UserController::class);
-
-//Route::view('userDisplay', '/users/display');
-
-Route::view('/test','users.search');
-
-//Route::get('/test',[UserController::class, 'search']);
-
-Route::get('/userDisplay', [UserController::class, 'sort']);
-
-Route::resource('/restaurantTable', RestaurantTableController::class);
-
-Route::resource('/reservation', ReservationController::class);
-
-Route::resource('/reservationDetail', ReservationDetailController::class);
-
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('/product',ProductController::class);
@@ -58,7 +38,6 @@ Route::view('/testProduct','product.search');
 Route::get('orders/add', 'App\Http\Controllers\OrderController@add');
 
 Route::get('orders/create', 'App\Http\Controllers\OrderController@create');
-
 
 Route::resource('/order', OrderController::class);
 
@@ -73,8 +52,6 @@ Route::post('update-cart', [CartController::class, 'update'])->name('update.cart
 Route::post('remove-from-cart', [CartController::class, 'destroy'])->name('remove.from.cart');
 
 Route::resource('/payment', PaymentController::class);
-
-Auth::routes();
 
 //Product
 Route::resource('/product',ProductController::class);
@@ -94,8 +71,33 @@ Route::post('/voucher/{code}','VoucherController@update');
 //Route::post('/api/updateVoucher/{code}','App\Http\Controllers\VoucherAPIController@updateVoucher');
 //Route::post('/api/deleteVoucher/{code}','App\Http\Controllers\VoucherAPIController@deleteVoucher');
 
+//Reservation
+Route::post('/reservation/addTable', 'App\Http\Controllers\ReservationController@addTable');
+//Route::resource('/reservation', ReservationController::class);
 
+//User
+//Route::resource('/user', UserController::class);
+Route::view('/test','users.search');
+Route::get('/userDisplay', [UserController::class, 'sort']);
+
+//Testing
+Route::resource('/restaurantTable', RestaurantTableController::class);
+Route::resource('/reservationDetail', ReservationDetailController::class);
 
 Route::get('/token', function () {
     return csrf_token();
+});
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::resource('roles', RoleController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('reservations', ReservationController::class);
 });

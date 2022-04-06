@@ -4,11 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-
+    function __construct()
+    {
+        $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:user-create', ['only' => ['create','store']]);
+        $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:user-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -27,7 +35,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roles = Role::pluck('name','name')->all();
+        return view('users.create', compact('roles'));
     }
 
     /**
@@ -49,7 +58,7 @@ class UserController extends Controller
 
         $password = Hash::make($request->input('password'));
 
-        User::create([
+        $user = User::create([
             'icNumber' => $request->input('icNumber'),
             'name' => $request->input('name'),
             'role' => $request->input('role'),
@@ -60,6 +69,7 @@ class UserController extends Controller
             'birthday' => $request->input('birthday'),
             'address' => $request->input('address')
         ]);
+        $user->assignRole($request->input('role'));
 
 //        $ic = $request->input('icNumber');
         $this->newXml();
@@ -178,7 +188,10 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        return view('users.edit')->with('users', $user);
+        $role = Role::pluck('name','name')->all();
+        $userRole = $user->roles->pluck('name','name')->all();
+
+        return view('users.edit',compact('user','role','userRole'))->with('users', $user);
     }
 
     /**
@@ -193,8 +206,11 @@ class UserController extends Controller
         $user = User::find($id);
         $input = $request->all();
         $user->update($input);
+
+        DB::table('model_has_roles')->where('model_id',$id)->delete();
+        $user->assignRole($request->input('role'));
         $this->newXml();
-        return redirect('user')->with('flash_message', 'User Updated!');
+        return redirect('users')->with('flash_message', 'User Updated!');
     }
 
     /**
