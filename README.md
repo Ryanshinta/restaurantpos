@@ -22,6 +22,9 @@ Rename the **.env.example** to  **.env** file and fill in your database password
 1. `npm install`
 2. `npm run dev` (sometime need run twice)
 
+### Create permissions
+1. `php artisan db:seed --class=PermissionTableSeeder`
+
 ### Create Admin Account
 
 1. `php artisan db:seed --class=CreateAdminUserSeeder`
