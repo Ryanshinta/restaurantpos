@@ -7,7 +7,7 @@
                 <h3>Filters to search</h3><br>
                 <label>IC Number : </label><input type="text" name="icNumber" id="icNumber" value=""/><br><br>
                 <label>Name : </label><input type="text" name="name" value=""/><br><br>
-                <label>Position : </label><select name="position" value="">
+                <label>Staff Role : </label><select name="role" value="">
                     <option value="">--Choose one--</option>
                     <option value="Waiter">Waiter</option>
                     <option value="Chef">Chef</option>
@@ -24,27 +24,27 @@
                 <?php if (isset($_GET['submit'])){
                 $doc = new \DOMDocument();
                 $doc->preserveWhiteSpace = false;
-                $doc->load('xml/staff_info.xml');
+                $doc->load('xml/user_info.xml');
                 $xpath = new \DOMXPath($doc);
                 $x_ic = $_GET['icNumber'];
                 $x_name = $_GET['name'];
-                $x_position = $_GET['position'];
+                $x_role = $_GET['role'];
                 $x_gender = $_GET['gender'];
                 $x_mobile = $_GET['mobile'];
-                $query = "//staffs/staff[ic[(contains(text(),'$x_ic'))] and name[(contains(text(),'$x_name'))]
-                and position[(contains(text(),'$x_position'))]
+                $query = "//users/user[ic[(contains(text(),'$x_ic'))] and name[(contains(text(),'$x_name'))]
+                and role[(contains(text(),'$x_role'))]
                 and gender[(contains(text(),'$x_gender'))]
                 and mobile[(contains(text(),'$x_mobile'))]]/ic";
-//                $query = "//staffs/staff/name[contains(text(),'$x_name')]";
-                //                $query = "//staffs/staff/name[contains(text(),'$x_name')]/(.following-sibling::*|self::*)";
-                //                 staffs/staff/position[contains(text(),'$x_position')]
+//                $query = "//users/user/name[contains(text(),'$x_name')]";
+                //                $query = "//users/user/name[contains(text(),'$x_name')]/(.following-sibling::*|self::*)";
+                //                 users/user/role[contains(text(),'$x_role')]
                 $entries = $xpath->query($query);
                 ?>
                 <table class="table">
                     <tr>
                         <td>IC Number</td>
                         <td>Name</td>
-                        <td>Position</td>
+                        <td>Role</td>
                         <td>Gender</td>
                         <td>Phone no.</td>
                         <td>Date Registered</td>
@@ -61,7 +61,7 @@
                         </tr>
                     @endforeach
                     </tbody>
-                </table><br><br><?php } ?>
+                </table><br><br><?php }?>
 
                 <h3>Select sorting element</h3><br>
                 {{--                {{ url('staff/search') }}--}}
@@ -69,7 +69,7 @@
                     <option value="-">--Choose one--</option>
                     <option value="IC Number">IC Number</option>
                     <option value="Name">Name</option>
-                    <option value="Position">Position</option>
+                    <option value="Role">Role</option>
                     <option value="Mobile">Mobile</option>
                     <option value="Birth Date">Birth Date</option>
                     <option value="Register Date">Register Date</option>
@@ -96,30 +96,30 @@
         $value = $_GET['sortElement'];
 
         $xml = new \DOMDocument();
-        $xml->load('xml/staff_info.xml');
+        $xml->load('xml/user_info.xml');
 
         $xsl = new \DOMDocument();
 
         if ($value == "IC Number") {
-            $xsl->load('xml/staff_sort_icNumber.xslt');
+            $xsl->load('xml/user_sort_icNumber.xslt');
         }
         if ($value == "Name") {
-            $xsl->load('xml/staff_sort_name.xslt');
+            $xsl->load('xml/user_sort_name.xslt');
         }
-        if ($value == "Position") {
-            $xsl->load('xml/staff_sort_position.xslt');
+        if ($value == "Role") {
+            $xsl->load('xml/user_sort_role.xslt');
         }
         if ($value == "Mobile") {
-            $xsl->load('xml/staff_sort_mobile.xslt');
+            $xsl->load('xml/user_sort_mobile.xslt');
         }
         if ($value == "Register Date") {
-            $xsl->load('xml/staff_sort_dateRegistered.xslt');
+            $xsl->load('xml/user_sort_dateRegistered.xslt');
         }
         if ($value == "Birth Date") {
-            $xsl->load('xml/staff_sort_dateBirth.xslt');
+            $xsl->load('xml/user_sort_dateBirth.xslt');
         }
         if ($value == "-") {
-            $xsl->load('xml/staff_info.xslt');
+            $xsl->load('xml/user_info.xslt');
         }
 
         $proc = new \XSLTProcessor();

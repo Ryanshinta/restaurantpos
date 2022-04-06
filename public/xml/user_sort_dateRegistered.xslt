@@ -8,7 +8,7 @@
                         <tr>
                             <td>IC Number</td>
                             <td>Name</td>
-                            <td>Position</td>
+                            <td>Role</td>
                             <td>Gender</td>
                             <td>Mobile</td>
                             <td>Birthday</td>
@@ -16,12 +16,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <xsl:for-each select="staffs/staff">
-                            <xsl:sort select="birthday"/>
+                        <xsl:for-each select="users/user">
+                            <xsl:sort select="dateRegistered"/>
                             <tr>
                                 <td><xsl:value-of select="ic"/></td>
                                 <td><xsl:value-of select="name"/></td>
-                                <td><xsl:value-of select="position"/></td>
+                                <td><xsl:value-of select="role"/></td>
                                 <td><xsl:value-of select="gender"/></td>
                                 <td><xsl:value-of select="mobile"/></td>
                                 <td><xsl:value-of select="birthday"/></td>

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Staff;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class StaffController extends Controller
+class UserController extends Controller
 {
 
     /**
@@ -16,8 +16,8 @@ class StaffController extends Controller
      */
     public function index()
     {
-        $staffs = Staff::all();
-        return view('staffs.index')->with('staffs', $staffs);
+        $users = User::all();
+        return view('users.index')->with('users', $users);
     }
 
     /**
@@ -27,7 +27,7 @@ class StaffController extends Controller
      */
     public function create()
     {
-        return view('staffs.create');
+        return view('users.create');
     }
 
     /**
@@ -40,7 +40,7 @@ class StaffController extends Controller
     {
         //$input = $request->all();
         $request->validate([
-            'icNumber' => 'unique:staffs|regex:/^\d{6}-\d{2}-\d{4}$/',
+            'icNumber' => 'unique:users|regex:/^\d{6}-\d{2}-\d{4}$/',
             'name' => "regex:/^[a-zA-Z-'\s]+$/",
             'password' => "regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/",
             'mobile' => "regex:/^\d{3}-\d{7,9}$/",
@@ -49,10 +49,10 @@ class StaffController extends Controller
 
         $password = Hash::make($request->input('password'));
 
-        Staff::create([
+        User::create([
             'icNumber' => $request->input('icNumber'),
             'name' => $request->input('name'),
-            'position' => $request->input('position'),
+            'role' => $request->input('role'),
             'password' => $password,
             'gender' => $request->input('gender'),
             'mobile' => $request->input('mobile'),
@@ -63,7 +63,7 @@ class StaffController extends Controller
 
 //        $ic = $request->input('icNumber');
         $this->newXml();
-        return redirect('staff')->with('flash_message', 'Staff Added!');
+        return redirect('user')->with('flash_message', 'User Added!');
     }
 
     /**
@@ -73,86 +73,87 @@ class StaffController extends Controller
      */
     public function display()
     {
-        $xml = file_get_contents('D:\Program Files\Xampp\htdocs\restaurantpos\public\xml\staff_info.xml');
+        $xml = file_get_contents('D:\Program Files\Xampp\htdocs\restaurantpos\public\xml\user_info.xml');
         $data = simplexml_load_string($xml);
 
         $json = json_encode($data);
         $array = json_decode($json, true);
-        $array = $array['staff'];
+        $array = $array['user'];
 
-        return view('staffs.display')->with('data', $data)->with('array', $array)/*->with('ic', $ic)->with('name', $name)->with('position', $position)*/ ;
+        return view('users.display')->with('data', $data)->with('array', $array)/*->with('ic', $ic)->with('name', $name)->with('role', $role)*/ ;
     }
 
     public function sort()
     {
+        $this->newXml();
         $xml = new \DOMDocument();
-        $xml->load('xml/staff_info.xml');
+        $xml->load('xml/user_info.xml');
 
         $xsl = new \DOMDocument();
-        $xsl->load('xml/staff_sort_position.xslt');
+        $xsl->load('xml/user_info.xslt');
 
         $proc = new \XSLTProcessor();
         $proc->importStylesheet($xsl);
         $x = $proc->transformToXml($xml);
-        return view('staffs.search')->with('x', $x);
+        return view('users.search')->with('x', $x);
     }
 //        $doc = new \DOMDocument();
 //        $doc->preserveWhiteSpace = false;
-//        $doc->load('xml/staff_info.xml');
+//        $doc->load('xml/user_info.xml');
 //        $xpath = new \DOMXPath($doc);
-//        $query = '//staffs/staff/position[.="Manager"]';
+//        $query = '//users/user/role[.="Manager"]';
 //        $entries = $xpath->query($query);
 //            ->with('entries',$entries);
 //        ->with('proc', $proc);
 
     public function newXml()
     {
-        $path = 'public/xml/staff_info.xml';
+        $path = 'public/xml/user_info.xml';
         if (file_exists($path)) {
             unlink($path);
         } else {
-            $results = Staff::all();
+            $results = User::all();
 
             $xml = new \DOMDocument('1.0');
             $xml->formatOutput = true;
 
-            $staffs = $xml->createElement('staffs');
-            $xml->appendChild($staffs);
+            $users = $xml->createElement('users');
+            $xml->appendChild($users);
 
             foreach ($results as $row) {
-                $staff = $xml->createElement("staff");
-                $staffs->appendChild($staff);
+                $user = $xml->createElement("user");
+                $users->appendChild($user);
 
                 $ic = $xml->createElement("ic", $row['icNumber']);
-                $staff->appendChild($ic);
+                $user->appendChild($ic);
 
                 $name = $xml->createElement("name", $row['name']);
-                $staff->appendChild($name);
+                $user->appendChild($name);
 
-                $position = $xml->createElement("position", $row['position']);
-                $staff->appendChild($position);
+                $role = $xml->createElement("role", $row['role']);
+                $user->appendChild($role);
 
                 $gender = $xml->createElement("gender", $row['gender']);
-                $staff->appendChild($gender);
+                $user->appendChild($gender);
 
                 $mobile = $xml->createElement("mobile", $row['mobile']);
-                $staff->appendChild($mobile);
+                $user->appendChild($mobile);
 
                 $email = $xml->createElement("email", $row['email']);
-                $staff->appendChild($email);
+                $user->appendChild($email);
 
                 $birthday = $xml->createElement("birthday", $row['birthday']);
-                $staff->appendChild($birthday);
+                $user->appendChild($birthday);
 
                 $address = $xml->createElement("address", $row['address']);
-                $staff->appendChild($address);
+                $user->appendChild($address);
 
                 $dateRegistered = $xml->createElement("dateRegistered", substr($row['created_at'], 0, 10));
-                $staff->appendChild($dateRegistered);
+                $user->appendChild($dateRegistered);
             }
 
-            echo "<xmp>" . $xml->saveXML() . "</xmp>";
-            $xml->save("xml/staff_info.xml") or die("Unable to create xml");
+            $xml->saveXML();
+            $xml->save("xml/user_info.xml") or die("Unable to create xml");
         }
     }
 
@@ -164,8 +165,8 @@ class StaffController extends Controller
      */
     public function show($id)
     {
-        $staff = Staff::find($id);
-        return view('staffs.show')->with('staffs', $staff);
+        $user = User::find($id);
+        return view('users.show')->with('users', $user);
     }
 
     /**
@@ -176,8 +177,8 @@ class StaffController extends Controller
      */
     public function edit($id)
     {
-        $staff = Staff::find($id);
-        return view('staffs.edit')->with('staffs', $staff);
+        $user = User::find($id);
+        return view('users.edit')->with('users', $user);
     }
 
     /**
@@ -189,11 +190,11 @@ class StaffController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $staff = Staff::find($id);
+        $user = User::find($id);
         $input = $request->all();
-        $staff->update($input);
+        $user->update($input);
         $this->newXml();
-        return redirect('staff')->with('flash_message', 'Staff Updated!');
+        return redirect('user')->with('flash_message', 'User Updated!');
     }
 
     /**
@@ -204,9 +205,9 @@ class StaffController extends Controller
      */
     public function destroy($id)
     {
-        Staff::destroy($id);
+        User::destroy($id);
         $this->newXml();
-        return redirect('staff')->with('flash_message', 'Staff deleted!');
+        return redirect('user')->with('flash_message', 'User deleted!');
     }
 
 }

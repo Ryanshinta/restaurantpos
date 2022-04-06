@@ -3,7 +3,7 @@
 <div class="container">
     <div class="upper-section">
         <h2>Register Account</h2>
-        <form id="register-form" method="POST" action="{{ url('staff') }}">
+        <form id="register-form" method="POST" action="{{ url('user') }}">
             {!! csrf_field() !!}
             <label>IC Number : </label><input type="text" name="icNumber" id="icNumber" value="" placeholder="xxxxxx-xx-xxxx" required="true"/><br><br>
             <!--<span class="error"><?php // echo "* " . $icNumberError;      ?></span><br><br>-->
@@ -11,7 +11,7 @@
             <label>Full Name : </label><input type="text" name="name" value="" required="true"/><br><br>
             <!--<span class="error"><?php // echo "* " . $nameError;      ?></span><br><br>-->
 
-            <label>Position  : </label><select name="position" value="" required="true">
+            <label>Staff Role  : </label><select name="role" value="" required="true">
                 <option value="Waiter">Waiter</option>
                 <option value="Chef">Chef</option>
                 <option value="Manager">Manager</option>

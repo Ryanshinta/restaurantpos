@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<users>
+  <user>
+    <ic>011201-14-0493</ic>
+    <name>Chai Jia Hao</name>
+    <role>Admin</role>
+    <gender>Male</gender>
+    <mobile>013-2865802</mobile>
+    <email>jiahaochai0112@gmail.com</email>
+    <birthday>2001-12-01</birthday>
+    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+    <dateRegistered>2022-04-06</dateRegistered>
+  </user>
+  <user>
+    <ic>011201-14-0491</ic>
+    <name>Chan Chun Wai</name>
+    <role>Waiter</role>
+    <gender>Male</gender>
+    <mobile>013-7785416</mobile>
+    <email>ash3000@gmail.com</email>
+    <birthday>2022-03-31</birthday>
+    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+    <dateRegistered>2022-04-06</dateRegistered>
+  </user>
+  <user>
+    <ic>011201-14-0492</ic>
+    <name>Gan Wei Zhe</name>
+    <role>Chef</role>
+    <gender>Male</gender>
+    <mobile>016-7784521</mobile>
+    <email>ganwz@gmail.com</email>
+    <birthday>2022-04-03</birthday>
+    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+    <dateRegistered>2022-04-06</dateRegistered>
+  </user>
+  <user>
+    <ic>011201-14-0494</ic>
+    <name>Ouyang Yunru</name>
+    <role>Manager</role>
+    <gender>Male</gender>
+    <mobile>012-3644875</mobile>
+    <email>ryanshinta@gmail.com</email>
+    <birthday>2022-04-01</birthday>
+    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+    <dateRegistered>2022-04-06</dateRegistered>
+  </user>
+  <user>
+    <ic>011201-14-0495</ic>
+    <name>Chiew Wai Hong</name>
+    <role>Waiter</role>
+    <gender>Male</gender>
+    <mobile>017-6695484</mobile>
+    <email>honghong@gmail.com</email>
+    <birthday>2022-04-16</birthday>
+    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+    <dateRegistered>2022-04-06</dateRegistered>
+  </user>
+  <user>
+    <ic>011201-14-0496</ic>
+    <name>Foong Pooi Guan</name>
+    <role>Manager</role>
+    <gender>Female</gender>
+    <mobile>018-5564871</mobile>
+    <email>nicole111@gmail.com</email>
+    <birthday>2022-04-01</birthday>
+    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+    <dateRegistered>2022-04-06</dateRegistered>
+  </user>
+</users>

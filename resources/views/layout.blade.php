@@ -19,7 +19,7 @@
             <div class="menu">
                 <div class="item"><a href="Home.php">Dashboard</a></div>
                 <div class="item"><a href="#">Access Control (RBAC)</a></div>
-                <div class="item"><a href="/staff">Staff</a></div>
+                <div class="item"><a href="/user">Staff</a></div>
                 <div class="item">
                     <a class="sub-btn" href="/product">Product</a>
                 </div>

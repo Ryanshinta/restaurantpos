@@ -4,14 +4,14 @@
         <div class="upper-section">
             <h2>Staff Information</h2>
             <h4>Insert search condition</h4><br>
-            <form id="register-form" method="POST" action="{{ url('staff/display') }}">
+            <form id="register-form" method="POST" action="{{ url('user/display') }}">
                 {!! csrf_field() !!}
                 <label>IC Number : </label><input type="text" name="icNumber" id="icNumber" value=""
                                                   placeholder="xxxxxx-xx-xxxx"/><br><br>
 
                 <label>Full Name : </label><input type="text" name="name" value=""/><br><br>
 
-                <label>Position : </label><select name="position" value="">
+                <label>Staff Role : </label><select name="role" value="">
                     <option value="Waiter">Waiter</option>
                     <option value="Chef">Chef</option>
                     <option value="Manager">Manager</option>
