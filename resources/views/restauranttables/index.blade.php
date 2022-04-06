@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="upper-section">
@@ -59,7 +59,7 @@
                             <td><a href="Home.php">01</a></td>
                         </tr>
                     </table>
-        
+
                 </div>-->
     </div>
 </div>

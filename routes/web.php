@@ -72,7 +72,7 @@ Route::post('/voucher/{code}','VoucherController@update');
 //Route::post('/api/deleteVoucher/{code}','App\Http\Controllers\VoucherAPIController@deleteVoucher');
 
 //Reservation
-Route::post('/reservation/addTable', 'App\Http\Controllers\ReservationController@addTable');
+//Route::post('/reservations/addTable', 'App\Http\Controllers\ReservationController@addTable');
 //Route::resource('/reservation', ReservationController::class);
 
 //User
@@ -101,3 +101,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('users', UserController::class);
     Route::resource('reservations', ReservationController::class);
 });
+
+
+Route::post('/reservations/addTable', 'App\Http\Controllers\ReservationController@addTable');

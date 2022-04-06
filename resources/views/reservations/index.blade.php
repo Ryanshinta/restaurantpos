@@ -8,7 +8,7 @@
     <div class="container">
         <div class="upper-section">
             <h2>Reservations</h2>
-            <a href="{{ url('/reservation/create') }}" title="Add New Reservation">
+            <a href="{{ url('/reservations/create') }}" title="Add New Reservation">
                 <button class="btn btn-primary btn-sm"
                         style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i
                         aria-hidden="true"></i> Add New
@@ -39,12 +39,12 @@
                         <td>{{ $item->custMobile }}</td>
                     <!--<td>{{ $item->address }}</td>-->
                         <td>
-                            <a href="{{ url('/reservation/' . $item->reserveId) }}" title="View Reservation">
+                            <a href="{{ url('/reservations/' . $item->reserveId) }}" title="View Reservation">
                                 <button style="height: 28px; width: 85px;" class="btn btn-info btn-sm"><i
                                         aria-hidden="true"></i> View
                                 </button>
                             </a>
-                            <a href="{{ url('/reservation/' . $item->reserveId . '/edit') }}" title="Edit Reservation">
+                            <a href="{{ url('/reservations/' . $item->reserveId . '/edit') }}" title="Edit Reservation">
                                 <button style="height: 28px; width: 85px;" class="btn btn-primary btn-sm"><i
                                         aria-hidden="true"></i> Edit
                                 </button>
@@ -55,7 +55,7 @@
                             {{--                            <button type="submit" style="height: 28px; width: 85px;" class="btn btn-danger btn-sm" title="Delete Reservation" onclick="return confirm( & quot; Confirm delete? & quot; )"><i aria-hidden="true"></i> Delete</button>--}}
                             {{--                        </form>--}}
                             <button class="btn btn-danger btn-delete"
-                                    data-url="{{route('reservation.destroy', $item)}}"><i
+                                    data-url="{{route('reservations.destroy', $item)}}"><i
                                     class="fas fa-trash"></i></button>
                         </td>
                     </tr>

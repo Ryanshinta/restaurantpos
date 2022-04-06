@@ -3,7 +3,7 @@
 <div class="container">
     <div class="upper-section">
         <h2>Update Reservation</h2>
-        <form method="POST" action="{{ url('reservation/' .$reservations->reserveId) }}">
+        <form method="POST" action="{{ url('reservations/' .$reservations->reserveId) }}">
             {!! csrf_field() !!}
             @method("PATCH")
             <label>Reservation ID : </label><input type="text" name="reserveId" value="{{$reservations->reserveId}}" required="true"/><br><br>

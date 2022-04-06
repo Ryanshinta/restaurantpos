@@ -8,7 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Restaurant System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
-{{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
+    {{--    <link href="{{ asset('css/app.css') }}" rel="stylesheet">--}}
     <link rel="stylesheet" href="{{asset('css/sideBar.css')}}">
 
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -27,8 +27,12 @@
             <div class="item"><a href="{{ route('register') }}">{{ __('Register') }}</a></div>
         @else
             <div class="item"><a href="Home.php">Dashboard</a></div>
-            <div class="item"><a href="{{route('roles.index')}}">Access Control (RBAC)</a></div>
-            <div class="item"><a href="{{ route('users.index') }}">Staff</a></div>
+            @can('role-list')
+                <div class="item"><a href="{{route('roles.index')}}">Access Control (RBAC)</a></div>
+            @endcan
+            @can('user-list')
+                <div class="item"><a href="{{ route('users.index') }}">Staff</a></div>
+            @endcan
             <div class="item"><a href="{{ route('product.index') }}">Product</a></div>
             <div class="item"><a class="sub-btn">Order<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
@@ -37,10 +41,12 @@
                     <a href="#" class="sub-item">Cancel Order</a>
                 </div>
             </div>
-            <div class="item"><a href="#">Payment</a></div>
+            <div class="item"><a href="{{ route('payment.index') }}">Payment</a></div>
             <div class="item"><a href="{{ route('voucher.index') }}">Voucher</a></div>
-            <div class="item"><a href="#">Table</a></div>
-            <div class="item"><a href="{{ route('reservations.index') }}">Reservation</a></div>
+            <div class="item"><a href="{{ route('restaurantTable.index') }}">Table</a></div>
+            @can('reservation-list')
+                <div class="item"><a href="{{ route('reservations.index') }}">Reservation</a></div>
+            @endcan
             <div class="item"><a href="{{ route('logout') }}"
                                  onclick="event.preventDefault(); document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
             </div>
