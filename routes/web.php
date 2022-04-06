@@ -1,18 +1,19 @@
 <?php
 
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReservationController;
 use App\Http\Controllers\ReservationDetailController;
 use App\Http\Controllers\RestaurantTableController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\OrderController;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\VoucherController;
 use App\Http\Resources\ProductResource;
 use App\Models\Reservation;
 use App\Models\RestaurantTable;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Auth;
 
 /*
   |--------------------------------------------------------------------------
@@ -81,16 +82,19 @@ Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->nam
 Route::view('/testProduct','product.search');
 
 //page
-Route::resource('/voucher',\App\Http\Controllers\VoucherController::class);
+Route::resource('/voucher',VoucherController::class);
 //Route::post('/voucher/create',\App\Http\Controllers\VoucherController::class);
-Route::post('voucher/create', 'VoucherController@store');
+//Route::post('voucher/create', 'VoucherController@store');
+Route::post('/voucher/{code}','VoucherController@update');
 
-//Voucher
-Route::get('voucher','App\Http\Controllers\VoucherController@getAllVoucher');
-Route::get('voucher/{code}','App\Http\Controllers\VoucherController@getVoucherByCode');
-Route::post('addVoucher','App\Http\Controllers\VoucherController@addVoucher');
-Route::post('updateVoucher/{code}','App\Http\Controllers\VoucherController@updateVoucher');
-Route::post('deleteVoucher/{code}','App\Http\Controllers\VoucherController@deleteVoucher');
+//voucher
+//Route::get('/api/voucher','App\Http\Controllers\VoucherAPIController@getAllVoucher');
+//Route::get('/api/voucher/{code}','App\Http\Controllers\VoucherAPIController@getVoucherByCode');
+//Route::post('/api/addVoucher','App\Http\Controllers\VoucherAPIController@addVoucher');
+//Route::post('/api/updateVoucher/{code}','App\Http\Controllers\VoucherAPIController@updateVoucher');
+//Route::post('/api/deleteVoucher/{code}','App\Http\Controllers\VoucherAPIController@deleteVoucher');
+
+
 
 Route::get('/token', function () {
     return csrf_token();
