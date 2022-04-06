@@ -33,7 +33,7 @@
                                 <tbody>
                                     @if(session('cart'))
                                     @foreach(session('cart') as $id => $item)
-                                    <tr>
+                                    <tr data-id="{{$id}}">
                                         <td>{{ $item['name'] }}</td>
                                         <td><img src="{{ Storage::url($item['image']) }}" width="100px" /></td>
                                         <td data-th="Price">RM{{ $item['price'] }}</td>
@@ -43,6 +43,8 @@
                                         <td data-th="Subtotal" class="text-center">RM{{ $item['price'] * $item['quantity'] }}</td>
                                         <td class="actions" >
                                             <form method="POST" action="{{ url('remove-from-cart') }}" accept-charset="UTF-8" style="display:inline">
+                                                @csrf
+                                                <input type="hidden" name="id" value="{{$id}}">
                                                 <button type="submit" style="height: 28px; width: 85px;" class="btn btn-danger btn-sm" title="Delete Product" ><i aria-hidden="true"></i> Delete</button>
                                             </form>
                                         </td>
@@ -60,7 +62,9 @@
                                     <button class="btn btn-primary btn-sm" style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i aria-hidden="true"></i> Cancel</button>
                                 </div>
                                 <div className="col">
-                                    <button class="btn btn-primary btn-sm" style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i aria-hidden="true"></i> Submit</button>
+
+                                    <a href="{{ url('orders/create') }}" style="background-color: grey;color: white;padding: 5px 10px;text-align: center;text-decoration: none;">Submit</a>
+
                                 </div>
                             </div>
                         </div>
@@ -81,7 +85,7 @@
 
         $.ajax({
             url: "{{ route('update.cart') }}",
-            method: "patch",
+            method: "post",
             data: {
                 _token: '{{ csrf_token() }}',
                 id: ele.parents("tr").attr("data-id"),
@@ -93,25 +97,25 @@
         });
     });
 
-    $(".remove-from-cart").click(function (e) {
-        e.preventDefault();
+    // $(".remove-from-cart").click(function (e) {
+    //     e.preventDefault();
   
-        var ele = $(this);
+    //     var ele = $(this);
   
-        if(confirm("Are you sure want to remove?")) {
-            $.ajax({
-                url: "{{ route('remove.from.cart') }}",
-                method: "DELETE",
-                data: {
-                    _token: '{{ csrf_token() }}', 
-                    id: ele.parents("tr").attr("data-id")
-                },
-                success: function (response) {
-                    window.location.reload();
-                }
-            });
-        }
-    });
+    //     if(confirm("Are you sure want to remove?")) {
+    //         $.ajax({
+    //             url: "{{ route('remove.from.cart') }}",
+    //             method: "DELETE",
+    //             data: {
+    //                 _token: '{{ csrf_token() }}', 
+    //                 id: ele.parents("tr").attr("data-id")
+    //             },
+    //             success: function (response) {
+    //                 window.location.reload();
+    //             }
+    //         });
+    //     }
+    // });
 
 </script>
 @endsection
