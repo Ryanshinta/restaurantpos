@@ -69,10 +69,12 @@
                                     $doc->load('xml/orderDetails.xml');
                                     $xpath = new \DOMXPath($doc);
                                     $x_ID = $_GET['ID'];
+                                    $x_Status = $_GET['status'];
                                     $x_totalprice = $_GET['total_price'];
                                     $x_createdAt = $_GET['created_at'];
                                     $x_updatedAt = $_GET['updated_at'];
-                                    $query = "//orders/order[id[(contains(text(),'$x_id'))] 
+                                    $query = "//orders/order[id[(contains(text(),'$x_id'))]
+                                    and status[(contains(text(),'$x_Status'))]
                                     and total_price[(contains(text(),'$x_totalprice'))] 
                                     and created_at[(contains(text(),'$x_createdAt'))]
                                     and updated_at[(contains(text(),'$x_updatedAt'))]]";
@@ -81,6 +83,7 @@
                                     <table class="table">
                                         <tr>
                                             <td>ID</td>
+                                            <td>Status</td>
                                             <td>totalPrice</td>
                                             <td>createdAt</td>
                                             <td>updatedAt</td>
@@ -90,8 +93,9 @@
                                             <tr>
                                                 <td>{{ $entry->nodeValue }}</td>
                                                 <td>{{ $entry->nextSibling->nextSibling->nodeValue }}</td>
-                                                <td>{{ $entry->nextSibling->nextSibling->nextSibling->nextSibling->nextSibling->nodeValue }}</td>
+                                                <td>{{ $entry->nextSibling->nextSibling->nextSibling->nodeValue }}</td>
                                                 <td>{{ $entry->nextSibling->nextSibling->nextSibling->nextSibling->nextSibling->nextSibling->nodeValue }}</td>
+                                                <td>{{ $entry->nextSibling->nextSibling->nextSibling->nextSibling->nextSibling->nextSibling->nextSibling->nodeValue }}</td>
                                             </tr>
                                             @endforeach
                                         </tbody>

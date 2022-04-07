@@ -89,6 +89,9 @@ class OrderController extends Controller
                 $ID = $xml->createElement("ID", $row['id']);
                 $order->appendChild($ID);
 
+                $Status = $xml->createElement("Status", $row['status']);
+                $order->appendChild($Status);
+
                 $totalPrice = $xml->createElement("totalPrice", $row['total_price']);
                 $order->appendChild($totalPrice);
 

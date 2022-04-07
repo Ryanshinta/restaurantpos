@@ -7,6 +7,7 @@
                     <thead>
                         <tr>
                             <th>ID</th>
+                            <td>Status</td>
                             <td>totalPrice</td>
                             <td>createdAt</td>
                             <td>updatedAt</td>
@@ -15,6 +16,7 @@
                     <tbody>
                             <tr>
                                 <td><xsl:value-of select="ID"/></td>
+                                <td><xsl:value-of select="s"/></td>
                                 <td>RM<xsl:value-of select="totalPrice"/>.00</td>
                                 <td><xsl:value-of select="createdAt"/></td>
                                 <td><xsl:value-of select="updatedAt"/></td>

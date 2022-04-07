@@ -30,13 +30,7 @@
             <div class="item"><a href="{{route('roles.index')}}">Access Control (RBAC)</a></div>
             <div class="item"><a href="{{ route('users.index') }}">Staff</a></div>
             <div class="item"><a href="{{ route('product.index') }}">Product</a></div>
-            <div class="item"><a class="sub-btn">Order<i class="fas fa-angle-right dropdown"></i></a>
-                <div class="sub-menu">
-                    <a href="/orders/add" class="sub-item">Add New Order</a>
-                    <a href="/order" class="sub-item">Edit Order Details</a>
-                    <a href="#" class="sub-item">Cancel Order</a>
-                </div>
-            </div>
+            <div class="item"><a href="{{ route('orders.index') }}">Order</a></div>
             <div class="item"><a href="#">Payment</a></div>
             <div class="item"><a href="{{ route('voucher.index') }}">Voucher</a></div>
             <div class="item"><a href="#">Table</a></div>
