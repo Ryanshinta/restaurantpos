@@ -11,7 +11,7 @@ class Order extends Model
     protected $fillable = ['name', 'address'];
 
     public function items(){
-        return $this->hasMany(Order_Detail::class);
+        return $this->hasMany(Orders_list::class);
     }
 
     public function payments(){

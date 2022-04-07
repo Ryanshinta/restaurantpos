@@ -55,13 +55,16 @@ Route::resource('/product',ProductController::class);
 Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->name("product.update");
 Route::view('/testProduct','product.search');
 
+//order
 Route::get('orders/add', 'App\Http\Controllers\OrderController@add');
 
 Route::get('orders/create', 'App\Http\Controllers\OrderController@create');
 
-
 Route::resource('/order', OrderController::class);
 
+Route::view('/showOrder','orders.show');
+
+//cart
 Route::get('/cart', [CartController::class, 'index']);
 
 Route::get('cart', [CartController::class, 'cart'])->name('cart');

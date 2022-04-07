@@ -55,11 +55,48 @@ class OrderController extends Controller
 
         $order->total_price = $totalPrice;
         $order->save();
+        $this->makeXml();
 
         $request->session()->forget('cart');
 
-        return redirect('/order');
+        return redirect('/order')->with('success', 'Order Submitted');
 
+    }
+
+    public function makeXml()
+    {
+        $path = 'public/xml/orderDetails.xml';
+        if (file_exists($path)) {
+            unlink($path);
+        } else {
+            $results = Order::all();
+
+            $xml = new \DOMDocument('1.0');
+            $xml->formatOutput = true;
+
+            $orders = $xml->createElement('Order');
+            $xml->appendChild($orders);
+
+            foreach ($results as $row) {
+                $order = $xml->createElement("order");
+                $orders->appendChild($order);
+
+                $ID = $xml->createElement("ID", $row['id']);
+                $order->appendChild($ID);
+
+                $totalPrice = $xml->createElement("totalPrice", $row['total_price']);
+                $order->appendChild($totalPrice);
+
+                $createdAt = $xml->createElement('createdAt',$row['created_at']);
+                $order->appendChild($createdAt);
+
+                $updatedAt = $xml->createElement('updatedAt',$row['updated_at']);
+                $order->appendChild($updatedAt);
+            }
+
+            echo "<xmp>" . $xml->saveXML() . "</xmp>";
+            $xml->save("xml/orderDetails.xml") or die("Unable to create xml");
+        }
     }
 
     /**
@@ -89,6 +126,7 @@ class OrderController extends Controller
         $product->save();
 
         return view('product')->with('product', $product);
+        
     }
 
     public function add(){

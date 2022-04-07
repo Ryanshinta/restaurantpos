@@ -11,7 +11,10 @@
                         <div className="row mb-2">
                         </div>
                         <div className="card">
-                            <a href="{{ url('orders/add') }}" title="Add New Product"><button class="btn btn-primary btn-sm" style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i aria-hidden="true"></i>Add Product</button></a>
+                            <a href="{{ url('orders/add') }}" title="Add New Product">
+                                <button class="btn btn-primary btn-sm" style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i aria-hidden="true"></i>Add Product</button></a>
+                            <a href="{{ url('/showOrder') }}" title="Show Order">
+                                <button class="btn btn-primary btn-sm" style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i aria-hidden="true"></i> Show Order</button></a>
                             @if (session('success'))
                             <div>{{ session('success') }}</div>
                             @endif
@@ -59,7 +62,41 @@
                             </div>
                             <div className="col">
                                 <a href="{{ url('orders/create') }}">
-                                    <button class="btn btn-primary btn-sm" style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i aria-hidden="true">Submit</a>
+                                    <button type="submit" name="submit" class="btn btn-primary btn-sm" style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i aria-hidden="true">Submit</a>
+                                <?php if (isset($_GET['submit'])) {
+                                    $doc = new \DOMDocument();
+                                    $doc->preserveWhiteSpace = false;
+                                    $doc->load('xml/orderDetails.xml');
+                                    $xpath = new \DOMXPath($doc);
+                                    $x_ID = $_GET['ID'];
+                                    $x_totalprice = $_GET['total_price'];
+                                    $x_createdAt = $_GET['created_at'];
+                                    $x_updatedAt = $_GET['updated_at'];
+                                    $query = "//orders/order[id[(contains(text(),'$x_id'))] 
+                                    and total_price[(contains(text(),'$x_totalprice'))] 
+                                    and created_at[(contains(text(),'$x_createdAt'))]
+                                    and updated_at[(contains(text(),'$x_updatedAt'))]]";
+                                    $entries = $xpath->query($query);
+                                ?>
+                                    <table class="table">
+                                        <tr>
+                                            <td>ID</td>
+                                            <td>totalPrice</td>
+                                            <td>createdAt</td>
+                                            <td>updatedAt</td>
+                                        </tr>
+                                        <tbody>
+                                            @foreach($entries as $entry)
+                                            <tr>
+                                                <td>{{ $entry->nodeValue }}</td>
+                                                <td>{{ $entry->nextSibling->nextSibling->nodeValue }}</td>
+                                                <td>{{ $entry->nextSibling->nextSibling->nextSibling->nextSibling->nextSibling->nodeValue }}</td>
+                                                <td>{{ $entry->nextSibling->nextSibling->nextSibling->nextSibling->nextSibling->nextSibling->nodeValue }}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table><br><br><?php } ?>
+
                                 <button class="btn btn-primary btn-sm" style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i aria-hidden="true"></i> Cancel</button>
                             </div>
                         </div>
