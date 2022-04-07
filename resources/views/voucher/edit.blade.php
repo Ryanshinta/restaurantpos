@@ -3,8 +3,9 @@
     <div class="container">
         <div class="upper-section">
             <h2>Update Voucher</h2>
-            <form id="editVoucher" method="POST" action="/voucher" enctype="multipart/form-data">
+            <form id="editVoucher" method="POST" action="{{route('voucher.update',['voucher' => $voucher->code])}}" enctype="multipart/form-data">
                 @csrf
+                @method('PUT')
                 <label for="code"> Code :</label> <input type="text" name="code" value="{{old('code',$voucher->code)}}" id="code" readonly class=" @error('name') is-invalid @enderror"> <br> <br>
                 <br>
                 <label for="type">type :</label>

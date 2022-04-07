@@ -3,7 +3,7 @@
     <div class="container">
         <div class="upper-section">
             <h2>Create new Voucher</h2>
-            <form id="addVoucher" method="POST" action="{{route('voucher.update',['code' => voucher->code])}}" enctype="multipart/form-data">
+            <form id="addVoucher" method="POST" action="/voucher" enctype="multipart/form-data">
                 @csrf
                 <label for="code"> Code :</label> <input type="text" name="code" id="code" required class=" @error('name') is-invalid @enderror"> <input type="checkbox" id="generateCode" name="generateCode" value="1"> Random Code Generate <br> <br>
 

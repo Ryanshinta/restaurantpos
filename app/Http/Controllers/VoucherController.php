@@ -76,7 +76,7 @@ class VoucherController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return
      */
-    public function update(Request $request, Voucher $voucher){
+    public function update(Request $request){
 
         Http::post('http://127.0.0.1:9876/api/updateVoucher/'.$request->code,[
             'code' => $request->code,
@@ -85,12 +85,7 @@ class VoucherController extends Controller
             'isActive' => $request->isActive,
             'expireDate' => $request->expireDate
         ]);
-        $voucher->code = $request->code;
-        $voucher->type = $request->type;
-        $voucher->value = $request->value;
-        $voucher->isActive = $request->isActive;
-        $voucher->expireDate = $request->expireDate;
-        $voucher->save();
+
 
         return redirect()->route('voucher.index');
 
