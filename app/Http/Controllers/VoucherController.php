@@ -17,14 +17,11 @@ class VoucherController extends Controller
 
     public function create(Request $request)
     {
-//        $voucher = Http::post('http://127.0.0.1:9876/api/addVoucher',$request->all());
         return view('voucher.create');
     }
 
     public function store(Request $request)
     {
-
-
         if ($request->generateCode == 1){
             $request->validate([
                 'code' => 'string|max:10',
@@ -77,7 +74,6 @@ class VoucherController extends Controller
         $url = $request->getPathInfo();
         $newURL = explode('/', $url, 4);
         $url = $newURL[2];
-        dd(url);
 
         $result = Http::post('http://127.0.0.1:9876/api/updateVoucher'.$url,[
             'code' => $request->code,
@@ -87,10 +83,7 @@ class VoucherController extends Controller
             'expireDate' => $request->expireDate
         ]);
 
-
-        error_log($result);
         dd($result);
-
 
         return redirect()->route('voucher.index');
 

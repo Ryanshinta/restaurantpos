@@ -3,20 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Services\Strategy\ChefSalary;
+use App\Services\Strategy\ManagerSalary;
+use App\Services\Strategy\WaiterSalary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
+use App\Services\Strategy\Context;
 
 class UserController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:user-create', ['only' => ['create','store']]);
-        $this->middleware('permission:user-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:user-list|user-create|user-edit|user-delete', ['only' => ['index', 'store']]);
+        $this->middleware('permission:user-create', ['only' => ['create', 'store']]);
+        $this->middleware('permission:user-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +40,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::pluck('name','name')->all();
+        $roles = Role::pluck('name', 'name')->all();
         return view('users.create', compact('roles'));
     }
 
@@ -188,10 +193,10 @@ class UserController extends Controller
     public function edit($id)
     {
         $user = User::find($id);
-        $role = Role::pluck('name','name')->all();
-        $userRole = $user->roles->pluck('name','name')->all();
+        $role = Role::pluck('name', 'name')->all();
+        $userRole = $user->roles->pluck('name', 'name')->all();
 
-        return view('users.edit',compact('user','role','userRole'))->with('users', $user);
+        return view('users.edit', compact('user', 'role', 'userRole'))->with('users', $user);
     }
 
     /**
@@ -204,13 +209,60 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
+        $base = $request->input('base');
+        $overTime = $request->input('overTime');
+        $bonusRate = $request->input('bonusRate');
+        $deduction = $request->input('deduction');
+//        $salary = $request->input('salary');
+        $role = $request->input('role');
+        if ($role != "Admin") {
+            if (!empty($base) or !empty($overTime) or !empty($bonusRate) or !empty($deduction)) {
+                if (empty($base)) {
+                    $base = 0;
+                };
+                if (empty($overTime)) {
+                    $overTime = 0;
+                };
+                if (empty($bonusRate)) {
+                    $bonusRate = 0;
+                };
+                if (empty($deduction)) {
+                    $deduction = 0;
+                };
+                $salary = $this->defineStrategy($role, $base, $overTime, $bonusRate, $deduction);
+                $user->update(array('salary' => $salary));
+            }
+        }
         $input = $request->all();
         $user->update($input);
 
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
+        DB::table('model_has_roles')->where('model_id', $id)->delete();
         $user->assignRole($request->input('role'));
         $this->newXml();
         return redirect('users')->with('flash_message', 'User Updated!');
+    }
+
+    /**
+     * @throws \Exception
+     */
+    public function defineStrategy($role, $base, $overTime, $bonusRate, $deduction): float
+    {
+        switch ($role) {
+            case "Manager":
+                $strategy = new ManagerSalary();
+                break;
+            case "Chef":
+                $strategy = new ChefSalary();
+                break;
+            case "Waiter":
+                $strategy = new WaiterSalary();
+                break;
+            default:
+                throw new \Exception('Strategy not found for this category.');
+        }
+
+        $context = new Context($strategy);
+        return $context->execute($base, $overTime, $bonusRate, $deduction);
     }
 
     /**

@@ -19,7 +19,8 @@ class User extends Authenticatable
     protected $fillable = [
         'icNumber', 'name', 'role',
         'password', 'gender', 'mobile',
-        'email', 'birthday', 'address'
+        'email', 'birthday', 'address',
+        'salary'
     ];
 
     protected $hidden = [
