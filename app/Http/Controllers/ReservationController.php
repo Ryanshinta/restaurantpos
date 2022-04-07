@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\State\Pending;
 use DB;
 use App\Models\Reservation;
 use App\Models\RestaurantTable;
@@ -19,7 +20,9 @@ class ReservationController extends Controller {
 
     public function index() {
         $reservations = Reservation::all();
-        return view('reservations.index')->with('reservations', $reservations);
+        $reserveStatus = Reservation::find(1);
+        $reserveStatus->reserveStatus->transitionTo(Pending::class);
+        return view('reservations.index')->with('reservations', $reservations)->with('reserveStatus', $reserveStatus);
     }
 
     public function create() {

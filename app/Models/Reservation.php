@@ -4,12 +4,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\State\ReserveStatus;
+use Spatie\ModelStates\HasStates;
 
 class Reservation extends Model
 {
+    use HasStates;
+
     protected $table = 'reservations';
 
-    protected $casts = ['reserveId' => 'string'];
+    protected $casts = ['reserveId' => 'string',
+        'reserveStatus' => ReserveStatus::class,];
 
     protected $primaryKey = 'reserveId';
 

@@ -8,6 +8,7 @@
     <div class="container">
         <div class="upper-section">
             <h2>Reservations</h2>
+            <h3><?php echo {{ $reserveStatus }}; ?></h3>
             <a href="{{ url('/reservations/create') }}" title="Add New Reservation">
                 <button class="btn btn-primary btn-sm"
                         style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i

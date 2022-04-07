@@ -16,6 +16,7 @@ use App\Models\Reservation;
 use App\Models\RestaurantTable;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\SalaryController;
 
 /*
   |--------------------------------------------------------------------------
@@ -93,6 +94,8 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::resource('salaries', SalaryController::class);
 
 Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);

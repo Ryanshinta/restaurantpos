@@ -9,6 +9,7 @@
         <label>Staff Role : </label><label style="color: blue">{{ $users->role }}</label><br><br>
         <label>Password : </label><label style="color: blue">{{ $users->password }}</label><br><br>
         <label>Gender : </label><label style="color: blue">{{ $users->gender }}</label><br><br>
+        <label>Salary (RM) : </label><label style="color: blue">{{ $users->salary }}</label><br><br>
         <label>Phone no. : </label><label style="color: blue">{{ $users->mobile }}</label><br><br>
         <label>Email : </label><label style="color: blue">{{ $users->email }}</label><br><br>
         <label>Birthday : </label><label style="color: blue">{{ $users->birthday }}</label><br><br>
