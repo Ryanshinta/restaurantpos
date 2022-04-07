@@ -213,26 +213,26 @@ class UserController extends Controller
         $overTime = $request->input('overTime');
         $bonusRate = $request->input('bonusRate');
         $deduction = $request->input('deduction');
-        $salary = $request->input('salary');
-        if (!empty($base) or !empty($overTime) or !empty($bonusRate) or !empty($deduction)) {
-            if (empty($base)) {
-                $base = 0;
-            };
-            if (empty($overTime)) {
-                $overTime = 0;
-            };
-            if (empty($bonusRate)) {
-                $bonusRate = 0;
-            };
-            if (empty($deduction)) {
-                $deduction = 0;
-            };
-            $role = $request->input('role');
-            $salary = $this->defineStrategy($role, $base, $overTime, $bonusRate, $deduction);
-            $user->update(array('salary' => $salary));
-        }//else{
-//            $user->update(array('salary' => $salary));
-//        }
+//        $salary = $request->input('salary');
+        $role = $request->input('role');
+        if ($role != "Admin") {
+            if (!empty($base) or !empty($overTime) or !empty($bonusRate) or !empty($deduction)) {
+                if (empty($base)) {
+                    $base = 0;
+                };
+                if (empty($overTime)) {
+                    $overTime = 0;
+                };
+                if (empty($bonusRate)) {
+                    $bonusRate = 0;
+                };
+                if (empty($deduction)) {
+                    $deduction = 0;
+                };
+                $salary = $this->defineStrategy($role, $base, $overTime, $bonusRate, $deduction);
+                $user->update(array('salary' => $salary));
+            }
+        }
         $input = $request->all();
         $user->update($input);
 
