@@ -5,10 +5,87 @@
     <name>My Admin</name>
     <role>Admin</role>
     <gender>Male</gender>
-    <mobile>012-3456789</mobile>
+    <mobile>012-9999999</mobile>
     <email>admin@gmail.com</email>
     <birthday/>
     <address/>
     <dateRegistered>2022-04-07</dateRegistered>
+  </user>
+  <user>
+    <ic>011201-14-0493</ic>
+    <name>Chai Jia Hao</name>
+    <role>Manager</role>
+    <gender>Male</gender>
+    <mobile>013-2865802</mobile>
+    <email>jiahaochai0112@gmail.com</email>
+    <birthday>2022-04-01</birthday>
+    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+    <dateRegistered>2022-04-07</dateRegistered>
+  </user>
+  <user>
+    <ic>011201-14-0494</ic>
+    <name>Gan Wei Zhe</name>
+    <role>Waiter</role>
+    <gender>Male</gender>
+    <mobile>013-2865802</mobile>
+    <email>giegie@gmail.com</email>
+    <birthday>2022-04-01</birthday>
+    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+    <dateRegistered>2022-04-07</dateRegistered>
+  </user>
+  <user>
+    <ic>011201-14-0495</ic>
+    <name>Ouyang Yunru</name>
+    <role>Waiter</role>
+    <gender>Male</gender>
+    <mobile>013-2865802</mobile>
+    <email>ryanshinta@gmail.com</email>
+    <birthday>2022-04-01</birthday>
+    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+    <dateRegistered>2022-04-07</dateRegistered>
+  </user>
+  <user>
+    <ic>011201-14-0496</ic>
+    <name>Chiew Wai Hong</name>
+    <role>Waiter</role>
+    <gender>Male</gender>
+    <mobile>013-2865802</mobile>
+    <email>honghong@gmail.com</email>
+    <birthday>2022-04-01</birthday>
+    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+    <dateRegistered>2022-04-08</dateRegistered>
+  </user>
+  <user>
+    <ic>011201-14-0497</ic>
+    <name>Foong Pooi Guan</name>
+    <role>Waiter</role>
+    <gender>Male</gender>
+    <mobile>013-2865802</mobile>
+    <email>nicole@gmail.com</email>
+    <birthday>2022-04-05</birthday>
+    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+    <dateRegistered>2022-04-08</dateRegistered>
+  </user>
+  <user>
+    <ic>011201-14-0498</ic>
+    <name>Chan Chun Wai</name>
+    <role>Waiter</role>
+    <gender>Male</gender>
+    <mobile>013-2865802</mobile>
+    <email>ash3000@gmail.com</email>
+    <birthday>2022-04-07</birthday>
+    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+    <dateRegistered>2022-04-08</dateRegistered>
+  </user>
+  <user>
+    <ic>011201-14-0499</ic>
+    <name>Lim Jun Hua</name>
+    <role>Waiter</role>
+    <gender>Male</gender>
+    <mobile>013-2865802</mobile>
+    <email>kiddingDream@gmail.com</email>
+    <birthday>2022-04-01</birthday>
+    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+    <dateRegistered>2022-04-08</dateRegistered>
   </user>
 </users>
