@@ -5,7 +5,7 @@
             <h2>Create new Voucher</h2>
             <form id="addVoucher" method="POST" action="/voucher" enctype="multipart/form-data">
                 @csrf
-                <label for="code"> Code :</label> <input type="text" name="code" id="code" required class=" @error('name') is-invalid @enderror"> <input type="checkbox" id="generateCode" name="generateCode" value="1">  Code Generate <br> <br>
+                <label for="code"> Code :</label> <input type="text" name="code" id="code" required class=" @error('name') is-invalid @enderror"> <input type="checkbox" id="generateCode" name="generateCode" value="1"> Random Code Generate <br> <br>
 
                 {{--                @error('name')--}}
                 {{--                <span class="invalid-feedback" role="alert">--}}

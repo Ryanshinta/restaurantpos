@@ -40,9 +40,9 @@
                         @else
                             <td>Inactive</td>
                         @endif
-                        <td>{{$voucher->expireDate}}</td>
-                        <td>{{$voucher->updated_at}}</td>
-                        <td>{{$voucher->created_at}}</td>
+                        <td>{{ date('jS  F Y h:i',strtotime($voucher->expireDate))    }}</td>
+                        <td>{{ date('jS  F Y h:i',strtotime($voucher->updated_at))  }}</td>
+                        <td>{{ date('jS  F Y h:i',strtotime($voucher->created_at))  }}</td>
 
                         <td>
                             <a href="{{route('voucher.edit',$voucher->code)}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>

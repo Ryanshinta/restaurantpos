@@ -57,23 +57,18 @@ Route::post('remove-from-cart', [CartController::class, 'destroy'])->name('remov
 
 Route::resource('/payment', PaymentController::class);
 
+
 //Product
 Route::resource('/product',ProductController::class);
 Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->name("product.update");
 Route::view('/testProduct','product.search');
 
-//page
+//VoucherPage
 Route::resource('/voucher',VoucherController::class);
 //Route::post('/voucher/create',\App\Http\Controllers\VoucherController::class);
 //Route::post('voucher/create', 'VoucherController@store');
 Route::post('/voucher/{code}','VoucherController@update');
 
-//voucher
-//Route::get('/api/voucher','App\Http\Controllers\VoucherAPIController@getAllVoucher');
-//Route::get('/api/voucher/{code}','App\Http\Controllers\VoucherAPIController@getVoucherByCode');
-//Route::post('/api/addVoucher','App\Http\Controllers\VoucherAPIController@addVoucher');
-//Route::post('/api/updateVoucher/{code}','App\Http\Controllers\VoucherAPIController@updateVoucher');
-//Route::post('/api/deleteVoucher/{code}','App\Http\Controllers\VoucherAPIController@deleteVoucher');
 
 //Reservation
 //Route::post('/reservations/addTable', 'App\Http\Controllers\ReservationController@addTable');
@@ -104,7 +99,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('users', UserController::class);
     Route::resource('reservations', ReservationController::class);
     Route::resource('/restaurantTable', RestaurantTableController::class);
-    Route::resource('/product',ProductController::class);
+    //Route::resource('/product',ProductController::class);
 });
 
 
