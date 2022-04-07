@@ -3,7 +3,7 @@
 <div class="container">
     <div class="upper-section">
         <h2>Register Account</h2>
-        <form id="register-form" method="POST" action="{{ url('user') }}">
+        <form id="register-form" method="POST" action="{{ url('users') }}">
             {!! csrf_field() !!}
             <label>IC Number : </label><input type="text" name="icNumber" id="icNumber" value="" placeholder="xxxxxx-xx-xxxx" required="true"/><br><br>
             <!--<span class="error"><?php // echo "* " . $icNumberError;      ?></span><br><br>-->

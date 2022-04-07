@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 
 class RestaurantTableController extends Controller {
 
+    function __construct()
+    {
+        $this->middleware('permission:table-list|table-create|table-edit|table-delete', ['only' => ['index','store']]);
+        $this->middleware('permission:table-create', ['only' => ['create','store']]);
+        $this->middleware('permission:table-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:table-delete', ['only' => ['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,7 @@ class RestaurantTableController extends Controller {
         $restauranttables = RestaurantTable::all();
         return view ('restauranttables.index')->with('restauranttables', $restauranttables);
     }
-    
+
     public function display() {
         $restauranttables = RestaurantTable::all();
         return view ('restauranttables.display')->with('restauranttables', $restauranttables);
@@ -29,7 +36,7 @@ class RestaurantTableController extends Controller {
     public function create() {
         $tableNum = RestaurantTable::all()->count();
         $tableNum = $tableNum + 1;
-        
+
         return view('restauranttables.create')->with('tableNum', $tableNum);
     }
 
@@ -42,7 +49,7 @@ class RestaurantTableController extends Controller {
     public function store(Request $request) {
         $tableNum = RestaurantTable::all()->count();
         $tableNum = $tableNum + 1;
-        //$input = $request->all();    
+        //$input = $request->all();
         RestaurantTable::create([
             'tableNo' => $tableNum,
             'tableType' => $request->input('tableType'),

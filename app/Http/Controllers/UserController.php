@@ -73,7 +73,7 @@ class UserController extends Controller
 
 //        $ic = $request->input('icNumber');
         $this->newXml();
-        return redirect('user')->with('flash_message', 'User Added!');
+        return redirect('users')->with('flash_message', 'User Added!');
     }
 
     /**

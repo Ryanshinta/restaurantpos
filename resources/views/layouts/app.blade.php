@@ -33,7 +33,9 @@
             @can('user-list')
                 <div class="item"><a href="{{ route('users.index') }}">Staff</a></div>
             @endcan
-            <div class="item"><a href="{{ route('product.index') }}">Product</a></div>
+            @can('product-list')
+                <div class="item"><a href="{{ route('product.index') }}">Product</a></div>
+            @endcan
             <div class="item"><a class="sub-btn">Order<i class="fas fa-angle-right dropdown"></i></a>
                 <div class="sub-menu">
                     <a href="/orders/add" class="sub-item">Add New Order</a>
@@ -43,7 +45,9 @@
             </div>
             <div class="item"><a href="{{ route('payment.index') }}">Payment</a></div>
             <div class="item"><a href="{{ route('voucher.index') }}">Voucher</a></div>
-            <div class="item"><a href="{{ route('restaurantTable.index') }}">Table</a></div>
+            @can('table-list')
+                <div class="item"><a href="{{ route('restaurantTable.index') }}">Table</a></div>
+            @endcan
             @can('reservation-list')
                 <div class="item"><a href="{{ route('reservations.index') }}">Reservation</a></div>
             @endcan

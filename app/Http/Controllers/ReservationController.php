@@ -45,7 +45,7 @@ class ReservationController extends Controller {
     public function store(Request $request) {
         Reservation::create([
             'reserveId' => $request->input('reserveId'), 'reserveDate' => $request->input('reserveDate'),
-            'reserveSlot' => $request->input('reserveSlot'), //'reserveStatus' => $request->input('reserveStatus'),
+            'reserveSlot' => $request->input('reserveSlot'), 'reserveStatus' => "Pending",
             'noTableReserve' => $request->input('noTableReserve'), 'noOfCust' => $request->input('noOfCust'),
             'custName' => $request->input('custName'), 'custMobile' => $request->input('custMobile'),
         ]);

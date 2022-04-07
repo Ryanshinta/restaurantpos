@@ -11,7 +11,7 @@ and open the template in the editor.
         @method("PATCH")
         <h2>Order ID : {{$order[0]->orderID}}</h2>
         <h2>Table : </h2>
-
+        
         <table>
 
 

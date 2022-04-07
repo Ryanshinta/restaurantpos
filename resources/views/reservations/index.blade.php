@@ -44,19 +44,23 @@
                                         aria-hidden="true"></i> View
                                 </button>
                             </a>
+                            @can('reservation-edit')
                             <a href="{{ url('/reservations/' . $item->reserveId . '/edit') }}" title="Edit Reservation">
                                 <button style="height: 28px; width: 85px;" class="btn btn-primary btn-sm"><i
                                         aria-hidden="true"></i> Edit
                                 </button>
                             </a>
+                            @endcan
                             {{--                        <form method="POST" action="{{ url('/reservation' . '/' . $item->reserveId) }}" accept-charset="UTF-8" style="display:inline">--}}
                             {{--                            {{ method_field('DELETE') }}--}}
                             {{--                            {{ csrf_field() }}--}}
                             {{--                            <button type="submit" style="height: 28px; width: 85px;" class="btn btn-danger btn-sm" title="Delete Reservation" onclick="return confirm( & quot; Confirm delete? & quot; )"><i aria-hidden="true"></i> Delete</button>--}}
                             {{--                        </form>--}}
+                            @can('reservation-delete')
                             <button class="btn btn-danger btn-delete"
                                     data-url="{{route('reservations.destroy', $item)}}"><i
                                     class="fas fa-trash"></i></button>
+                            @endcan
                         </td>
                     </tr>
                 @endforeach

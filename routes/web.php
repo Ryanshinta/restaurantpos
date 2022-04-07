@@ -30,8 +30,6 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::resource('/product',ProductController::class);
-
 Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->name("product.update");
 Route::view('/testProduct','product.search');
 
@@ -81,7 +79,6 @@ Route::view('/test','users.search');
 Route::get('/userDisplay', [UserController::class, 'sort']);
 
 //Testing
-Route::resource('/restaurantTable', RestaurantTableController::class);
 Route::resource('/reservationDetail', ReservationDetailController::class);
 
 Route::get('/token', function () {
@@ -100,6 +97,8 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('reservations', ReservationController::class);
+    Route::resource('/restaurantTable', RestaurantTableController::class);
+    Route::resource('/product',ProductController::class);
 });
 
 
