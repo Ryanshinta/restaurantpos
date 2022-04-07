@@ -21,7 +21,7 @@
 
                 <label for="value">Value :RM/%</label> <input name="value" id="value" value="{{old('code',$voucher->value)}}" required> <br> <br>
                 <br>
-                <label for="expireDate">expire Date :</label><input type="date" name="expireDate" value="{{$voucher->expireDate}}"/> <br> <br>
+                <label for="expireDate">expire Date :</label><input type="date" name="expireDate" value="{{ date('Y-m-d',strtotime($voucher->expireDate))}}"/> <br> <br>
                 <br>
                 <label for="isActive">Status</label>
                 <select name="isActive" class="form-control @error('isActive') is-invalid @enderror" id="isActive">

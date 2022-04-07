@@ -31,8 +31,8 @@ use App\Http\Controllers\SalaryController;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->name("product.update");
-Route::view('/testProduct','product.search');
+//Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->name("product.update");
+//Route::view('/testProduct','product.search');
 
 //order
 Route::get('orders/add', 'App\Http\Controllers\OrderController@add');
@@ -65,10 +65,11 @@ Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->nam
 Route::view('/testProduct','product.search');
 
 //VoucherPage
+//Route::get()
+//Route::post('/voucher/{code}','App\Http\Controllers\VoucherController@update')->name('voucher.update');
 Route::resource('/voucher',VoucherController::class);
-//Route::post('/voucher/create',\App\Http\Controllers\VoucherController::class);
-//Route::post('voucher/create', 'VoucherController@store');
-Route::post('/voucher/{code}','VoucherController@update');
+
+
 
 
 //Reservation

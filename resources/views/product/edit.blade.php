@@ -14,7 +14,7 @@
                 {{--                </span>--}}
                 {{--                @enderror--}}
                 <br>
-                <label for="image">Product Image :</label> <input type="file" name="image" id="image"> <br> <br>
+                <label for="image">Product Image :</label> <img src="{{ Storage::url($product->image) }}" alt="" width="100"> <input type="file" name="image" id="image" > <br> <br>
                 <br>
                 <label for="price">Product Price :</label> <input pattern="^\d+(?:\.\d{1,2})?$" name="price" value="{{ old('price', $product->price) }}" id="price" required> <br> <br>
                 <br>
