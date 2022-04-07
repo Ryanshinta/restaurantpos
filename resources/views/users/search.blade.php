@@ -31,10 +31,14 @@
                 $x_role = $_GET['role'];
                 $x_gender = $_GET['gender'];
                 $x_mobile = $_GET['mobile'];
-                $query = "//users/user[ic[(contains(text(),'$x_ic'))] and name[(contains(text(),'$x_name'))]
+                $query = "//users/user
+                [
+                    ic[(contains(text(),'$x_ic'))]
+                and name[(contains(text(),'$x_name'))]
                 and role[(contains(text(),'$x_role'))]
                 and gender[(contains(text(),'$x_gender'))]
-                and mobile[(contains(text(),'$x_mobile'))]]/ic";
+                and mobile[(contains(text(),'$x_mobile'))]
+                ]/ic";
 //                $query = "//users/user/name[contains(text(),'$x_name')]";
                 //                $query = "//users/user/name[contains(text(),'$x_name')]/(.following-sibling::*|self::*)";
                 //                 users/user/role[contains(text(),'$x_role')]

@@ -28,8 +28,6 @@
                                 </td>
                                 <td>RM <xsl:value-of select="price"/></td>
                                 <td><xsl:value-of select="description"/></td>
-
-
                                 <td><xsl:value-of select="createdAt"/></td>
                                 <td><xsl:value-of select="updatedAt"/></td>
                             </tr>

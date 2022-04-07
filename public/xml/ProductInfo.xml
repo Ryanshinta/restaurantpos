@@ -9,4 +9,22 @@
     <updatedAt>2022-04-07 23:58:43</updatedAt>
     <imagePath>/storage/products/TDHdsd4OCP48VmyiMWme1sDFImxj1aKVKXjdbAjB.jpg</imagePath>
   </Product>
+  <Product Status="0">
+    <ID>2</ID>
+    <name>Cat</name>
+    <description>Black Cat</description>
+    <price>20.10</price>
+    <createdAt>2022-04-08 01:37:26</createdAt>
+    <updatedAt>2022-04-08 01:37:26</updatedAt>
+    <imagePath>/storage/products/E9ni1WRI6sBQM638RV49yafKFaoNGeo9mIVGbHRH.jpg</imagePath>
+  </Product>
+  <Product Status="1">
+    <ID>3</ID>
+    <name>Sweet</name>
+    <description>So Sweet</description>
+    <price>99.10</price>
+    <createdAt>2022-04-08 01:37:47</createdAt>
+    <updatedAt>2022-04-08 01:37:47</updatedAt>
+    <imagePath>/storage/products/zj56WF7pEiSoiK5bKpA9Smwl8TghaztbJnGc37d6.jpg</imagePath>
+  </Product>
 </Products>
