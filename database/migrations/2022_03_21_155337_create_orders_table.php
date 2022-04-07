@@ -17,6 +17,8 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('address')->nullable();
+            $table->string('status')->default('ordered');
+            $table->double('total_price', 10, 2)->nullable();
             $table->timestamps();
         });
     }

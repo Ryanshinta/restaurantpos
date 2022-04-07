@@ -16,6 +16,7 @@ class CreateOrdersListTable extends Migration
         Schema::create('orders_list', function (Blueprint $table) {
             $table->id();
             $table->integer('order_id')->nullable();
+            $table->string('status')->default('pending');
             $table->integer('product_id')->nullable();
             $table->integer('quantity')->nullable();
             $table->double('subtotal', 10, 2)->nullable();

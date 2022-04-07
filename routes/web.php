@@ -43,6 +43,8 @@ Route::resource('/order', OrderController::class);
 Route::view('/showOrder','orders.show');
 
 //cart
+Route::get('cart/index', 'App\Http\Controllers\OrderController@index');
+
 Route::get('/cart', [CartController::class, 'index']);
 
 Route::get('cart', [CartController::class, 'cart'])->name('cart');

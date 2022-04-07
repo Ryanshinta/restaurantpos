@@ -25,6 +25,11 @@ class OrderController extends Controller
         return view('orders.index', ['product' => $product]);
     }
 
+    public function cart()
+    {
+        return view('cart');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -32,10 +37,10 @@ class OrderController extends Controller
      */
     public function create(Request $request)
     {
-        $user_id = Auth::id();
+        //$user_id = Auth::id();
 
         $order = new Order();
-        $order->user_id = $user_id;
+        //$order->user_id = $user_id;
         $order->save();
 
         $orderId = $order->id;

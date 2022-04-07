@@ -1,21 +1,9 @@
 <?xml version="1.0"?>
 <Order>
   <order>
-    <ID>20</ID>
+    <ID>1</ID>
     <totalPrice>10</totalPrice>
-    <createdAt>2022-04-07 14:53:08</createdAt>
-    <updatedAt>2022-04-07 14:53:08</updatedAt>
-  </order>
-  <order>
-    <ID>21</ID>
-    <totalPrice>10</totalPrice>
-    <createdAt>2022-04-07 15:00:05</createdAt>
-    <updatedAt>2022-04-07 15:00:05</updatedAt>
-  </order>
-  <order>
-    <ID>22</ID>
-    <totalPrice>10</totalPrice>
-    <createdAt>2022-04-07 15:23:59</createdAt>
-    <updatedAt>2022-04-07 15:23:59</updatedAt>
+    <createdAt>2022-04-07 17:58:09</createdAt>
+    <updatedAt>2022-04-07 17:58:09</updatedAt>
   </order>
 </Order>

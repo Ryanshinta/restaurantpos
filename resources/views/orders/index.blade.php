@@ -102,8 +102,8 @@
                         </div>
                     </div>
                 </div>
-    </div>
-    </tbody>
+            </div>
+        </tbody>
     </table>
 </div>
 </div>

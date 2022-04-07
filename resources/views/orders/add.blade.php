@@ -5,6 +5,8 @@
 <div class="container">
     <div class="upper-section">
         <h2>Menu</h2>
+        <a href="{{ url('cart/index') }}" title="View Cart">
+            <button class="btn btn-primary btn-sm" style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i aria-hidden="true"></i>View Cart</button></a>
         @if (session('success'))
         <div>{{ session('success') }}</div>
         @endif
