@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layouts.app')
 @section('content')
     <div class="container">
         <div class="upper-section">
@@ -45,7 +45,7 @@
                         <td>{{$voucher->created_at}}</td>
 
                         <td>
-                            <a href="#" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                            <a href="{{route('voucher.edit',$voucher->code)}}" class="btn btn-primary"><i class="fas fa-edit"></i></a>
                             <button class="btn btn-danger btn-delete"
                                     data-url="{{route('voucher.destroy',$voucher->code)}}"><i
                                     class="fas fa-trash"></i></button>

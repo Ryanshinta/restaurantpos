@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<users>
+  <user>
+    <ic>010101-01-0101</ic>
+    <name>My Admin</name>
+    <role>Admin</role>
+    <gender>Male</gender>
+    <mobile>012-3456789</mobile>
+    <email>admin@gmail.com</email>
+    <birthday/>
+    <address/>
+    <dateRegistered>2022-04-07</dateRegistered>
+  </user>
+  <user>
+    <ic>011201-14-0493</ic>
+    <name>Chai Jia Hao</name>
+    <role>Waiter</role>
+    <gender>Male</gender>
+    <mobile>013-2865802</mobile>
+    <email>jiahaochai0112@gmail.com</email>
+    <birthday>2001-12-01</birthday>
+    <address>No 33, jalan KE 12/1, Kota Emerald, 48000, Rawang, Selangor</address>
+    <dateRegistered>2022-04-07</dateRegistered>
+  </user>
+</users>

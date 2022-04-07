@@ -10,6 +10,13 @@ use Illuminate\Http\Request;
 
 class ReservationController extends Controller {
 
+    function __construct(){
+        $this->middleware('permission:reservation-list|reservation-create|reservation-edit|reservation-delete', ['only' => ['index','show']]);
+        $this->middleware('permission:reservation-create', ['only' => ['create','store']]);
+        $this->middleware('permission:reservation-edit', ['only' => ['edit','update']]);
+        $this->middleware('permission:reservation-delete', ['only' => ['destroy']]);
+    }
+
     public function index() {
         $reservations = Reservation::all();
         return view('reservations.index')->with('reservations', $reservations);
@@ -38,7 +45,7 @@ class ReservationController extends Controller {
     public function store(Request $request) {
         Reservation::create([
             'reserveId' => $request->input('reserveId'), 'reserveDate' => $request->input('reserveDate'),
-            'reserveSlot' => $request->input('reserveSlot'), //'reserveStatus' => $request->input('reserveStatus'),
+            'reserveSlot' => $request->input('reserveSlot'), 'reserveStatus' => "Pending",
             'noTableReserve' => $request->input('noTableReserve'), 'noOfCust' => $request->input('noOfCust'),
             'custName' => $request->input('custName'), 'custMobile' => $request->input('custMobile'),
         ]);
@@ -47,9 +54,10 @@ class ReservationController extends Controller {
         $s = $request->input('reserveSlot');
         $n = $request->input('noTableReserve');
         $r = $request->input('reserveId');
+        $t = $request->input('noOfCust');
 
         $restauranttables = $this->showTable($d, $s);
-        return view('reservations.addTable')->with('restauranttables', $restauranttables)->with('n', $n)->with('r', $r);
+        return view('reservations.addTable')->with('restauranttables', $restauranttables)->with('n', $n)->with('r', $r)->with('t',$t);
     }
 
     public function showTable($d, $s) {
@@ -70,7 +78,7 @@ class ReservationController extends Controller {
         $reservation = Reservation::find($id);
         $reservation->restauranttables()->attach($request->tableNo);
         Reservation::where('reserveId', $id)->update(array('reserveStatus' => 'Confirmed'));
-        return redirect('reservation')->with('flash_message', 'Table Selected!');
+        return redirect('reservations')->with('flash_message', 'Table Selected!');
     }
 
     public function show($reserveId) {
@@ -87,17 +95,23 @@ class ReservationController extends Controller {
 
     public function update(Request $request, $reserveId) {
         $reservation = Reservation::find($reserveId);
+        $input = $request->all();
 
         if ($request->input('noTableReserve') != $reservation->getOriginal('noTableReserve')) {
             $reservation->restauranttables()->detach($request->tableNo);
-            $n = $request->input('noTableReserve'); $r = $reserveId;
-            $d = $request->input('reserveDate'); $s = $request->input('reserveSlot');
+            $n = $request->input('noTableReserve');
+            $r = $reserveId;
+            $t = $request->input('noOfCust');
+            $d = $request->input('reserveDate');
+            $s = $request->input('reserveSlot');
             $restauranttables = $this->showTable($d, $s);
-            return view('reservations.addTable')->with('restauranttables', $restauranttables)->with('n', $n)->with('r', $r);
+
+            $reservation->update($input);
+            return view('reservations.addTable')->with('restauranttables', $restauranttables)->with('n', $n)->with('r', $r)->with('t',$t);
         }
-        $input = $request->all();
+
         $reservation->update($input);
-        return redirect('reservation')->with('flash_message', 'Reservation Updated!');
+        return redirect('reservations')->with('flash_message', 'Reservation Updated!');
     }
 
     public function destroy($reserveId) {

@@ -1,9 +1,9 @@
-@extends('layout')
+@extends('layouts.app')
 @section('content')
 <div class="container">
     <div class="upper-section">
         <h2>Update Reservation</h2>
-        <form method="POST" action="{{ url('reservation/' .$reservations->reserveId) }}">
+        <form method="POST" action="{{ url('reservations/' .$reservations->reserveId) }}">
             {!! csrf_field() !!}
             @method("PATCH")
             <label>Reservation ID : </label><input type="text" name="reserveId" value="{{$reservations->reserveId}}" required="true"/><br><br>
@@ -17,7 +17,7 @@
                 <option value="Evening Slot">Evening Slot</option>
             </select><br><br>
             <!--<span class="error"><?php // echo "* " . $reserveSlotErr; ?></span><br><br>-->
-            
+
             <label>Status  : </label><select name="reserveStatus" value="">
                 <option value="{{$reservations->reserveStatus}}" selected>{{$reservations->reserveStatus}}</option>
                 <option value="Pending">Pending</option>
@@ -27,7 +27,7 @@
                 <option value="No Show">No Show</option>
                 <option value="Arrived">Arrived</option>
             </select><br><br>
-            
+
             <label>Total table reserve : </label><input type="number" name="noTableReserve" value="{{$reservations->noTableReserve}}" required="true"/><br><br>
             <!--<span class="error"><?php // echo "* " . $numTableReserveErr; ?></span><br><br>-->
 

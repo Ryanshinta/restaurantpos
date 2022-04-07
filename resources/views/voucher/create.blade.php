@@ -1,17 +1,18 @@
-@extends('layout')
+@extends('layouts.app')
 @section('content')
     <div class="container">
         <div class="upper-section">
             <h2>Create new Voucher</h2>
             <form id="addVoucher" method="POST" action="/voucher" enctype="multipart/form-data">
                 @csrf
-                <label for="code"> Code :</label> <input type="text" name="code" id="code" required class=" @error('name') is-invalid @enderror"> <br> <br>
+                <label for="code"> Code :</label> <input type="text" name="code" id="code" required class=" @error('name') is-invalid @enderror"> <input type="checkbox" id="generateCode" name="generateCode" value="1">  Code Generate <br> <br>
 
                 {{--                @error('name')--}}
                 {{--                <span class="invalid-feedback" role="alert">--}}
                 {{--                    <strong>{{ $message }} </strong>--}}
                 {{--                </span>--}}
                 {{--                @enderror--}}
+
                 <br>
                 <label for="type">type :</label>
                 <select name="type">
@@ -45,35 +46,5 @@
         </div>
     </div>
 
-{{--    <script>--}}
-{{--        $(".btn-primary").click(function (event){--}}
-{{--            let code = $("input[name=code]").val();--}}
-{{--            let type = $("select[name=type]").val();--}}
-{{--            let value = $("input[name=value]").val();--}}
-{{--            let expireDate = $("input[name=expireDate]").val();--}}
-{{--            let isActive = $("select[name=isActive]").val();--}}
-
-{{--            let _token = $('meta[name="csrf-token"]').attr('content');--}}
-
-{{--            $.ajax({--}}
-{{--                url:"http://127.0.0.1:9876/api/addVoucher"--}}
-{{--                type:"POST",--}}
-{{--                data:{--}}
-{{--                    code:code,--}}
-{{--                    type:type,--}}
-{{--                    value:value,--}}
-{{--                    expireDate:expireDate,--}}
-{{--                    isActive:isActive,--}}
-{{--                    _token:_token--}}
-{{--                },--}}
-{{--                success:function (response){--}}
-{{--                    console.log(response);--}}
-{{--                },--}}
-{{--                error:function (error){--}}
-{{--                    console.log(error);--}}
-{{--                }--}}
-{{--            });--}}
-{{--        });--}}
-{{--    </script>--}}
 @endsection
 
