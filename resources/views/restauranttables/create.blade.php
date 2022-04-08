@@ -13,8 +13,14 @@
                 <option value="2" >Outdoor</option>
             </select>
             <br><br>
-            
-            <label>Max Seats : </label><input type="number" name="maxSeats" value="" required="true" max="12" min="1"/><br><br>
+
+            <label>Max Seats : </label><input type="number" name="maxSeats" value="" required="true"/><br><br>
+
+            {{--                @error('maxSeats')--}}
+            {{--                <span class="invalid-feedback" role="alert">--}}
+            {{--                    <strong>{{ $message }} </strong>--}}
+            {{--                </span>--}}
+            {{--                @enderror--}}
 
             <input style="width:100px; height: 28px;" type="submit" name="submit" value="Add"/>
             <button style="width: 100px; height: 28px;" ><a style="color: black; text-decoration: none; " href="javascript:history.back()"><i aria-hidden="true"></i> Back</a></button><br><br>

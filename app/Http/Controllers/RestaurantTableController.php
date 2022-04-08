@@ -7,6 +7,8 @@ use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use DB;
+use App\Http\Requests\tableRequestValidation;
+
 
 class RestaurantTableController extends Controller {
 
@@ -47,7 +49,7 @@ class RestaurantTableController extends Controller {
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request) {
+    public function store(tableRequestValidation $request) {
         $tableNum = RestaurantTable::all()->count();
         $tableNum = $tableNum + 1;
         //$input = $request->all();    
@@ -164,7 +166,9 @@ class RestaurantTableController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        $table = Http::delete('http://127.0.0.1:8081/api/deleteTable/' . $id);
+        
+        $result = Http::acceptJson()->delete('http://127.0.0.1:8081/api/deletetable/' . $id);
+
         $this->newXml();
         return redirect('restaurantTable')->with('flash_message', 'Table deleted!');
     }
