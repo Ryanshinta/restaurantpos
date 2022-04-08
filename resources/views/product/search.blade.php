@@ -25,7 +25,7 @@
                     $priceGreater = 0;
                 }
                 $priceSmall = $_GET['priceSmall'];
-                if ($priceSmall == 0){
+                if ($priceSmall == null){
                     $priceSmall = PHP_INT_MAX;
                 }
             $query =
