@@ -28,18 +28,15 @@
                 if ($priceSmall == 0){
                     $priceSmall = PHP_INT_MAX;
                 }
-                $query =
-                    "//Products/Product[
+            $query =
+                "//Products/Product[
                        ID[(contains(text(),'$ID'))]
                    and name[(contains(text(),'$name'))]
-                   and price>=$priceGreater
-                   and price<=$priceSmall
+                   and price <= '$priceSmall'
+                   and price >= '$priceGreater'
+
                    ]/ID";
-//            $query =
-//                "//Products/Product[ID[(contains(text(),'$ID'))]
-//                    or name[(contains(text(),'$name'))]
-//                    or price[price >= $priceGreater]
-//                    or price[price <= $priceSmall]]/ID";
+
                 $entries = $xpath->query($query);
                 ?>
                 <table class="table">
