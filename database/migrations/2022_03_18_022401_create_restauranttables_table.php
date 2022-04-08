@@ -13,7 +13,7 @@ class CreateRestauranttablesTable extends Migration {
      */
     public function up() {
         Schema::create('restauranttables', function (Blueprint $table) {
-            $table->id();
+            $table->integer('tableNo')->primary();
             $table->string('tableStatus')->default('Available');
             $table->string('tableType');
             $table->integer('maxSeats');
