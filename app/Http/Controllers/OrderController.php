@@ -145,26 +145,6 @@ class OrderController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Package $package)
-    {
-        $package = new PackageService;
-
-        var_dump($package->getPackageServices());
-        $package ->service('A');
-        var_dump($package->getPackageServices());
-        $package ->service('B');
-        var_dump($package->getPackageServices());
-
-        $package->save();
-
-    }
-
-    /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\Order  $order

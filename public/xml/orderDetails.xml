@@ -2,9 +2,23 @@
 <Order>
   <order>
     <ID>1</ID>
-    <Status/>
-    <totalPrice>10.2</totalPrice>
-    <createdAt>2022-04-08 00:26:35</createdAt>
-    <updatedAt>2022-04-08 00:26:35</updatedAt>
+    <Status>ordered</Status>
+    <totalPrice>10</totalPrice>
+    <createdAt>2022-04-07 17:58:09</createdAt>
+    <updatedAt>2022-04-07 17:58:09</updatedAt>
+  </order>
+  <order>
+    <ID>2</ID>
+    <Status>ordered</Status>
+    <totalPrice>20</totalPrice>
+    <createdAt>2022-04-07 18:16:51</createdAt>
+    <updatedAt>2022-04-07 18:16:51</updatedAt>
+  </order>
+  <order>
+    <ID>3</ID>
+    <Status>ordered</Status>
+    <totalPrice>10</totalPrice>
+    <createdAt>2022-04-08 18:41:38</createdAt>
+    <updatedAt>2022-04-08 18:41:38</updatedAt>
   </order>
 </Order>
