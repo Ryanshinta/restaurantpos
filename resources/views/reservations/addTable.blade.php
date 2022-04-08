@@ -20,7 +20,7 @@
                             <td>{{ $item->tableNo }}</td>
                             <td>{{ $item->maxSeats }}</td>
                             <td>
-                                <input type="checkbox" name="tableNo[]" value="{{ $item->tableNo }}"">
+                                <input type="checkbox" name="tableNo[]" value="{{ $item->tableNo }}">
                             </td>
                         </tr>
                         @endforeach

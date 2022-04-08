@@ -26,7 +26,6 @@
             <div class="item"><a href="{{ route('login') }}">{{ __('Login') }}</a></div>
             <div class="item"><a href="{{ route('register') }}">{{ __('Register') }}</a></div>
         @else
-            <div class="item"><a href="Home.php">Dashboard</a></div>
             @can('role-list')
                 <div class="item"><a href="{{route('roles.index')}}">Access Control (RBAC)</a></div>
             @endcan
