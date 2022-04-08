@@ -1,31 +1,32 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\RestaurantTable;
+use App\Models\Order;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use DB;
 
 class RestaurantTableController extends Controller {
 
-    function __construct()
-    {
-        $this->middleware('permission:table-list|table-create|table-edit|table-delete', ['only' => ['index','store']]);
-        $this->middleware('permission:table-create', ['only' => ['create','store']]);
-        $this->middleware('permission:table-edit', ['only' => ['edit','update']]);
-        $this->middleware('permission:table-delete', ['only' => ['destroy']]);
-    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $restauranttables = RestaurantTable::all();
-        return view ('restauranttables.index')->with('restauranttables', $restauranttables);
+//        $restauranttables = RestaurantTable::all();
+
+        $response = Http::acceptJson()->get('http://127.0.0.1:8081/api/table');
+        $userdata = json_decode($response);
+        return view('restauranttables.index')->with('userdata', $userdata);
     }
 
-    public function display() {
-        $restauranttables = RestaurantTable::all();
-        return view ('restauranttables.display')->with('restauranttables', $restauranttables);
+    public function orderTable() {
+        $available = 'Available';
+        $restauranttables = DB::table('restauranttables')->where('tableStatus', $available)->get();
+        return view('restauranttables.orderTable')->with('restauranttables', $restauranttables);
     }
 
     /**
@@ -49,13 +50,63 @@ class RestaurantTableController extends Controller {
     public function store(Request $request) {
         $tableNum = RestaurantTable::all()->count();
         $tableNum = $tableNum + 1;
-        //$input = $request->all();
+        //$input = $request->all();    
         RestaurantTable::create([
             'tableNo' => $tableNum,
             'tableType' => $request->input('tableType'),
             'maxSeats' => $request->input('maxSeats')
         ]);
+
+        $this->newXml();
         return redirect('restaurantTable')->with('flash_message', 'Table Added!');
+    }
+
+    public function sort() {
+        $xml = new \DOMDocument();
+        $xml->load('xml/TableInfo.xml');
+
+        $xsl = new \DOMDocument();
+        $xsl->load('xml/staff_sort_position.xslt');
+
+        $proc = new \XSLTProcessor();
+        $proc->importStylesheet($xsl);
+        $x = $proc->transformToXml($xml);
+        return view('restauranttables.search')->with('x', $x);
+    }
+
+    public function newXml() {
+        $path = 'public/xml/TableInfo.xml';
+        if (file_exists($path)) {
+            unlink($path);
+        } else {
+            $results = RestaurantTable::all();
+
+            $xml = new \DOMDocument('1.0');
+            $xml->formatOutput = true;
+
+            $tables = $xml->createElement('tables');
+            $xml->appendChild($tables);
+
+            foreach ($results as $row) {
+                $table = $xml->createElement("table");
+                $tables->appendChild($table);
+
+                $tableStatus = $xml->createElement("tableStatus", $row['tableStatus']);
+                $table->appendChild($tableStatus);
+
+                $tableType = $xml->createElement("tableType", $row['tableType']);
+                $table->appendChild($tableType);
+
+                $maxSeats = $xml->createElement("maxSeats", $row['maxSeats']);
+                $table->appendChild($maxSeats);
+
+                $orderID = $xml->createElement("orderID", $row['orderID']);
+                $table->appendChild($orderID);
+            }
+
+            echo "<xmp>" . $xml->saveXML() . "</xmp>";
+            $xml->save("xml/TableInfo.xml") or die("Unable to create xml");
+        }
     }
 
     /**
@@ -91,7 +142,19 @@ class RestaurantTableController extends Controller {
         $restauranttable = RestaurantTable::find($id);
         $input = $request->all();
         $restauranttable->update($input);
+        $this->newXml();
         return redirect('restaurantTable')->with('flash_message', 'Table Updated!');
+    }
+
+    public function orderUpdate(Request $request) {
+        $orderid = DB::table('orders')->max('id');
+        echo $orderid;
+        $restauranttable = RestaurantTable::find($request['tableNo']);
+
+        $restauranttable->update(['orderID' => $orderid]);
+        $restauranttable->update(['tableStatus' => 'Served']);
+        $this->newXml();
+        return redirect('payment');
     }
 
     /**
@@ -101,7 +164,8 @@ class RestaurantTableController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function destroy($id) {
-        RestaurantTable::destroy($id);
+        $table = Http::delete('http://127.0.0.1:8081/api/deleteTable/' . $id);
+        $this->newXml();
         return redirect('restaurantTable')->with('flash_message', 'Table deleted!');
     }
 

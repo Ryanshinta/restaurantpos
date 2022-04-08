@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout')
 @section('content')
 <div class="container">
     <div class="upper-section">
@@ -10,8 +10,8 @@
 
             <label>Table Type : </label>
             <select name="tableType" id="tableType" value="{{$restauranttables->tableType}}">
-                <option value="1" {{old('tableType') === 1 ? 'selected': ''}}>Indoor</option>
-                <option value="2" {{old('tableType') === 2 ? 'selected': ''}}>Outdoor</option>
+                <option value="1" {{old('tableType',$restauranttables->tableType) === 1 ? 'selected': ''}}>Indoor</option>
+                <option value="2" {{old('tableType',$restauranttables->tableType) === 2 ? 'selected': ''}}>Outdoor</option>
             </select>
             <br><br>
 

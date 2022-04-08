@@ -70,7 +70,23 @@ Route::view('/searchProduct','product.search');
 Route::resource('/voucher',VoucherController::class);
 
 
+//Payment
+Route::post('/payment/create/{id}', 'App\Http\Controllers\PaymentController@create');
 
+Route::post('/payment/{id}', 'App\Http\Controllers\PaymentController@show');
+
+Route::resource('/payment', PaymentController::class);
+
+//Restauranttable
+Route::get('/restaurantTableDisplay', [RestaurantTableController::class, 'sort']);
+
+Route::get('/orderTable', [RestaurantTableController::class, 'orderTable']);
+
+Route::POST('/orderUpdate', [RestaurantTableController::class, 'orderUpdate']);
+
+
+//kitchen
+Route::resource('/kitchen', KitchenController::class);
 
 //Reservation
 //Route::post('/reservations/addTable', 'App\Http\Controllers\ReservationController@addTable');

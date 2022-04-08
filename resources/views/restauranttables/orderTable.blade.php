@@ -29,7 +29,7 @@
                     <td>
 
 
-                        <form method="POST" action="{{ url('/payment', $item->orderID) }}" accept-charset="UTF-8" style="display:inline">
+                        <form method="POST" action="{{ url('/orderUpdate') }}" accept-charset="UTF-8" style="display:inline">
 
                             {!! csrf_field() !!}
                             <input type="hidden" value="{{ $item->tableNo }}" name="tableNo">

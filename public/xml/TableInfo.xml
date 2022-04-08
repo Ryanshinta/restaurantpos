@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<tables>
+  <table>
+    <tableStatus>Available</tableStatus>
+    <tableType>1</tableType>
+    <maxSeats>6</maxSeats>
+    <orderID/>
+  </table>
+  <table>
+    <tableStatus>Served</tableStatus>
+    <tableType>2</tableType>
+    <maxSeats>10</maxSeats>
+    <orderID>16</orderID>
+  </table>
+  <table>
+    <tableStatus>Available</tableStatus>
+    <tableType>2</tableType>
+    <maxSeats>4</maxSeats>
+    <orderID>14</orderID>
+  </table>
+</tables>

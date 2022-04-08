@@ -64,7 +64,7 @@ class OrderController extends Controller
 
         $request->session()->forget('cart');
 
-        return redirect('/order')->with('success', 'Order Submitted');
+        return redirect('/orderTable')->with('success', 'Order Submitted')->with('orderId', $orderId);
 
     }
 

@@ -17,5 +17,8 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model{
     protected $table = 'payment';
     protected $primaryKey = 'paymentID';
-    protected $fillable = ['orderID','applyVoucher','totalBeforeTax','serviceTax','paymentStatus'];
+    protected $fillable = ['orderID','applyVoucher','voucherDiscount','serviceTax', 'PaymentTotal','paymentStatus'];
+
+    public $timestamps = false;
+
 }
