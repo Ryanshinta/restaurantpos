@@ -31,8 +31,8 @@ use App\Http\Controllers\SalaryController;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->name("product.update");
-Route::view('/testProduct','product.search');
+Route::put('/product/{id}', 'App\Http\Controllers\ProductController@update')->name("product.update");
+Route::view('/testProduct', 'product.search');
 
 //order
 Route::get('orders/add', 'App\Http\Controllers\OrderController@add');
@@ -41,7 +41,11 @@ Route::get('orders/create', 'App\Http\Controllers\OrderController@create');
 
 Route::resource('/order', OrderController::class);
 
-Route::view('/showOrder','orders.show');
+Route::view('/showOrder', 'orders.show');
+
+Route::get('show-package', 'App\Http\Controllers\OrderController@show');
+
+Route::get('/api/product','App\Http\Controllers\ProductApiController@getAllProduct');
 
 //cart
 Route::get('cart/index', 'App\Http\Controllers\OrderController@index');
@@ -60,15 +64,15 @@ Route::resource('/payment', PaymentController::class);
 
 
 //Product
-Route::resource('/product',ProductController::class);
-Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->name("product.update");
-Route::view('/testProduct','product.search');
+Route::resource('/product', ProductController::class);
+Route::put('/product/{id}', 'App\Http\Controllers\ProductController@update')->name("product.update");
+Route::view('/testProduct', 'product.search');
 
 //VoucherPage
-Route::resource('/voucher',VoucherController::class);
+Route::resource('/voucher', VoucherController::class);
 //Route::post('/voucher/create',\App\Http\Controllers\VoucherController::class);
 //Route::post('voucher/create', 'VoucherController@store');
-Route::post('/voucher/{code}','VoucherController@update');
+Route::post('/voucher/{code}', 'VoucherController@update');
 
 
 //Reservation
@@ -77,7 +81,7 @@ Route::post('/voucher/{code}','VoucherController@update');
 
 //User
 //Route::resource('/user', UserController::class);
-Route::view('/test','users.search');
+Route::view('/test', 'users.search');
 Route::get('/userDisplay', [UserController::class, 'sort']);
 
 //Testing
@@ -97,7 +101,7 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('salaries', SalaryController::class);
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('reservations', ReservationController::class);

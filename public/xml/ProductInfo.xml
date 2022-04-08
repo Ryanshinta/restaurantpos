@@ -1,12 +1,21 @@
 <?xml version="1.0"?>
 <Products>
   <Product Status="1">
-    <ID>1</ID>
-    <name>NewProduct</name>
-    <description>Test</description>
-    <price>12.11</price>
-    <createdAt>2022-04-06 13:54:15</createdAt>
-    <updatedAt>2022-04-06 13:54:15</updatedAt>
-    <imagePath>/storage/products/6hTQDfT8VZGyg6CSUQzFzfcWCZ6tSR5jFqfMurLb.jpg</imagePath>
+    <ID>2</ID>
+    <name>coffee</name>
+    <description>just coffee</description>
+    <price>10.00</price>
+    <createdAt>2022-04-06 10:46:19</createdAt>
+    <updatedAt>2022-04-06 10:46:19</updatedAt>
+    <imagePath>/storage/products/Uc9kRtt8KSwdrBTd993bQih2lxp45cMj2JhS8HRz.jpg</imagePath>
+  </Product>
+  <Product Status="1">
+    <ID>18</ID>
+    <name>Azhdaha</name>
+    <description>just a fat dragon</description>
+    <price>40.00</price>
+    <createdAt>2022-04-08 04:12:11</createdAt>
+    <updatedAt>2022-04-08 04:12:11</updatedAt>
+    <imagePath>/storage/products/Wv6k0QzwEM6ZtYgfLjMopxL4Ie2dzgJx8THwVy1m.webp</imagePath>
   </Product>
 </Products>
