@@ -62,7 +62,7 @@ Route::resource('/payment', PaymentController::class);
 //Product
 Route::resource('/product',ProductController::class);
 Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->name("product.update");
-Route::view('/testProduct','product.search');
+Route::view('/searchProduct','product.search');
 
 //VoucherPage
 //Route::get()

@@ -10,7 +10,7 @@
                 <label>Price (Greater than) : </label><input type="text" name="priceGreater" id="priceGreater" value=""/><br><br>
                 <label>Price (Small than) : </label><input type="text" name="priceSmall" id="priceSmall" value=""/><br><br>
                 <input style="width:100px; height: 28px;" type="submit" name="submit" value="Search"/><br><br>
-            </form>
+
                 <?php if (isset($_GET['submit'])){
                 $doc = new \DOMDocument();
                 $doc->preserveWhiteSpace = false;
@@ -62,6 +62,24 @@
                         </tr>
                     @endforeach
                     </tbody>
-                </table><br><br><?php }?>
+                </table>
+            <br><br><?php }?>
+            </form>
+            <h3>After sort by price</h3><br><br>
+        <?php
 
+
+    $xml = new \DOMDocument();
+    $xml->load('xml/ProductInfo.xml');
+    $xsl = new \DOMDocument();
+    $xsl->load('xml/ProductInfoSortPrice.xslt');
+
+    $proc = new \XSLTProcessor();
+    $proc->importStylesheet($xsl);
+    echo $proc->transformToXml($xml);
+    echo "<br><br>";
+
+    ?>
+        </div>
+    </div>
 @stop
