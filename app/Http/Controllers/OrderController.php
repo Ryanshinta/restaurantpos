@@ -5,12 +5,11 @@ namespace App\Http\Controllers;
 use DB;
 
 use App\Models\Order;
-use App\Models\Cart;
+use Illuminate\Support\Facades\Http;
 use App\Models\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Auth;
-
+use App\Services\Factory\PackageService;
+use Facade\Ignition\Support\Packagist\Package;
 
 class OrderController extends Controller
 {
@@ -21,8 +20,11 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $product = Product::all();
-        return view('orders.index', ['product' => $product]);
+        //$product = Product::all();
+        //return view('orders.index', ['product' => $product]);
+
+        $product = Http::get('http://127.0.0.1:8111/api/product');
+        return view('orders.index', ['product' => json_decode($product)]);
     }
 
     public function cart()
@@ -140,18 +142,6 @@ class OrderController extends Controller
     public function add(){
         $product = Product::all();
         return view('orders/add', ['product' => $product]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Order  $order
-     * @return \Illuminate\Http\Response
-     */
-    public function show(order $order)
-    {
-        //
-
     }
 
     /**
