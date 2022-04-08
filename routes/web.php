@@ -31,8 +31,13 @@ use App\Http\Controllers\SalaryController;
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+<<<<<<< HEAD
 Route::put('/product/{id}', 'App\Http\Controllers\ProductController@update')->name("product.update");
 Route::view('/testProduct', 'product.search');
+=======
+//Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->name("product.update");
+//Route::view('/testProduct','product.search');
+>>>>>>> 3f146f6bf015a49834812de4a11463f8f8399282
 
 //order
 Route::get('orders/add', 'App\Http\Controllers\OrderController@add');
@@ -64,6 +69,7 @@ Route::resource('/payment', PaymentController::class);
 
 
 //Product
+<<<<<<< HEAD
 Route::resource('/product', ProductController::class);
 Route::put('/product/{id}', 'App\Http\Controllers\ProductController@update')->name("product.update");
 Route::view('/testProduct', 'product.search');
@@ -73,7 +79,35 @@ Route::resource('/voucher', VoucherController::class);
 //Route::post('/voucher/create',\App\Http\Controllers\VoucherController::class);
 //Route::post('voucher/create', 'VoucherController@store');
 Route::post('/voucher/{code}', 'VoucherController@update');
+=======
+Route::resource('/product',ProductController::class);
+Route::put('/product/{id}','App\Http\Controllers\ProductController@update')->name("product.update");
+Route::view('/searchProduct','product.search');
 
+//VoucherPage
+//Route::get()
+//Route::post('/voucher/{code}','App\Http\Controllers\VoucherController@update')->name('voucher.update');
+Route::resource('/voucher',VoucherController::class);
+>>>>>>> 3f146f6bf015a49834812de4a11463f8f8399282
+
+
+//Payment
+Route::post('/payment/create/{id}', 'App\Http\Controllers\PaymentController@create');
+
+Route::post('/payment/{id}', 'App\Http\Controllers\PaymentController@show');
+
+Route::resource('/payment', PaymentController::class);
+
+//Restauranttable
+Route::get('/restaurantTableDisplay', [RestaurantTableController::class, 'sort']);
+
+Route::get('/orderTable', [RestaurantTableController::class, 'orderTable']);
+
+Route::POST('/orderUpdate', [RestaurantTableController::class, 'orderUpdate']);
+
+
+//kitchen
+Route::resource('/kitchen', KitchenController::class);
 
 //Reservation
 //Route::post('/reservations/addTable', 'App\Http\Controllers\ReservationController@addTable');
@@ -99,7 +133,7 @@ Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::resource('salaries', SalaryController::class);
+//Route::resource('salaries', SalaryController::class);
 
 Route::group(['middleware' => ['auth']], function () {
     Route::resource('roles', RoleController::class);

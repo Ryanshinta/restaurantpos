@@ -39,14 +39,14 @@
                         <td>{{ $item->icNumber }}</td>
                         <td>{{ $item->name }}</td>
                         <td>{{ $item->role }}</td>
-                    <!--<td>{{ $item->password }}</td>-->
-                    <!--<td>{{ $item->gender }}</td>-->
+{{--                    <!--<td>{{ $item->password }}</td>-->--}}
+{{--                    <!--<td>{{ $item->gender }}</td>-->--}}
                         <td>{{ $item->mobile }}</td>
                         <td>{{ $item->email }}</td>
                     <td>{{ $item->salary }}</td>
-                    <!--<td>{{ $item->address }}</td>-->
+{{--                    <!--<td>{{ $item->address }}</td>-->--}}
                         <td>
-                            <a href="{{ url('/users/' . $item->id) }}" title="View Student">
+                            <a href="{{ url('/users/' . $item->id) }}" title="View Staff">
                                 <button style="height: 28px; width: 85px;" class="btn btn-info btn-sm"><i
                                         aria-hidden="true"></i> View
                                 </button>
@@ -57,7 +57,7 @@
                                 </button>
                             </a>
                             <button class="btn btn-danger btn-delete" style="height: 28px; width: 85px;"
-                                    data-url="{{route('users.destroy', $item)}}"><i
+                                    data-url="{{route('users.destroy', $item->id)}}"><i
                                     aria-hidden="true"></i>Delete</button>
                         </td>
                     </tr>

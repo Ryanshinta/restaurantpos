@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <Products>
   <Product Status="1">
+<<<<<<< HEAD
     <ID>2</ID>
     <name>coffee</name>
     <description>just coffee</description>
@@ -17,5 +18,41 @@
     <createdAt>2022-04-08 04:12:11</createdAt>
     <updatedAt>2022-04-08 04:12:11</updatedAt>
     <imagePath>/storage/products/Wv6k0QzwEM6ZtYgfLjMopxL4Ie2dzgJx8THwVy1m.webp</imagePath>
+=======
+    <ID>1</ID>
+    <name>TestProduct</name>
+    <description>Good</description>
+    <price>10.20</price>
+    <createdAt>2022-04-07 23:53:40</createdAt>
+    <updatedAt>2022-04-07 23:58:43</updatedAt>
+    <imagePath>/storage/products/TDHdsd4OCP48VmyiMWme1sDFImxj1aKVKXjdbAjB.jpg</imagePath>
+  </Product>
+  <Product Status="0">
+    <ID>2</ID>
+    <name>Cat</name>
+    <description>Black Cat</description>
+    <price>20.10</price>
+    <createdAt>2022-04-08 01:37:26</createdAt>
+    <updatedAt>2022-04-08 01:37:26</updatedAt>
+    <imagePath>/storage/products/E9ni1WRI6sBQM638RV49yafKFaoNGeo9mIVGbHRH.jpg</imagePath>
+  </Product>
+  <Product Status="1">
+    <ID>3</ID>
+    <name>Sweet</name>
+    <description>So Sweet</description>
+    <price>99.10</price>
+    <createdAt>2022-04-08 01:37:47</createdAt>
+    <updatedAt>2022-04-08 01:37:47</updatedAt>
+    <imagePath>/storage/products/zj56WF7pEiSoiK5bKpA9Smwl8TghaztbJnGc37d6.jpg</imagePath>
+  </Product>
+  <Product Status="1">
+    <ID>4</ID>
+    <name>Ayam</name>
+    <description>Aaaa</description>
+    <price>1.20</price>
+    <createdAt>2022-04-08 13:15:33</createdAt>
+    <updatedAt>2022-04-08 13:15:33</updatedAt>
+    <imagePath>/storage/products/J6AticcQUSSLIVDNG40O4yBbV7KP7kOrlj5DMA1r.png</imagePath>
+>>>>>>> 3f146f6bf015a49834812de4a11463f8f8399282
   </Product>
 </Products>

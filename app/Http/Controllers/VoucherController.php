@@ -6,6 +6,7 @@ use App\Models\Voucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use App\Facades\Voucher as VoService;
+use Illuminate\Support\Facades\Log;
 
 class VoucherController extends Controller
 {
@@ -65,17 +66,19 @@ class VoucherController extends Controller
         $url = $newURL[2];
         $voucher = Http::get('http://127.0.0.1:9876/api/voucher/'.$url);
 
-        return view('voucher.edit',['voucher' => json_decode($voucher)]);
+        return view('voucher.edit')->with(['voucher' => json_decode($voucher)]);
 
     }
 
-
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return
+     */
     public function update(Request $request){
-        $url = $request->getPathInfo();
-        $newURL = explode('/', $url, 4);
-        $url = $newURL[2];
 
-        $result = Http::post('http://127.0.0.1:9876/api/updateVoucher'.$url,[
+        Http::post('http://127.0.0.1:9876/api/updateVoucher/'.$request->code,[
             'code' => $request->code,
             'type' => $request->type,
             'value' => $request->value,
@@ -83,7 +86,6 @@ class VoucherController extends Controller
             'expireDate' => $request->expireDate
         ]);
 
-        dd($result);
 
         return redirect()->route('voucher.index');
 

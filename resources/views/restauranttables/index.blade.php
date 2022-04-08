@@ -1,7 +1,7 @@
-@extends('layouts.app')
+@extends('layout')
 @section('content')
 <div class="container">
-    <div class="upper-section">
+    <div class="upper-section" >
 
         <h2>Restaurant Tables</h2>
         <a href="{{ url('/restaurantTable/create') }}" title="Add New Table">
@@ -9,6 +9,8 @@
                 <i aria-hidden="true"></i> Add New
             </button>
         </a>
+        <a href="{{ url('/restaurantTableDisplay') }}" title="Filter Record"><button class="btn btn-primary btn-sm" style="margin-left: 10px; margin-top: 10px; height: 28px; width: 100px;"><i aria-hidden="true"></i> Search & Filter</button></a>
+
 
 
 
@@ -22,7 +24,7 @@
                 <th>Edit</th>
             </tr>
             <tbody>
-                @foreach($restauranttables as $item)
+                @foreach($userdata as $item)
                 <tr>
                     <td>{{ $item->tableNo }}</td>
                     <td>
@@ -50,7 +52,6 @@
             </tbody>
         </table>
 
-
         <!--        <div >
                     <h2>Restaurant Name</h2>
                     <table class="tableMap">
@@ -59,7 +60,7 @@
                             <td><a href="Home.php">01</a></td>
                         </tr>
                     </table>
-
+        
                 </div>-->
     </div>
 </div>

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Order;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Product;
+use App\Models\Payment;
+use App\Models\RestaurantTable;
+
 use DB;
 
 class PaymentController extends Controller {
@@ -18,7 +21,8 @@ class PaymentController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        
+        $restauranttables = DB::table('restauranttables')->where('tableStatus', 'Served')->get();
+        return view('payment.index')->with('restauranttables', $restauranttables);
     }
 
     /**
@@ -26,16 +30,9 @@ class PaymentController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function create() {
-        echo "hello";
-        $orderid = Order::max('orderID');
-        $this->id = $orderid;
+    public function create(Request $request) {
 
-
-        $orders = DB::table('orders')->where('orderID', '=', $orderid)->get();
-        $order__details = DB::table('order__details')->where('orderID', '=', $orderid)->get();
-
-        return view('payment.create')->with('order__details', $order__details)->with('orders', $orders);
+        return view('payment.create');
     }
 
     /**
@@ -45,9 +42,57 @@ class PaymentController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request) {
-        //
+
+
+        $payment = Payment::create([
+                    'orderID' => $request->orderid,
+                    'applyVoucher' => $request->voucher,
+                    'voucherDiscount' => $request->discount,
+                    'serviceTax' => $request->tax,
+                    'PaymentTotal' => $request->total,
+                    'paymentStatus' => 'Paid'
+        ]);
+
+        DB::table('restauranttables')->where('orderID', $request->orderid)->update(['tableStatus' => 'Available', 'orderID' => null]);
+        
+        $path = 'public/xml/TableInfo.xml';
+        if (file_exists($path)) {
+            unlink($path);
+        } else {
+            $results = RestaurantTable::all();
+
+            $xml = new \DOMDocument('1.0');
+            $xml->formatOutput = true;
+
+            $tables = $xml->createElement('tables');
+            $xml->appendChild($tables);
+
+            foreach ($results as $row) {
+                $table = $xml->createElement("table");
+                $tables->appendChild($table);
+
+                $tableStatus = $xml->createElement("tableStatus", $row['tableStatus']);
+                $table->appendChild($tableStatus);
+
+                $tableType = $xml->createElement("tableType", $row['tableType']);
+                $table->appendChild($tableType);
+
+                $maxSeats = $xml->createElement("maxSeats", $row['maxSeats']);
+                $table->appendChild($maxSeats);
+
+                $orderID = $xml->createElement("orderID", $row['orderID']);
+                $table->appendChild($orderID);
+
+                $dateCreated = $xml->createElement("dateCreated", $row['dateCreated']);
+                $table->appendChild($dateCreated);
+            }
+
+            echo "<xmp>" . $xml->saveXML() . "</xmp>";
+            $xml->save("xml/TableInfo.xml") or die("Unable to create xml");
+        }
+
+        return redirect()->route('payment.index')->with('success', 'Success, you product have been created.');
     }
-   
 
     /**
      * Display the specified resource.
@@ -55,20 +100,35 @@ class PaymentController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    public function validateVoucher($code) {
+        $voucher = DB::table('vouchers')->where('code', '=', $code)->get();
+
+        if (!empty($voucher)) {
+            if ($voucher->type == 'percentage') {
+                $voucher->value = $voucher->value / 100;
+            } else {
+                $voucher->value = $voucher->value;
+            }
+        }
+
+        return $voucher;
+    }
+
     public function show($id) {
         $orders = DB::table("orders")->select('*')
                 ->where('id', '=', $id)
                 ->whereNOTIn('id', function($query) {
-                    $query->select('id')->from('payment');
+                    $query->select('orderID')->from('payment');
                 })
                 ->get();
 
-        $order__details = DB::table('order__details')->where('order_id', '=', $id)->get();
+        $orders_list = DB::table('orders_list')->where('order_id', '=', $id)->get();
 
         $products = Product::all();
 
+        $voucher = DB::table('vouchers')->select('*')->get();
 
-        return view('payment.show')->with('orders', $orders)->with('order__details', $order__details)->with('products', $products);
+        return view('payment.show')->with('orders', $orders)->with('orders_list', $orders_list)->with('products', $products)->with('voucher', $voucher);
     }
 
     /**

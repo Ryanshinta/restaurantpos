@@ -12,10 +12,14 @@
             <!--<span class="error"><?php // echo "* " . $nameError;      ?></span><br><br>-->
 
             <label>Staff Role  : </label><select name="role" value="" required="true">
-                <option value="Waiter">Waiter</option>
-                <option value="Chef">Chef</option>
-                <option value="Manager">Manager</option>
-                <option value="Admin">Admin</option>
+                                <option value="">--Choose one--</option>
+                @foreach($roles as $role)
+                    <option value="{{$role}}">{{$role}}</option>
+                @endforeach
+{{--                <option value="Waiter">Waiter</option>--}}
+{{--                <option value="Chef">Chef</option>--}}
+{{--                <option value="Manager">Manager</option>--}}
+{{--                <option value="Admin">Admin</option>--}}
             </select><br><br>
 
             <label>Enter Password  : </label><input type="password" name="password" value="" required="true"/><br><br>

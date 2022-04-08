@@ -4,7 +4,7 @@
         <div class="upper-section">
             <h2>Product</h2>
 
-            <a href="{{url('/testProduct')}}">
+            <a href="{{url('/searchProduct')}}">
                 <button class="btn btn-primary btn-sm"
                         style="margin-left: 10px; margin-bottom: 10px; height: 28px; width: 100px;"><i
                         aria-hidden="true"></i> Search

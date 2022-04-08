@@ -9,6 +9,7 @@ use App\Services\Strategy\WaiterSalary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Spatie\Permission\Models\Role;
 use App\Services\Strategy\Context;
 
@@ -22,34 +23,20 @@ class UserController extends Controller
         $this->middleware('permission:user-delete', ['only' => ['destroy']]);
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
-        $users = User::all();
-        return view('users.index')->with('users', $users);
+        $users = Http::get('http://127.0.0.1:8001/api/user');
+        return view('users.index', ['users' => json_decode($users)]);
+//        $users = User::all();
+//        return view('users.index')->with('users', $users);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $roles = Role::pluck('name', 'name')->all();
         return view('users.create', compact('roles'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         //$input = $request->all();
@@ -74,18 +61,24 @@ class UserController extends Controller
             'birthday' => $request->input('birthday'),
             'address' => $request->input('address')
         ]);
-        $user->assignRole($request->input('role'));
+//        $user = Http::post('http://127.0.0.1:8001/api/addUser', [
+//            'icNumber' => $request->icNumber,
+//            'name' => $request->name,
+//            'role' => $request->role,
+//            'password' => $password,
+//            'gender' => $request->gender,
+//            'mobile' => $request->mobile,
+//            'email' => $request->email,
+//            'birthday' => $request->birthday,
+//            'address' => $request->address
+//        ]);
+//        $user->assignRole($request->input('role'));
 
 //        $ic = $request->input('icNumber');
         $this->newXml();
-        return redirect('users')->with('flash_message', 'User Added!');
+        return redirect()->route('users.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function display()
     {
         $xml = file_get_contents('D:\Program Files\Xampp\htdocs\restaurantpos\public\xml\user_info.xml');
@@ -112,14 +105,6 @@ class UserController extends Controller
         $x = $proc->transformToXml($xml);
         return view('users.search')->with('x', $x);
     }
-//        $doc = new \DOMDocument();
-//        $doc->preserveWhiteSpace = false;
-//        $doc->load('xml/user_info.xml');
-//        $xpath = new \DOMXPath($doc);
-//        $query = '//users/user/role[.="Manager"]';
-//        $entries = $xpath->query($query);
-//            ->with('entries',$entries);
-//        ->with('proc', $proc);
 
     public function newXml()
     {
@@ -127,43 +112,44 @@ class UserController extends Controller
         if (file_exists($path)) {
             unlink($path);
         } else {
-            $results = User::all();
-
+//            $results = User::all();
+            $results = Http::get('http://127.0.0.1:8001/api/user');
+            $data = json_decode($results);
             $xml = new \DOMDocument('1.0');
             $xml->formatOutput = true;
 
             $users = $xml->createElement('users');
             $xml->appendChild($users);
 
-            foreach ($results as $row) {
+            foreach ($data as $row) {
                 $user = $xml->createElement("user");
                 $users->appendChild($user);
 
-                $ic = $xml->createElement("ic", $row['icNumber']);
+                $ic = $xml->createElement("ic", $row->icNumber);
                 $user->appendChild($ic);
 
-                $name = $xml->createElement("name", $row['name']);
+                $name = $xml->createElement("name", $row->name);
                 $user->appendChild($name);
 
-                $role = $xml->createElement("role", $row['role']);
+                $role = $xml->createElement("role", $row->role);
                 $user->appendChild($role);
 
-                $gender = $xml->createElement("gender", $row['gender']);
+                $gender = $xml->createElement("gender", $row->gender);
                 $user->appendChild($gender);
 
-                $mobile = $xml->createElement("mobile", $row['mobile']);
+                $mobile = $xml->createElement("mobile", $row->mobile);
                 $user->appendChild($mobile);
 
-                $email = $xml->createElement("email", $row['email']);
+                $email = $xml->createElement("email", $row->email);
                 $user->appendChild($email);
 
-                $birthday = $xml->createElement("birthday", $row['birthday']);
+                $birthday = $xml->createElement("birthday", $row->birthday);
                 $user->appendChild($birthday);
 
-                $address = $xml->createElement("address", $row['address']);
+                $address = $xml->createElement("address", $row->address);
                 $user->appendChild($address);
 
-                $dateRegistered = $xml->createElement("dateRegistered", substr($row['created_at'], 0, 10));
+                $dateRegistered = $xml->createElement("dateRegistered", substr($row->created_at, 0, 10));
                 $user->appendChild($dateRegistered);
             }
 
@@ -172,24 +158,14 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        $user = User::find($id);
-        return view('users.show')->with('users', $user);
+        $user = Http::get('http://127.0.0.1:8001/api/user/' . $id);
+        return view('users.show', ['user' => json_decode($user)]);
+//        $user = User::find($id);
+//        return view('users.show')->with('users', $user);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         $user = User::find($id);
@@ -199,13 +175,6 @@ class UserController extends Controller
         return view('users.edit', compact('user', 'role', 'userRole'))->with('users', $user);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         $user = User::find($id);
@@ -213,7 +182,6 @@ class UserController extends Controller
         $overTime = $request->input('overTime');
         $bonusRate = $request->input('bonusRate');
         $deduction = $request->input('deduction');
-//        $salary = $request->input('salary');
         $role = $request->input('role');
         if ($role != "Admin") {
             if (!empty($base) or !empty($overTime) or !empty($bonusRate) or !empty($deduction)) {
@@ -242,9 +210,6 @@ class UserController extends Controller
         return redirect('users')->with('flash_message', 'User Updated!');
     }
 
-    /**
-     * @throws \Exception
-     */
     public function defineStrategy($role, $base, $overTime, $bonusRate, $deduction): float
     {
         switch ($role) {
@@ -265,17 +230,12 @@ class UserController extends Controller
         return $context->execute($base, $overTime, $bonusRate, $deduction);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        User::destroy($id);
+//        User::destroy($id);
+        $user = Http::delete('http://127.0.0.1:8001/api/deleteUser/'. $id);
         $this->newXml();
-        return redirect('user')->with('flash_message', 'User deleted!');
+        return redirect()->route('users.index');
     }
 
 }

@@ -16,6 +16,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <xsl:for-each select="Products/Product">
                             <tr>
                                 <td><xsl:value-of select="ID"/></td>
                                 <td><xsl:value-of select="name"/></td>
@@ -28,11 +29,10 @@
                                 </td>
                                 <td>RM <xsl:value-of select="price"/></td>
                                 <td><xsl:value-of select="description"/></td>
-
-
                                 <td><xsl:value-of select="createdAt"/></td>
                                 <td><xsl:value-of select="updatedAt"/></td>
                             </tr>
+                        </xsl:for-each>
                     </tbody>
                 </table>
             </div>

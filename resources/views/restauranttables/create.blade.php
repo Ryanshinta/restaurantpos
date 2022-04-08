@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout')
 @section('content')
 <div class="container">
     <div class="upper-section">
@@ -13,7 +13,7 @@
                 <option value="2" >Outdoor</option>
             </select>
             <br><br>
-
+            
             <label>Max Seats : </label><input type="number" name="maxSeats" value="" required="true" max="12" min="1"/><br><br>
 
             <input style="width:100px; height: 28px;" type="submit" name="submit" value="Add"/>

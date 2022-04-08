@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Order;
+use App\Models\Product;
 use App\Models\Voucher;
 use Carbon\Carbon;
 use function MongoDB\BSON\toJSON;
@@ -26,6 +27,6 @@ class VoucherService
         }while(Voucher::query()->where('code',$code)->exists());
         return $code;
     }
-
+    
 
 }

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout')
 @section('content')
 <!DOCTYPE html>
 <!--
@@ -8,91 +8,73 @@ and open the template in the editor.
 -->
 <div class="container">
     <div class="upper-section">
-        @method("PATCH")
-        <h2>Order ID : {{$order[0]->orderID}}</h2>
-        <h2>Table : </h2>
-        
-        <table>
+        <!-- Modal content -->
+        <form id="NewProduct" method="post" action="{{url('payment')}}" enctype="multipart/form-data">
+            @csrf
+            <div class="modal-content">
+                <?php
+                if ($_POST['payment'] == 'Visa' || $_POST['payment'] == 'MasterCard') {
+                    ?>
+
+                <label>Credit Card No : </label><input type = "text" class = "card" placeholder="xxx"><br><br>
+                    <?php
+                }
+                ?>
+                <label>Order Total  :   <strong>RM {{$_POST['total']}}</strong></label><br><br>
 
 
-            <tr>
-                <th >Product ID</th>
-<!--                <th >Product Name</th>
-                <th >Price</th>-->
-                <th >Quantity</th>
-                <th >Subtotal</th>
-            </tr>
+                <label>Pay          :   </label><input value="<?php
+                if ($_POST['payment'] == 'Visa' || $_POST['payment'] == 'MasterCard') {
+                    echo $_POST['total'];
+                }
+                ?>" type="number" name="pay" id="pay" min="{{$_POST['total']}}" step=".01" 
+                                                       <?php
+                                                       if ($_POST['payment'] == 'Visa' || $_POST['payment'] == 'MasterCard') {
+                                                           echo "disabled";
+                                                       }
+                                                       ?>
+                                                       ><br><br>
+                <input type="hidden" name="total" value="{{$_POST['total'] }}">
+                <input type="hidden" name="orderid" value="{{$_POST['orderid'] }}">
+                <input type="hidden" name="tax" value="{{$_POST['tax'] }}">
+                <input type="hidden" name="discount" value="{{$_POST['discount'] }}">
+                <input type="hidden" name="voucher" value="{{$_POST['voucher'] }}">
 
-            <tbody>
-                @foreach($order_details as $item)
-                <tr>
-                    <td>{{ $item->productID}}</td>
-                    <td>{{ $item->quantity }}</td>
-                    <td>{{ $item->subtotal }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
-
-
-        <form>
-            <table>
-                <tr>
-                    <td>Subtotal  :   {{$order[0]->ttlPrice}}</td>
-                    <td></td>
-                </tr>
-
-                <tr>
-                    <td>SST (10%) :   {{$order[0]->ttlPrice*0.1}}</td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Voucher   :   </td>
-                    <td>
-                        <input type="text" maxlength="10" ><input type="submit" name="Apply">
-                    </td>
-                </tr>
-                <tr>
-                    <td>Total     :   {{$order[0]->ttlPrice*1.1 }}</td>
-                    <td></td>
-                </tr>
-            </table>
+                <input type="submit" value='pay' name="pay">
+            </div>
         </form>
 
 
-
-        <h5>Payment Method :</h5>
-        <table class = 'paymentMethod'>
-            <tr>
-                <td>
-                    <input type = 'radio' id = 'R1' name = 'cash' value = 'cash' ><label>Cash </label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type = 'radio' id = 'R1' name = 'creditCard' value = 'creditCard' ><label>Credit Card</label>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type = 'radio' id = 'R1' name = 'payment' value = 'Visa'><img src = 'images/Visa-Brand-Markvbm_blugrad01.jpg' alt = 'Visa'/>
-                </td>
-                <td>
-                    <input type = 'radio' id = 'R2' name = 'payment' value = 'MasterCard'><img src = 'images/MasterCard_logo.jpg' alt = 'MasterCard' />
-                </td>
-                <td>
-                    <input type = 'radio' id = 'R3' name = 'payment' value = 'UnionPay'><img src = 'images/unionpay.png' alt = 'UnionPay'/>
-                </td>
-            </tr>
-        </table>
-
-        <form>
-            <input type="submit" name="pay" value="PAY">
-        </form>
 
     </div>
 </div>
 <?php
 // put your code here
 ?>
+
+
+<script>
+    .modal {
+    display: block; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z - index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100 % ; /* Full width */
+    height: 100 % ; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background - color: rgb(0, 0, 0); /* Fallback color */
+    background - color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content/Box */
+    .modal - content {
+    background - color: #fefefe;
+    margin: 15 % auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60 % ; /* Could be more or less, depending on screen size */
+    }
+</script>
+
 @endsection

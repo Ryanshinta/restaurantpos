@@ -13,10 +13,9 @@
 
                     <label>Staff Role : </label><select name="role" value="">
                         <option value="{{$users->role}}" selected>{{$users->role}}</option>
-                        <option value="Waiter">Waiter</option>
-                        <option value="Chef">Chef</option>
-                        <option value="Manager">Manager</option>
-                        <option value="Admin">Admin</option>
+                        @foreach($role as $r)
+                            <option value="{{$r}}">{{$r}}</option>
+                        @endforeach
                     </select><br><br>
 
                     <label>Password : </label><input type="password" name="password"
@@ -41,7 +40,7 @@
                     <label>Deduction : </label><input type="number" name="deduction" value=""/><br><br>
                     <label>Over Time : </label><input type="number" name="overTime" value=""><br><br>
                     <label>Bonus Rate : </label><input type="number" name="bonusRate" value=""/><br><br>
-                    <label>Total (RM) : </label><input style="color: blue" value="{{$user->salary}}"/><br><br>
+                    <label>Total (RM) : </label><input type="number" style="color: blue" value="{{$user->salary}}"/><br><br>
                 </div>
                 <input style="width: 100px; height: 28px;" type="submit" name="update" value="Update"/>
                 <a href="{{ url('/users') }}" title="Back">
