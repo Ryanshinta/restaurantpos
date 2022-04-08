@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
-use App\State\Pending;
 use DB;
 use App\Models\Reservation;
 use App\Models\RestaurantTable;
@@ -19,10 +17,14 @@ class ReservationController extends Controller {
     }
 
     public function index() {
-        $reservations = Reservation::all();
-        $reserveStatus = Reservation::find(1);
-        $reserveStatus->reserveStatus->transitionTo(Pending::class);
-        return view('reservations.index')->with('reservations', $reservations)->with('reserveStatus', $reserveStatus);
+//        $reservations = Reservation::all();
+        $reservations = DB::table('restauranttables')
+            ->join('reservation_restaurant_tables', 'restauranttables.tableNo', '=', 'reservation_restaurant_tables.tableNo')
+            ->join('reservations', 'reservation_restaurant_tables.reserveId', '=', 'reservations.reserveId')
+            ->where('reservations.reserveDate', '>=', date("Y-m-d"))//date("Y-m-d"))
+                ->orderBy('reservations.reserveDate')
+            ->get();
+        return view('reservations.index')->with('reservations', $reservations);
     }
 
     public function create() {
